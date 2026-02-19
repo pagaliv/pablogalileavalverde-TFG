@@ -1,0 +1,206 @@
+% ============================================
+% ===== CAPÍTULO 2: ANÁLISIS =====
+% ============================================
+\chapter{Análisis}\label{chap:analisis}
+En este capítulo se define el proyecto, creando los requisitos para la identificación de los requisitos funcionales y no funcionales. Después de obtener dichos requisitos, se limitará el proyecto mediante un estudio de viabilidad debido a la limitación de recursos, en concreto el tiempo. En caso de ser viable, se realizará y en caso negativo se limitará a una parte de dicho proyecto que proporcione un conjunto modular funcional.
+
+\section{Definición y alcance del proyecto}
+\subsubsection{Definición del Proyecto}
+
+El proyecto \textbf{API Canary de Validación de Facturación Cloud} consiste en el desarrollo e implementación de un sistema de validación cruzada automatizada para los procesos de facturación de IONOS Cloud. Esta solución implementa una arquitectura de despliegue gradual (Canary) que permite la detección temprana de inconsistencias mediante la comparación de resultados entre sistemas independientes.
+
+La API actúa como un \textit{sistema de alerta temprana} que ejecuta validaciones periódicas sobre los datos de facturación generados por el Data Center Designer (DCD), comparándolos con los sistemas legacy de facturación para garantizar coherencia y precisión en los cargos a los clientes.
+
+\subsubsection{Alcance Técnico}
+
+\begin{itemize}
+    \item \textbf{Desarrollo de API REST:} Implementación de \textit{endpoints}\footnote{Es la URL específica y única (https://api.ejemplo.com/usuarios) que permite a una aplicación cliente interactuar con un servidor para acceder, modificar o enviar recursos específicos.}  para ejecución, programación y monitoreo de validaciones.
+    
+    \item \textbf{Sistema de Despliegue Canary:} Mecanismos para implementaciones graduales con capacidad de rollback automático. Basado en GitLab.
+    
+    \item \textbf{Validación Cruzada:} Comparación automática entre:
+    \begin{itemize}
+        \item Datos del DCD (Data Center Designer).
+        \item Cálculos teóricos reales del coste.
+    \end{itemize}
+    
+    \item \textbf{Monitoreo y Alertas:} Sistema de notificaciones en tiempo real ante discrepancias detectadas.
+\end{itemize}
+
+\subsubsection{Alcance Funcional}
+
+El sistema cubre las siguientes funcionalidades principales:
+
+\begin{enumerate}
+    \item \textbf{Validación Automatizada:}
+    \begin{itemize}
+        \item Ejecución programada de validaciones (diaria, semanal, mensual).
+        \item Verificación de consistencia en cálculos de facturación.
+        \item Detección de discrepancias en precios y tarifas.
+    \end{itemize}
+    
+    \item \textbf{Gestión de Configuración:}
+    \begin{itemize}
+        \item Administración de reglas de validación.
+        \item Configuración de umbrales de tolerancia.
+        \item Gestión de frecuencias de ejecución.
+    \end{itemize}
+    
+    \item \textbf{Reporting y Dashboard:}
+    \begin{itemize}
+        \item Generación de reportes de validación.
+        \item Dashboard de métricas y KPIs.
+        \item Histórico de discrepancias detectadas.
+    \end{itemize}
+    
+    \item \textbf{Integraciones:}
+    \begin{itemize}
+        \item Conexión con sistemas DCD de IONOS.
+        \item Comunicación con sistemas de alertas (Slack, Email, Teams).
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Límites y Exclusiones}
+
+\begin{itemize}
+    \item \textbf{No incluye:} Modificación de sistemas legacy de facturación.
+    \item \textbf{No incluye:} Desarrollo de interfaz gráfica de usuario (GUI) completa.
+    \item \textbf{No incluye:} Gestión de reclamaciones de clientes.
+    \item \textbf{Se limita a:} Entornos de desarrollo, testing y producción de IONOS Cloud.
+    \item \textbf{Se limita a:} Validación de facturación del DCD de IONOS cloud (no otros productos).
+\end{itemize}
+
+\newpage
+
+\subsubsection{Objetivos de Calidad}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{|p{0.35\textwidth}|p{0.25\textwidth}|p{0.3\textwidth}|}
+    \hline
+    \textbf{Métrica} & \textbf{Objetivo} & \textbf{Justificación} \\
+    \hline
+    \hline
+    Tiempo de detección de errores & < 24 horas & Minimizar impacto en clientes \\
+    \hline
+    Precisión en validación de elementos estáticos & 99.9\% & Garantizar fiabilidad de facturación \\
+    \hline
+    Cobertura de tests & > 95\% & Calidad del código y funcionalidad \\
+    \hline
+    \end{tabular}
+    \caption{Métricas de calidad del proyecto}
+    \label{tab:metricas-calidad}
+\end{table}
+
+\subsubsection{Entregables del Proyecto}
+
+\begin{itemize}
+    \item \textbf{Código En este capítulo se define el proyecto, creando los requisitos para la identificación de los requisitos funcionales y no funcionales. Después de obtener dichos requisitos se limitará el proyecto teniendo, por medio de un estudio de viabilidad debido a la limitación de recursos, en concreto el tiempo. En caso de ser viable se realizara y en caso negativo se limitara a una parte de dicho proyecto que proporcione un cpnjunto modular funcional. fuente:} Repositorio Git con toda la implementación.
+    \item \textbf{Memoria de implementación:} Documentación del proceso y de lecciones aprendidas.
+\end{itemize}
+
+\section{Requisitos}
+A partir del punto anterior se desarrollarán los siguientes requisitos:
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{|p{0.1\textwidth}|p{0.7\textwidth}|}
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Requisitos no Funcionales}} \\
+    \hline
+    \hline
+    Código &  Descripción \\
+    \hline
+    RNF01 & Fiabilidad, tener garantías del correcto funcionamiento\\
+    \hline
+    RNF02 & Mantenibilidad, teniendo que ser fácil la actualización y fácil adición de nuevos tipos de recursos\\
+    \hline
+    RNF03 & Seguridad, Credenciales seguras para las APIs y accesos restringidos al contrato de pruebas. \\
+    \hline
+    RNF04 & Costos, minimización de los costos de recursos de prueba \\
+    \hline   
+    \end{tabular}
+    \caption{Requisitos no funcionales}
+    \label{tab:requisitos-no-funcionales}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{|p{0.1\textwidth}|p{0.55\textwidth}|}
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Requisitos Funcionales}} \\
+    \hline
+    \hline
+    Código &  Descripción \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{RF01 - Gestión del Contrato de Pruebas}} \\
+    \hline
+    RF01.01 & El sistema debe tener un usuario exclusivo para las pruebas de facturación. \\
+    \hline
+    RF01.02 & El contrato del usuario debe tener todos los recursos facturables del producto. \\
+    \hline
+    RF01.03 & Exclusión manual de productos con costos de licencia elevados cuando sea posible \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{RF02 - Recursos de Consumo Constante (Continuables)}} \\
+    \hline
+    RF02.01 & Provisión automática de recursos que mantienen consumo constante \\
+    \hline
+    RF02.01.01 & Provisión automática de Maquinas Virtuales (VMs) \\
+    \hline
+    RF02.01.02 & Provisión automática de Almacenamiento (S3 buckets, discos) \\
+    \hline
+    RF02.02& Configuración única sin modificaciones posteriores \\
+    \hline
+    RF02.03& Consumo mensual predecible y estable, no introducir cambios bruscos\\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{RF03 - Generación de Consumo Variable (No Continuables)}} \\
+    \hline
+    RF03.01 & Servicio Canary API para generar consumo artificial \\
+    \hline
+    RF03.02 & Generación de cantidades similares mensualmente \\
+    \hline
+    RF03.03 & Tolerancia configurable para variaciones esperadas \\
+    \hline
+    RF03.04 & Programación de jobs cron para generación periódica \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{RF04 - Verificación de Facturación}} \\
+    \hline
+    RF04.01 & Recolección diaria de datos de consumo \\
+    \hline
+    RF04.02 & Comparación con cálculos dinámicos generados automáticamente \\
+    \hline
+    RF04.03 & Márgenes de tolerancia configurables por \textit{SKU}\footnote{Código alfanumérico único que cada empresa crea para identificar y gestionar una variante específica de un producto.}\\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{RF05 - Sistema de Alertas y Reportes}} \\
+    \hline
+    RF05.01 & Notificaciones automáticas en desviaciones significativas \\
+    \hline
+    RF05.04 & Histórico de verificaciones y desviaciones \\
+    \hline
+    
+    \end{tabular}
+    \caption{Requisitos funcionales}
+    \label{tab:requisitos-funcionales}
+\end{table}
+
+\newpage
+
+\section{Estudio de viabilidad}
+\subsection{Requisitos mínimos}
+\begin{itemize}
+    \item \textbf{Usuario con contrato: } Se necesita un contrato con capacidad de recursos mayor a un contrato estándar del DCD de IONOS, ya que se necesitan recursos extra para poder lograr usar todos los elementos a estudiar. En este caso no hay problema, ya que al ser el DCD de IONOS un servicio nuestro, se puede solicitar dicho contrato ampliado.
+    \item \textbf{Acceso a APIs internas: }Se necesita acceso a estas APIs como por ejemplo \textit{IONOS Cloud Billing API (3.9.0)}, siendo esta imprescindible, ya que es de donde se sacarán los datos a comparar y usar. Una vez conseguido el contrato se puede adquirir de forma natural. 
+    \item \textbf{Aceso a Base de datos de configuración: }Se necesita acceso a la base de datos de \textit{Apache CouchDB} porque es la Base de Datos usada para las configuraciones y tiene acceso restringido. El acceso a esta página web es más complejo, pero solicitándolo con tiempo es posible. 
+\end{itemize}
+\subsection{Viabilidad de constancia de recursos a analizar}
+    Hay dos tipos, los \textit{items} continuables y los no continuables, siendo los continuables, los que son recursos que todos los meses son iguales, como por ejemplo una máquina virtual o una \textit{IP}. Por otro lado están los recursos no continuables, siendo estos los que no tienen por qué ser todos los meses iguales, como puede ser por ejemplo el uso de \textit{tokens} de uso de una Inteligencia Artificial. 
+    \begin{itemize}
+        \item \textbf{items continuables :} La constancia de estos recursos es sencilla, el único problema posible es añadir todos los recursos que se quieren comprobar, ya que no hay una clara vinculación entre los items y luego su representación gráfica en la interfaz del DCD. 
+        \item \textbf{items no continuables :} La continuidad de estos items es más compleja, debido a que no hay forma de que todos los meses sea exactamente igual y que uso debe ser de manera manual o automatizada cada mes, por lo que se debe hacer un estudio más desarrollado.
+    \end{itemize}
+    
+    
+    
+    
+
+
+

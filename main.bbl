@@ -1,0 +1,136 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{PostMan-Learning}{online}{}
+      \list{organization}{1}{%
+        {PostMan}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{title}{Postman Docs}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://learning.postman.com/
+      \endverb
+      \verb{url}
+      \verb https://learning.postman.com/
+      \endverb
+    \endentry
+    \entry{CouchDB-Info}{online}{}
+      \list{organization}{1}{%
+        {Apache CouchBD}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{title}{CouchDB}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://couchdb.apache.org/
+      \endverb
+      \verb{url}
+      \verb https://couchdb.apache.org/
+      \endverb
+    \endentry
+    \entry{billing-IONOSClaud}{online}{}
+      \name{author}{1}{}{%
+        {{hash=ddc83ca7af5ef03820b2d070f60e2428}{%
+           family={{IONOS Claud}},
+           familyi={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{ddc83ca7af5ef03820b2d070f60e2428}
+      \strng{fullhash}{ddc83ca7af5ef03820b2d070f60e2428}
+      \strng{bibnamehash}{ddc83ca7af5ef03820b2d070f60e2428}
+      \strng{authorbibnamehash}{ddc83ca7af5ef03820b2d070f60e2428}
+      \strng{authornamehash}{ddc83ca7af5ef03820b2d070f60e2428}
+      \strng{authorfullhash}{ddc83ca7af5ef03820b2d070f60e2428}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Consultado el 16 de febrero de 2026}
+      \field{title}{billing API}
+      \field{urlday}{16}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://api.ionos.com/docs/billing/v3/
+      \endverb
+      \verb{url}
+      \verb https://api.ionos.com/docs/billing/v3/
+      \endverb
+    \endentry
+    \entry{keepassxc-audit}{online}{}
+      \list{organization}{1}{%
+        {KeePassXC Team}%
+      }
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{note}{Auditoría de seguridad realizada por Zaur Molotnikov}
+      \field{title}{KeePassXC Audit Report}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://keepassxc.org/blog/2023-04-15-audit-report/
+      \endverb
+      \verb{url}
+      \verb https://keepassxc.org/blog/2023-04-15-audit-report/
+      \endverb
+    \endentry
+    \entry{keepassxc-features}{online}{}
+      \list{organization}{1}{%
+        {KeePassXC Team}%
+      }
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labeltitlesource}{title}
+      \field{title}{KeePassXC - Features}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://keepassxc.org/features/
+      \endverb
+      \verb{url}
+      \verb https://keepassxc.org/features/
+      \endverb
+    \endentry
+    \entry{ionos-token-management}{online}{}
+      \list{organization}{1}{%
+        {IONOS Cloud Documentation}%
+      }
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labeltitlesource}{title}
+      \field{title}{Manage Authentication Tokens}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://docs.ionos.com/cloud/getting-started/basic-tutorials/manage-authentication-tokens
+      \endverb
+      \verb{url}
+      \verb https://docs.ionos.com/cloud/getting-started/basic-tutorials/manage-authentication-tokens
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

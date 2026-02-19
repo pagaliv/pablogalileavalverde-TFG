@@ -1,0 +1,331 @@
+\documentclass[a4paper,12pt,twoside]{report}
+
+% ============================================
+% ===== PREÁMBULO - PAQUETES ORDENADOS =====
+% ============================================
+
+% 1. ENCODING Y LENGUAJE (siempre primero)
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+% 2. FORMATO DE TEXTO Y PÁGINA
+\usepackage{indentfirst}          % Sangría en primer párrafo
+\usepackage{setspace}             % Control de interlineado
+\usepackage{soul}                 % Texto tachado (\st{})
+\usepackage{paralist}             % Listas compactas
+\usepackage{nameref}              % Referencias por nombre
+\usepackage{verbatim}             % Texto verbatim
+
+% 3. CONFIGURACIÓN DE PÁGINA (GEOMETRÍA)
+% ¡SOLO UNA configuración de geometry! Elijo la segunda que tenías
+\usepackage[top=3cm,bottom=4cm,left=2.5cm,right=3cm,twoside]{geometry}
+\setlength{\headheight}{15pt}
+\addtolength{\topmargin}{-3pt}
+
+% 4. GRÁFICOS Y COLORES
+\usepackage{graphicx}                        % Incluir imágenes
+\usepackage[table,dvipsnames]{xcolor}        % Colores en tablas
+\usepackage{tikz}                            % Gráficos vectoriales
+\usepackage{tcolorbox}                       % Cajas con color
+\usetikzlibrary{shapes, arrows, positioning} %librerias de tikz
+
+% 5. TABLAS
+\usepackage{float}                % Posicionamiento de tablas
+\usepackage{booktabs}             % Líneas profesionales en tablas
+\usepackage{multirow}             % Multiples filas en tablas
+\usepackage{caption}              % Personalización de leyendas
+\captionsetup[table]{name=Tabla}  % Cambiar "Table" por "Tabla"
+
+% 6. MATEMÁTICAS
+\usepackage{amsmath}              % Símbolos y entornos matemáticos
+\usepackage{amssymb}              % Símbolos matemáticos adicionales
+
+% 7. CÓDIGO FUENTE
+\usepackage{listings}             % Incluir código
+\usepackage{xcolor}               % Colores para el código (ya cargado)
+
+% 8. REFERENCIAS Y ENLACES
+\usepackage{hyperref}             % Enlaces en el documento
+
+
+% 9. ENCABEZADOS Y FORMATO DE CAPÍTULOS
+\usepackage{fancyhdr}             % Encabezados y pies personalizados
+\usepackage{titlesec}             % Formato de títulos de secciones
+\usepackage{etoolbox}             % Utilidades para capítulos
+
+% 10. Para hacer listas dentro de listas numeradas
+%\usepackage{enumitem}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{array}
+
+% 10. BIBLIOGRAFÍA
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+\usepackage[
+  backend=biber,
+  style=ieee,           
+  url=true,
+  urldate=iso,
+  seconds=true
+]{biblatex}
+\addbibresource{bibliografia.bib}
+
+% 11. Configuración para JSON
+\lstdefinelanguage{json}{
+    keywords={true,false,null},
+    keywordstyle=\color{blue}\bfseries,
+    ndkeywords={products,meterId,meterDesc,deprecated,unit,type,unitCost,quantity},
+    ndkeywordstyle=\color{purple}\bfseries,
+    identifierstyle=\color{black},
+    sensitive=false,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{gray}\ttfamily,
+    stringstyle=\color{teal}\ttfamily,
+    morestring=[b]",
+    morestring=[b]'
+}
+
+\lstset{
+    language=json,
+    basicstyle=\ttfamily\small,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{gray!10},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    rulecolor=\color{black!30},
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=true,
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    literate={\ \ }{{\ }}1
+}
+% Para cambiar el formato de \paragraph
+\titleformat{\paragraph}
+  {\normalfont\bfseries}           % Formato del título
+  {\theparagraph}                   % Numeración
+  {1em}                             % Espacio entre número y título
+  {}                                % Código antes del título
+  [\vspace{0.5ex}]                  % Código después del título (salto de línea)
+
+\titlespacing*{\paragraph}
+  {0pt}                             % Margen izquierdo
+  {3.25ex plus 1ex minus 0.2ex}     % Espacio antes
+  {0.5em}                           % Espacio después
+% A. Configuración de hyperref (DEBE ir después de cargar hyperref)
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=green,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdfauthor={Pablo Galilea Valverde},
+    pdftitle={Trabajo Fin de Grado: Sistema de gestión de automatización de test},
+    pdfsubject={Trabajo Fin de Grado en Ingeniería Informática},
+    pdfkeywords={automatización, testing, sistemas de negocio, hosting}
+}
+
+% B. Configuración de encabezados (fancyhdr)
+\pagestyle{fancy}
+\fancyhf{}  % Limpiar encabezados y pies
+\fancyhead[LE,RO]{\thepage}     % Número de página exterior
+\fancyhead[RE]{\leftmark}       % Nombre del capítulo (páginas pares)
+\fancyhead[LO]{\rightmark}      % Nombre de sección (páginas impares)
+
+% C. Configuración de formato de capítulos (titlesec)
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\centering}
+  {\chaptertitlename\ \thechapter}
+  {20pt}
+  {\Huge}
+\titlespacing*{\chapter}{0pt}{-30pt}{20pt}  % Ajuste de espacios
+
+% D. Configuración para capítulos en la misma página (etoolbox)
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+
+% E. Configuración de listings (código fuente)
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    frame=single,
+    breaklines=true,
+    showstringspaces=false
+}
+
+% F. Configuración de gráficos (ruta de imágenes)
+\graphicspath{ {./imagenes/} }  % Carpeta donde buscar imágenes
+
+% G. Otros ajustes
+\setlength{\arrayrulewidth}{0.5pt}  % Grosor de líneas en tablas
+\setlength{\tabcolsep}{12pt}        % Espacio en celdas de tabla
+\renewcommand{\arraystretch}{1.2}   % Altura de filas en tablas
+
+%\setlist[enumerate,1]{label=\arabic*., ref=\arabic*}
+%\setlist[enumerate,2]{label=\arabic*.\arabic*., ref=\arabic*.\arabic*, resume}
+%\setlist[enumerate,3]{label=\arabic*.\arabic*.\arabic*., ref=\arabic*.\arabic*.\arabic*, resume}
+
+% ============================================
+% ===== METADATOS DEL DOCUMENTO =====
+% ============================================
+
+\title{Sistema de gestión de automatización de test para los sistemas de negocio de una compañía de hosting}
+\author{Pablo Galilea Valverde}
+\date{Junio 2025}
+
+
+% ============================================
+% ===== CUERPO DEL DOCUMENTO =====
+% ============================================
+
+% ===== DOCUMENTO =====
+\begin{document}
+
+% Portada
+\input{portada}
+
+% ===== PÁGINA DE DEDICATORIA (OPCIONAL) =====
+% Si NO quieres página en blanco, usa esto:
+\clearpage  % En lugar de \cleardoublepage
+\thispagestyle{empty}
+\begin{center}
+    \vspace*{5cm}  % Espacio vertical
+    
+    \textit{Dedicado a...} 
+    
+    \vspace{2cm}
+    
+    \textit{A mis padres y mi hermano por su apoyo incondicional.} \\ % 
+    
+    \vspace{2cm}   % Espacio final
+\end{center}
+\clearpage  % Pasa a la siguiente página
+
+% ===== PÁGINAS PRELIMINARES =====
+% Configurar numeración romana para preliminares
+\pagenumbering{roman}
+\setcounter{page}{3}  % Empezar en página iii (portada = i, dedicatoria = ii)
+
+% ===== RESUMEN =====
+\chapter*{Resumen}
+\thispagestyle{empty}  % Sin número en primera página del resumen
+\addcontentsline{toc}{chapter}{Resumen}  % Añadir al índice
+
+\textbf{Palabras clave:} automatización, testing, facturación, hosting, validación.
+
+\vspace{0.5cm}
+
+En este proyecto implementaremos una solución para validar la corrección de un sistema de facturación de servicios en la nube, que funcione de manera automatizada. Se desarrollará una API REST en Node.js que valide de manera cruzada los cargos que se hacen a través de APIs internas de la empresa, que garantice una facturación estable, fiable y basada estrictamente en el consumo de los clientes. El proyecto debe ser capaz de usar flujos de trabajo y servicios en la nube, y abordar temas
+como la implementación, operación y monitoreo de aplicaciones REST de back-end.
+
+\vspace{2cm}
+
+% ===== ABSTRACT =====
+\chapter*{Abstract}
+\thispagestyle{empty}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\textbf{Keywords:} automation, testing, billing, hosting, validation.
+
+\vspace{0.5cm}
+
+This project implements an automated quality assurance solution to validate Cloud billing accuracy. A Node.js REST API application regularly cross-checks product charges via internal APIs, ensuring stable and reliable consumption-based invoicing. The project provided hands-on experience in QA workflows and Cloud Services, as well as in the topic of implementing, operating and monitoring the back-end REST applications.
+
+\vspace{2cm}
+
+\newpage
+
+% ===== AGRADECIMIENTOS =====
+\chapter*{Agradecimientos}
+\thispagestyle{empty}
+\addcontentsline{toc}{chapter}{Agradecimientos}
+
+En primer lugar, me gustaría expresar mi más sincero agradecimiento a mis tutores, Jesús María Aransay Azofra y José Luis Fernández Villar, por su dedicación, tiempo y valioso apoyo durante la realización de este trabajo. 
+
+Quiero extender mi agradecimiento también a Artem Levik, quien durante mis prácticas ejerció como tutor y me enseñó tanto, así como a todo el equipo de Cloud Billing \& ERP de IONOS Cloud, por su profesionalidad y apoyo. Además de mis compañeros dentro de Arsys, en especial a Luisa por darme consejos de LaTeX para realizar el TFG. 
+
+\vspace{0.8cm}
+
+Agradezco profundamente a mi familia por ser mi pilar fundamental. A mi madre, Ramoni, por ser ese apoyo incondicional en cada paso; a mi padre, Neftalí, por transmitirme su pasión por las ciencias y su facilidad para entenderlas; y a mi hermano Gael ---que ya no es tan pequeño--- por ser la persona que me inspira a ser mejor cada día. 
+
+\vspace{0.2cm}
+
+Un especial reconocimiento a mi abuelo Martín, quien nunca dudó de que su nieto lograría este objetivo. Él, sin estudios formales, me enseñó más matemáticas que muchos maestros. Y, por supuesto, a mi abuela, cuyo amor y orgullo ---presumiendo por Torremolinos de su nieto que ya casi era ingeniero--- me dieron la energía necesaria para seguir adelante.
+
+\vspace{0.8cm}
+
+También quiero expresar mi gratitud a mi segunda familia: mis amigos de la universidad. Este último paso, este proyecto, es en gran parte gracias a ellos, por todas las tardes de sábados y domingos que pasamos juntos en la biblioteca. Gracias a Izai, Irune, Diego, Maider, Rubén y Urretxo por haber sido lo mejor que me llevo de mi experiencia universitaria.  Una mención especial para Jacobo, por todos los días que hemos acabado mano a mano, porque sé que, aunque todo falle, tú siempre estarás ahí.
+
+\vspace{0.8cm}
+
+Por último, y más importante, quiero darle las gracias a Cristina. Una gran parte de este proyecto es gracias a ti. Has sido un apoyo incondicional todos estos meses, en los que a veces no me veía capaz de sacarlo adelante. Con una sonrisa, por pequeña que fuese, me animabas a seguir. Has sido la forma más bonita en que la vida me ha mostrado la felicidad. Gracias a ti no me he rendido. Te quiero.
+
+\vspace{1cm}
+
+\begin{center}
+\textit{Con todo mi cariño,} \\
+\textbf{Pablo}
+\end{center}
+
+
+% ===== ÍNDICES =====
+\clearpage
+\tableofcontents    % Índice general
+\clearpage
+\listoffigures      % Índice de figuras (si hay)
+
+\vspace{3cm}
+
+\listoftables       % Índice de tablas (si hay)
+
+\newpage
+
+% ===== CAPÍTULOS PRINCIPALES =====
+\input{capitulos/01-introduccion} 
+
+\newpage
+
+\input{capitulos/02-Análisis}Total de Horas
+
+\newpage
+
+\input{capitulos/03-Planificación}
+
+
+\newpage
+
+\input{capitulos/04-Iteraciones}
+
+
+
+
+% ===== APÉNDICES =====
+\appendix
+\renewcommand{\chaptername}{Anexo}          % Cambia "Capítulo" por "Anexo"
+\renewcommand{\thechapter}{\arabic{chapter}}
+\newpage
+\input{anexos/A1-Anexo-ListaItems}
+\newpage
+\input{anexos/A2-Anexo-ObtenerTockenDCD.tex}
+
+% ===== BIBLIOGRAFÍA =====
+\newpage
+\printbibliography[title={Bibliografía}, heading=bibintoc]
+
+\end{document}
