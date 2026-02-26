@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.2.12)  26 FEB 2026 08:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.2.12)  26 FEB 2026 08:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1136,7 +1136,7 @@ Overfull \hbox (0.85948pt too wide) detected at line 18
  []
 
 
-Overfull \hbox (0.32072pt too wide) detected at line 19
+Overfull \hbox (0.85948pt too wide) detected at line 19
  [][]
  []
 
@@ -1147,6 +1147,11 @@ Overfull \hbox (0.32072pt too wide) detected at line 20
 
 
 Overfull \hbox (0.32072pt too wide) detected at line 21
+ [][]
+ []
+
+
+Overfull \hbox (0.32072pt too wide) detected at line 22
  [][]
  []
 
@@ -1253,22 +1258,22 @@ LaTeX Info: Redefining \sptext on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 
-Overfull \hbox (7.76057pt too wide) detected at line 7
+Overfull \hbox (7.76057pt too wide) detected at line 8
  [][]
  []
 
 
-Overfull \hbox (19.18973pt too wide) detected at line 9
- [][]
- []
-
-
-Overfull \hbox (23.17903pt too wide) detected at line 10
+Overfull \hbox (19.18973pt too wide) detected at line 10
  [][]
  []
 
 
 Overfull \hbox (23.17903pt too wide) detected at line 11
+ [][]
+ []
+
+
+Overfull \hbox (23.17903pt too wide) detected at line 12
  [][]
  []
 
@@ -1344,28 +1349,25 @@ Overfull \hbox (7.76057pt too wide) detected at line 15
 ] (./capitulos/01-introduccion.tex
 Cap\'{\i }tulo 1.
 [8]
-LaTeX Info: Redefining \. on input line 56.
-LaTeX Info: Redefining \% on input line 56.
+LaTeX Info: Redefining \. on input line 58.
+LaTeX Info: Redefining \% on input line 58.
  [9]
-<./imagenes/interfaz-DCD-1.png, id=321, 1916.66063pt x 959.08313pt>
+<./imagenes/interfaz-DCD-1.png, id=323, 1916.66063pt x 959.08313pt>
 File: ./imagenes/interfaz-DCD-1.png Graphic file (type png)
 <use ./imagenes/interfaz-DCD-1.png>
-Package pdftex.def Info: ./imagenes/interfaz-DCD-1.png  used on input line 83.
-(pdftex.def)             Requested size: 441.01772pt x 220.67229pt.
-LaTeX Info: Redefining \. on input line 88.
-LaTeX Info: Redefining \% on input line 88.
+Package pdftex.def Info: ./imagenes/interfaz-DCD-1.png  used on input line 87.
+(pdftex.def)             Requested size: 384.1122pt x 192.20836pt.
+LaTeX Info: Redefining \. on input line 92.
+LaTeX Info: Redefining \% on input line 92.
  [10]
-<./imagenes/interfaz-DCD-2.png, id=328, 1461.20906pt x 928.97063pt>
+<./imagenes/interfaz-DCD-2.png, id=330, 1461.20906pt x 928.97063pt>
 File: ./imagenes/interfaz-DCD-2.png Graphic file (type png)
 <use ./imagenes/interfaz-DCD-2.png>
-Package pdftex.def Info: ./imagenes/interfaz-DCD-2.png  used on input line 99.
-(pdftex.def)             Requested size: 441.01772pt x 280.38016pt.
+Package pdftex.def Info: ./imagenes/interfaz-DCD-2.png  used on input line 103.
+(pdftex.def)             Requested size: 384.1122pt x 244.19156pt.
+LaTeX Info: Redefining \. on input line 111.
+LaTeX Info: Redefining \% on input line 111.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-LaTeX Info: Redefining \. on input line 117.
-LaTeX Info: Redefining \% on input line 117.
 
 Package fancyhdr Warning: \headheight is too small (15.0pt): 
 (fancyhdr)                Make it at least 29.54742pt, for example:
@@ -1373,65 +1375,65 @@ Package fancyhdr Warning: \headheight is too small (15.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-14.54742pt}.
 
-[11 <./imagenes/interfaz-DCD-1.png>]
-LaTeX Info: Redefining \. on input line 133.
-LaTeX Info: Redefining \% on input line 133.
- [12 <./imagenes/interfaz-DCD-2.png>]
-LaTeX Info: Redefining \. on input line 166.
-LaTeX Info: Redefining \% on input line 166.
+[11 <./imagenes/interfaz-DCD-1.png> <./imagenes/interfaz-DCD-2.png>]
+LaTeX Info: Redefining \. on input line 139.
+LaTeX Info: Redefining \% on input line 139.
+ [12]
+LaTeX Info: Redefining \. on input line 170.
+LaTeX Info: Redefining \% on input line 170.
  [13]
-Overfull \hbox (5.40225pt too wide) in paragraph at lines 172--186
+Overfull \hbox (5.40225pt too wide) in paragraph at lines 176--190
  [][] 
  []
 
 
 
 pdfTeX warning: pdflatex (file ./archivos/flujo_API_Canary.drawio.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<archivos/flujo_API_Canary.drawio.pdf, id=357, 614.295pt x 794.97pt>
+<archivos/flujo_API_Canary.drawio.pdf, id=358, 614.295pt x 794.97pt>
 File: archivos/flujo_API_Canary.drawio.pdf Graphic file (type pdf)
 <use archivos/flujo_API_Canary.drawio.pdf>
-Package pdftex.def Info: archivos/flujo_API_Canary.drawio.pdf  used on input line 207.
+Package pdftex.def Info: archivos/flujo_API_Canary.drawio.pdf  used on input line 211.
 (pdftex.def)             Requested size: 396.91325pt x 513.65543pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Info: Redefining \. on input line 217.
-LaTeX Info: Redefining \% on input line 217.
+LaTeX Info: Redefining \. on input line 225.
+LaTeX Info: Redefining \% on input line 225.
 [14]
-LaTeX Info: Redefining \. on input line 218.
-LaTeX Info: Redefining \% on input line 218.
+LaTeX Info: Redefining \. on input line 225.
+LaTeX Info: Redefining \% on input line 225.
  [15 <./archivos/flujo_API_Canary.drawio.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 260--260
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
 []|\T1/cmr/bx/n/12 Base de Da-tos
  []
 
 
-Underfull \hbox (badness 2591) in paragraph at lines 268--268
+Underfull \hbox (badness 2591) in paragraph at lines 272--272
 []|\T1/cmr/bx/n/12 Creación de dia-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 270--270
+Underfull \hbox (badness 10000) in paragraph at lines 274--274
 []|\T1/cmr/bx/n/12 Conexión con
  []
 
 
-Overfull \hbox (27.44775pt too wide) in paragraph at lines 243--272
+Overfull \hbox (27.44775pt too wide) in paragraph at lines 247--276
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 280.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 284.
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Info: Redefining \. on input line 296.
-LaTeX Info: Redefining \% on input line 296.
+LaTeX Info: Redefining \. on input line 308.
+LaTeX Info: Redefining \% on input line 308.
  [16{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-LaTeX Info: Redefining \. on input line 320.
-LaTeX Info: Redefining \% on input line 320.
+LaTeX Info: Redefining \. on input line 324.
+LaTeX Info: Redefining \% on input line 324.
  [17])
 LaTeX Info: Redefining \. on input line 302.
 LaTeX Info: Redefining \% on input line 302.
@@ -1486,7 +1488,7 @@ Cap\'{\i }tulo 3.
 
 
 pdfTeX warning: pdflatex (file ./archivos/EDT.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<archivos/EDT.pdf, id=432, 614.295pt x 794.97pt>
+<archivos/EDT.pdf, id=433, 614.295pt x 794.97pt>
 File: archivos/EDT.pdf Graphic file (type pdf)
 <use archivos/EDT.pdf>
 Package pdftex.def Info: archivos/EDT.pdf  used on input line 10.
@@ -1787,12 +1789,12 @@ LaTeX Info: Redefining \% on input line 225.
 [36]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 233.
-<./imagenes/PostMan-Test.png, id=561, 1644.89531pt x 746.03719pt>
+<./imagenes/PostMan-Test.png, id=562, 1644.89531pt x 746.03719pt>
 File: ./imagenes/PostMan-Test.png Graphic file (type png)
 <use ./imagenes/PostMan-Test.png>
 Package pdftex.def Info: ./imagenes/PostMan-Test.png  used on input line 241.
 (pdftex.def)             Requested size: 441.01773pt x 200.02116pt.
-<./imagenes/PostMan-Resumen.png, id=562, 237.88875pt x 112.16907pt>
+<./imagenes/PostMan-Resumen.png, id=563, 237.88875pt x 112.16907pt>
 File: ./imagenes/PostMan-Resumen.png Graphic file (type png)
 <use ./imagenes/PostMan-Resumen.png>
 Package pdftex.def Info: ./imagenes/PostMan-Resumen.png  used on input line 251.
@@ -1800,7 +1802,7 @@ Package pdftex.def Info: ./imagenes/PostMan-Resumen.png  used on input line 251.
 LaTeX Info: Redefining \. on input line 255.
 LaTeX Info: Redefining \% on input line 255.
  [37 <./imagenes/PostMan-Test.png>]
-<./imagenes/PostMan-CodsOK.png, id=585, 1414.53468pt x 261.97874pt>
+<./imagenes/PostMan-CodsOK.png, id=586, 1414.53468pt x 261.97874pt>
 File: ./imagenes/PostMan-CodsOK.png Graphic file (type png)
 <use ./imagenes/PostMan-CodsOK.png>
 Package pdftex.def Info: ./imagenes/PostMan-CodsOK.png  used on input line 258.
@@ -1848,10 +1850,10 @@ Overfull \hbox (8.9668pt too wide) in paragraph at lines 420--421
 LaTeX Info: Redefining \. on input line 448.
 LaTeX Info: Redefining \% on input line 448.
 [42])
-LaTeX Info: Redefining \. on input line 322.
-LaTeX Info: Redefining \% on input line 322.
+LaTeX Info: Redefining \. on input line 323.
+LaTeX Info: Redefining \% on input line 323.
  [43] (./anexos/A1-Anexo-ListaItems.tex
-Ap\'{e}ndice 1.
+Anexo 1.
 
 LaTeX Warning: Citation 'billing-IONOSClaud' on page 44 undefined on input line 7.
 
@@ -1861,16 +1863,16 @@ Overfull \hbox (21.0458pt too wide) in paragraph at lines 7--9
  []
 
 [44] [45])
-LaTeX Info: Redefining \. on input line 324.
-LaTeX Info: Redefining \% on input line 324.
+LaTeX Info: Redefining \. on input line 325.
+LaTeX Info: Redefining \% on input line 325.
  [46] (./anexos/A2-Anexo-ObtenerTockenDCD.tex
-Ap\'{e}ndice 2.
-<./imagenes/interfaz-InicioSesionDCD-1.png, id=643, 1434.10782pt x 685.05937pt>
+Anexo 2.
+<./imagenes/interfaz-InicioSesionDCD-1.png, id=644, 1434.10782pt x 685.05937pt>
 File: ./imagenes/interfaz-InicioSesionDCD-1.png Graphic file (type png)
 <use ./imagenes/interfaz-InicioSesionDCD-1.png>
 Package pdftex.def Info: ./imagenes/interfaz-InicioSesionDCD-1.png  used on input line 12.
 (pdftex.def)             Requested size: 298.75394pt x 142.7064pt.
-<./imagenes/interfaz-InicioSesionDCD-2.png, id=644, 1440.13031pt x 690.32906pt>
+<./imagenes/interfaz-InicioSesionDCD-2.png, id=645, 1440.13031pt x 690.32906pt>
 File: ./imagenes/interfaz-InicioSesionDCD-2.png Graphic file (type png)
 <use ./imagenes/interfaz-InicioSesionDCD-2.png>
 Package pdftex.def Info: ./imagenes/interfaz-InicioSesionDCD-2.png  used on input line 22.
@@ -1880,25 +1882,25 @@ File: ./imagenes/interfaz-DCD-1.png Graphic file (type png)
 <use ./imagenes/interfaz-DCD-1.png>
 Package pdftex.def Info: ./imagenes/interfaz-DCD-1.png  used on input line 34.
 (pdftex.def)             Requested size: 355.65944pt x 177.96907pt.
-<./imagenes/interfaz-DCD-3.png, id=653, 271.76532pt x 322.95656pt>
+<./imagenes/interfaz-DCD-3.png, id=654, 271.76532pt x 322.95656pt>
 File: ./imagenes/interfaz-DCD-3.png Graphic file (type png)
 <use ./imagenes/interfaz-DCD-3.png>
 Package pdftex.def Info: ./imagenes/interfaz-DCD-3.png  used on input line 46.
 (pdftex.def)             Requested size: 128.0374pt x 152.1592pt.
-<./imagenes/interfaz-DCD-tokens.png, id=654, 622.57594pt x 216.81pt>
+<./imagenes/interfaz-DCD-tokens.png, id=655, 622.57594pt x 216.81pt>
 File: ./imagenes/interfaz-DCD-tokens.png Graphic file (type png)
 <use ./imagenes/interfaz-DCD-tokens.png>
 Package pdftex.def Info: ./imagenes/interfaz-DCD-tokens.png  used on input line 54.
 (pdftex.def)             Requested size: 298.75394pt x 104.04114pt.
 )
-LaTeX Info: Redefining \. on input line 326.
-LaTeX Info: Redefining \% on input line 326.
+LaTeX Info: Redefining \. on input line 327.
+LaTeX Info: Redefining \% on input line 327.
  [48 <./imagenes/interfaz-DCD-3.png>]
-LaTeX Info: Redefining \. on input line 328.
-LaTeX Info: Redefining \% on input line 328.
+LaTeX Info: Redefining \. on input line 329.
+LaTeX Info: Redefining \% on input line 329.
  [49 <./imagenes/interfaz-DCD-tokens.png>]
 
-LaTeX Warning: Empty bibliography on input line 329.
+LaTeX Warning: Empty bibliography on input line 330.
 
 (%OUTDIR%/main.aux
 LaTeX Info: Redefining \sptext on input line 12.
@@ -1942,10 +1944,10 @@ pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exist,
 pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist, replaced by a fixed one
 
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfxc1200.pfb>
-Output written on %OUTDIR%/main.pdf (49 pages, 1738846 bytes).
+Output written on %OUTDIR%/main.pdf (49 pages, 1739266 bytes).
 PDF statistics:
- 816 PDF objects out of 1000 (max. 8388607)
- 688 compressed objects within 7 object streams
+ 817 PDF objects out of 1000 (max. 8388607)
+ 689 compressed objects within 7 object streams
  235 named destinations out of 1000 (max. 500000)
  417 words of extra memory for PDF output out of 10000 (max. 10000000)
 

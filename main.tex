@@ -205,15 +205,15 @@
 \clearpage  % En lugar de \cleardoublepage
 \thispagestyle{empty}
 \begin{center}
-    \vspace*{5cm}  % Espacio vertical
-    
-    \textit{Dedicado a...} 
-    
-    \vspace{2cm}
-    
-    \textit{A mis padres y mi hermano por su apoyo incondicional.} \\ % 
-    
-    \vspace{2cm}   % Espacio final
+  \vspace*{5cm}  % Espacio vertical
+
+  \textit{Dedicado a...}
+
+  \vspace{2cm}
+
+  \textit{A mis padres y mi hermano por su apoyo incondicional.} \\ % 
+
+  \vspace{2cm}   % Espacio final
 \end{center}
 \clearpage  % Pasa a la siguiente página
 
@@ -256,13 +256,13 @@ This project implements an automated quality assurance solution to validate Clou
 \thispagestyle{empty}
 \addcontentsline{toc}{chapter}{Agradecimientos}
 
-En primer lugar, me gustaría expresar mi más sincero agradecimiento a mis tutores, Jesús María Aransay Azofra y José Luis Fernández Villar, por su dedicación, tiempo y valioso apoyo durante la realización de este trabajo. 
+En primer lugar, me gustaría expresar mi más sincero agradecimiento a mis tutores, Jesús María Aransay Azofra y José Luis Fernández Villar, por su dedicación, tiempo y valioso apoyo durante la realización de este trabajo.
 
-Quiero extender mi agradecimiento también a Artem Levik, quien durante mis prácticas ejerció como tutor y me enseñó tanto, así como a todo el equipo de Cloud Billing \& ERP de IONOS Cloud, por su profesionalidad y apoyo. Además de mis compañeros dentro de Arsys, en especial a Luisa por darme consejos de LaTeX para realizar el TFG. 
+Quiero extender mi agradecimiento también a Artem Levik, quien durante mis prácticas ejerció como tutor y me enseñó tanto, así como a todo el equipo de Cloud Billing \& ERP de IONOS Cloud, por su profesionalidad y apoyo. Además de mis compañeros dentro de Arsys, en especial a Luisa por darme consejos de LaTeX para realizar el TFG.
 
 \vspace{0.8cm}
 
-Agradezco profundamente a mi familia por ser mi pilar fundamental. A mi madre, Ramoni, por ser ese apoyo incondicional en cada paso; a mi padre, Neftalí, por transmitirme su pasión por las ciencias y su facilidad para entenderlas; y a mi hermano Gael ---que ya no es tan pequeño--- por ser la persona que me inspira a ser mejor cada día. 
+Agradezco profundamente a mi familia por ser mi pilar fundamental. A mi madre, Ramoni, por ser ese apoyo incondicional en cada paso; a mi padre, Neftalí, por transmitirme su pasión por las ciencias y su facilidad para entenderlas; y a mi hermano Gael ---que ya no es tan pequeño--- por ser la persona que me inspira a ser mejor cada día.
 
 \vspace{0.2cm}
 
@@ -279,8 +279,8 @@ Por último, y más importante, quiero darle las gracias a Cristina. Una gran pa
 \vspace{1cm}
 
 \begin{center}
-\textit{Con todo mi cariño,} \\
-\textbf{Pablo}
+  \textit{Con todo mi cariño,} \\
+  \textbf{Pablo}
 \end{center}
 
 
@@ -297,7 +297,7 @@ Por último, y más importante, quiero darle las gracias a Cristina. Una gran pa
 \newpage
 
 % ===== CAPÍTULOS PRINCIPALES =====
-\input{capitulos/01-introduccion} 
+\input{capitulos/01-introduccion}
 
 \newpage
 
@@ -315,8 +315,9 @@ Por último, y más importante, quiero darle las gracias a Cristina. Una gran pa
 
 
 
-% ===== APÉNDICES =====
+% ===== ANEXOS =====
 \appendix
+\renewcommand{\appendixname}{Anexo}         % Cambia "Apéndice" por "Anexo" en el índice
 \renewcommand{\chaptername}{Anexo}          % Cambia "Capítulo" por "Anexo"
 \renewcommand{\thechapter}{\arabic{chapter}}
 \newpage

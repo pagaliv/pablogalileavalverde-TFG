@@ -12,14 +12,14 @@
 \contentsline {section}{\numberline {1.5}¿Qué es el DISEÑADOR DE CENTROS DE DATOS (DCD) de IONOS Cloud?}{\es@scroman {x}}{section.1.5}%
 \contentsline {subsection}{\numberline {1.5.1}Definición y Propósito}{\es@scroman {x}}{subsection.1.5.1}%
 \contentsline {subsection}{\numberline {1.5.2}Funciones y Herramientas del DCD}{\es@scroman {xi}}{subsection.1.5.2}%
-\contentsline {subsubsection}{Herramientas del DCD}{\es@scroman {xi}}{figure.caption.9}%
+\contentsline {subsubsection}{Herramientas del DCD}{\es@scroman {xii}}{figure.caption.9}%
 \contentsline {section}{\numberline {1.6}¿Qué es una API REST y una API Canary?}{\es@scroman {xiii}}{section.1.6}%
 \contentsline {subsection}{\numberline {1.6.1}¿Qué es una API REST?}{\es@scroman {xiii}}{subsection.1.6.1}%
 \contentsline {subsection}{\numberline {1.6.2}Principios REST}{\es@scroman {xiii}}{subsection.1.6.2}%
-\contentsline {subsection}{\numberline {1.6.3}Concepto y Origen de API Canary}{\es@scroman {xiv}}{subsection.1.6.3}%
+\contentsline {subsection}{\numberline {1.6.3}Concepto y Origen de API Canary}{\es@scroman {xiii}}{subsection.1.6.3}%
 \contentsline {subsection}{\numberline {1.6.4}Características Principales}{\es@scroman {xiv}}{subsection.1.6.4}%
 \contentsline {subsection}{\numberline {1.6.5}Ventajas en Sistemas de Facturación}{\es@scroman {xiv}}{subsection.1.6.5}%
-\contentsline {subsection}{\numberline {1.6.6}Flujo de Trabajo Canary}{\es@scroman {xv}}{subsection.1.6.6}%
+\contentsline {subsection}{\numberline {1.6.6}Flujo de Trabajo Canary}{\es@scroman {xiv}}{subsection.1.6.6}%
 \contentsline {section}{\numberline {1.7}Tecnologías y Herramientas Utilizadas}{\es@scroman {xvi}}{section.1.7}%
 \contentsline {subsubsection}{Stack Tecnológico Principal}{\es@scroman {xvi}}{section.1.7}%
 \contentsline {subsubsection}{Dependencias Clave del Proyecto}{\es@scroman {xvi}}{table.caption.12}%
