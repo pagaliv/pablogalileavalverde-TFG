@@ -1,17 +1,17 @@
 # Fdb version 4
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 1772106007.72781 -1
+["bibtex main"] 0 "main.aux" "main.bbl" "main" 1772106868.03488 -1
   "main.aux" 0 -1 0 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1772106005.71504 "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" "main.pdf" "main" 1772106007.72786 0
-  "%OUTDIR%/main.aux" 1772106007.60507 20119 39205f4778014b96eacd19aec8f26c72 "pdflatex"
-  "%OUTDIR%/main.lof" 1772106007.61098 1028 edf4ec97fddfaba90d3a40b6bbed57d2 "pdflatex"
-  "%OUTDIR%/main.lot" 1772106007.61098 1508 e16cec117210c70f72f1231e02878f51 "pdflatex"
-  "%OUTDIR%/main.out" 1772106007.60941 7656 114fecd1c9adfcffcf1e7b648a04ac54 "pdflatex"
-  "%OUTDIR%/main.run.xml" 1772106007.61098 2404 c26dd97bcd39844ed065af16e5d03e28 "pdflatex"
-  "%OUTDIR%/main.toc" 1772106007.61098 8817 e2b70077a3365076c281dd24b104aa32 "pdflatex"
+["pdflatex"] 1772106865.96255 "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" "main.pdf" "main" 1772106868.03493 0
+  "%OUTDIR%/main.aux" 1772106867.9081 20119 39205f4778014b96eacd19aec8f26c72 "pdflatex"
+  "%OUTDIR%/main.lof" 1772106867.9143 1028 edf4ec97fddfaba90d3a40b6bbed57d2 "pdflatex"
+  "%OUTDIR%/main.lot" 1772106867.9143 1508 e16cec117210c70f72f1231e02878f51 "pdflatex"
+  "%OUTDIR%/main.out" 1772106867.91228 7656 114fecd1c9adfcffcf1e7b648a04ac54 "pdflatex"
+  "%OUTDIR%/main.run.xml" 1772106867.9143 2404 c26dd97bcd39844ed065af16e5d03e28 "pdflatex"
+  "%OUTDIR%/main.toc" 1772106867.9143 8817 e2b70077a3365076c281dd24b104aa32 "pdflatex"
   "/etc/texmf/web2c/texmf.cnf" 1770890366.72124 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" 1772105671.07707 12163 cfc7418b04708ebdb6c728d34f438545 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -280,8 +280,8 @@
   "archivos/flujo_API_Canary.drawio.pdf" 1771235528 34088 1b23432f394b120fd84757f11a046983 ""
   "capitulos/01-introduccion.tex" 1772099510.69826 15689 6d49ab2d6653c12aaab06ce5cd54d3a0 ""
   "capitulos/02-Análisis.tex" 1772105418.06554 14495 dc75624a426934520fa8a9801c39fdeb ""
-  "capitulos/03-Planificación.tex" 1772105910.38223 40862 5be96168486ebab82f3d76cedb8f2a43 ""
-  "capitulos/04-Iteraciones.tex" 1772106003.28975 25307 b5194bdf78422a6518bdc5ac93d08e6e ""
+  "capitulos/03-Planificación.tex" 1772106865.69509 41021 dc4d6482db9c02ee391c52971195e9fa ""
+  "capitulos/04-Iteraciones.tex" 1772106018.034 25307 b5194bdf78422a6518bdc5ac93d08e6e ""
   "imagenes/PostMan-CodsOK.png" 1771415479.91596 40670 c378f8b11ec188857746e26b9d3fe39c ""
   "imagenes/PostMan-Resumen.png" 1771415844.83481 11334 8bce1b747e4bac17e6aae31bcdc58504 ""
   "imagenes/PostMan-Test.png" 1771415108.40216 215805 9e684a09ba3d1f315efa6a045262812d ""
