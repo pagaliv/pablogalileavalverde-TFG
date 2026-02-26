@@ -6,94 +6,94 @@
 \section{Primera Iteración}
 \subsection{Planificación}
 Siendo esta la primera iteración, es en la que más se desarrolla para que en las siguientes iteraciones todo resulte más sencillo.
- Esta iteración se basa en 4 puntos: La creación de la función para detectar los \textit{items} continuables;
-  las configuraciones iniciales en CouchDB; la creación de las primeras alarmas --- después de crearlas, solo habrá que modificar su contenido 
-  en el resto de iteraciones --- y la creación del contrato. 
+Esta iteración se basa en 4 puntos: La creación de la función para detectar los \textit{items} continuables;
+las configuraciones iniciales en CouchDB; la creación de las primeras alarmas --- después de crearlas, solo habrá que modificar su contenido
+en el resto de iteraciones --- y la creación del contrato.
 
 
 \vspace{0.8cm}
 
-Uno de los objetivos fundamentales de este proyecto es la creación de la base del proyecto y establecer las tecnologías fundamentales para iniciarlo. Con esto se engloba tanto el lenguaje que se usará 
-como la decisión del método de persistencia del código. En este caso ambas decisiones son heredadas, se usa \textit{JavaScript} porque es donde están desarrolladas las librerías internas del equipo de Billing 
+Uno de los objetivos fundamentales de este proyecto es la creación de la base del proyecto y establecer las tecnologías fundamentales para iniciarlo. Con esto se engloba tanto el lenguaje que se usará
+como la decisión del método de persistencia del código. En este caso ambas decisiones son heredadas, se usa \textit{JavaScript} porque es donde están desarrolladas las librerías internas del equipo de Billing
 de IONOS Cloud y para persistir se guardará en Gitlab de manera habitual y además por seguridad se guardará periodicamente tanto en github como en un disco duro físico.
 
 
 \vspace{0.8cm}
 
-Referido a la detección de los \textit{items} continuables, se realiza en dos fases: la primera consiste en detectar solamente un SKU concreto y, cuando funcione, se extiende al resto de SKUs. 
+Referido a la detección de los \textit{items} continuables, se realiza en dos fases: la primera consiste en detectar solamente un SKU concreto y, cuando funcione, se extiende al resto de SKUs.
 
 \vspace{0.8cm}
 
-Tanto la configuración inicial de CouchDB, como la creación de las alarmas y la formalización del contrato se realizan con cuidadoso detalle, porque si se hacen bien en esta fase, en el resto de 
-fases no hay que modificarlos mucho. 
+Tanto la configuración inicial de CouchDB, como la creación de las alarmas y la formalización del contrato se realizan con cuidadoso detalle, porque si se hacen bien en esta fase, en el resto de
+fases no hay que modificarlos mucho.
 
 \vspace{2cm}
 
 \subsubsection{Verificación de SKUs con PostMan}
-Para la verificación de los SKUs disponibles en la API de IONOS Cloud, hemos optado por utilizar 
-\textbf{PostMan}\Cite{PostMan-Learning} como herramienta de prueba y automatización. Antes de comenzar a utilizarlo, es 
+Para la verificación de los SKUs disponibles en la API de IONOS Cloud, hemos optado por utilizar
+\textbf{PostMan}\Cite{PostMan-Learning} como herramienta de prueba y automatización. Antes de comenzar a utilizarlo, es
 importante comprender su funcionamiento y las capacidades que ofrece para este proyecto.
 
-PostMan es una plataforma de colaboración para el desarrollo de APIs que permite diseñar, probar, 
-documentar y monitorizar APIs de manera eficiente. Para este trabajo, aprovecharemos especialmente 
-su capacidad para ejecutar scripts de prueba en JavaScript y su sistema de colecciones que permite 
+PostMan es una plataforma de colaboración para el desarrollo de APIs que permite diseñar, probar,
+documentar y monitorizar APIs de manera eficiente. Para este trabajo, aprovecharemos especialmente
+su capacidad para ejecutar scripts de prueba en JavaScript y su sistema de colecciones que permite
 automatizar peticiones.
 
 \paragraph{Conceptos básicos de PostMan para la verificación de SKUs}
 
-Antes de comenzar a usarlo, es importante entender algunos conceptos 
+Antes de comenzar a usarlo, es importante entender algunos conceptos
 clave de PostMan:
 
 \begin{itemize}
-    \item \textbf{Collections:} Son grupos de peticiones relacionadas que pueden organizarse en carpetas. 
-    En nuestro caso, crearemos una colección específica para las pruebas de verificación de SKUs de 
-    IONOS Cloud.
-    
-    \item \textbf{Environments y variables:} PostMan permite definir entornos con variables reutilizables. 
-    Utilizaremos variables de entorno para almacenar:
-    \begin{itemize}
-        \item La URL base de la API de IONOS Cloud.
-        \item Los tokens de autenticación de forma segura.
-        \item Los resultados de las verificaciones para su uso en otras peticiones.
-    \end{itemize}
-    
-    \item \textbf{Pre-request scripts:} Scripts que se ejecutan \textit{antes} de enviar una petición. 
-    Nos permitirán preparar datos, generar tokens temporales o configurar cabeceras de autenticación 
-    automáticamente.
-    
-    \item \textbf{Tests scripts:} Scripts que se ejecutan \textit{después} de recibir la respuesta de la API. 
-    Aquí implementaremos la lógica de verificación de SKUs, comparando los recursos obtenidos con 
-    la lista predefinida de recursos requeridos.
-    
-    \item \textbf{Console:} Herramienta de depuración que muestra los logs generados por nuestros scripts. 
-    Utilizaremos \texttt{console.log()} para generar reportes detallados del estado de cada verificación.
-    
-    \item \textbf{Runner:} Funcionalidad que permite ejecutar colecciones completas de manera automática, 
-    ideal para realizar verificaciones periódicas sin intervención manual.
+    \item \textbf{Collections:} Son grupos de peticiones relacionadas que pueden organizarse en carpetas.
+          En nuestro caso, crearemos una colección específica para las pruebas de verificación de SKUs de
+          IONOS Cloud.
+
+    \item \textbf{Environments y variables:} PostMan permite definir entornos con variables reutilizables.
+          Utilizaremos variables de entorno para almacenar:
+          \begin{itemize}
+              \item La URL base de la API de IONOS Cloud.
+              \item Los tokens de autenticación de forma segura.
+              \item Los resultados de las verificaciones para su uso en otras peticiones.
+          \end{itemize}
+
+    \item \textbf{Pre-request scripts:} Scripts que se ejecutan \textit{antes} de enviar una petición.
+          Nos permitirán preparar datos, generar tokens temporales o configurar cabeceras de autenticación
+          automáticamente.
+
+    \item \textbf{Tests scripts:} Scripts que se ejecutan \textit{después} de recibir la respuesta de la API.
+          Aquí implementaremos la lógica de verificación de SKUs, comparando los recursos obtenidos con
+          la lista predefinida de recursos requeridos.
+
+    \item \textbf{Console:} Herramienta de depuración que muestra los logs generados por nuestros scripts.
+          Utilizaremos \texttt{console.log()} para generar reportes detallados del estado de cada verificación.
+
+    \item \textbf{Runner:} Funcionalidad que permite ejecutar colecciones completas de manera automática,
+          ideal para realizar verificaciones periódicas sin intervención manual.
 \end{itemize}
 
 \subsubsection{Base de datos con CouchDB}
-Para las configuraciones, exceptuando los tokens y las claves, hemos optado por utilizar \textbf{CouchDB}\Cite{CouchDB-Info}, una base de datos NoSQL 
+Para las configuraciones, exceptuando los tokens y las claves, hemos optado por utilizar \textbf{CouchDB}\Cite{CouchDB-Info}, una base de datos NoSQL
 orientada a documentos que destaca por su facilidad de integración con aplicaciones web.
 
 \paragraph{Características principales de CouchDB}
 
 \begin{itemize}
-    \item \textbf{Almacenamiento basado en JSON:} Los datos se guardan como documentos JSON, lo que 
-    facilita su manipulación desde aplicaciones JavaScript.
-    
-    \item \textbf{API RESTful nativa:} CouchDB expone una API HTTP que permite realizar operaciones 
-    CRUD mediante peticiones estándar (GET, POST, PUT, DELETE), simplificando la comunicación con 
-    el backend.
-    
-    \item \textbf{MapReduce para consultas:} Implementa vistas mediante funciones MapReduce, 
-    permitiendo crear índices y consultas personalizadas sobre los documentos almacenados.
-    
-    \item \textbf{Replicación maestro-maestro:} Soporta sincronización bidireccional entre múltiples 
-    instancias, lo que facilita la distribución de datos y la tolerancia a fallos.
-    
-    \item \textbf{MVCC (Multiversion Concurrency Control):} Utiliza control de concurrencia mediante 
-    versiones, evitando bloqueos en lecturas y escrituras simultáneas.
+    \item \textbf{Almacenamiento basado en JSON:} Los datos se guardan como documentos JSON, lo que
+          facilita su manipulación desde aplicaciones JavaScript.
+
+    \item \textbf{API RESTful nativa:} CouchDB expone una API HTTP que permite realizar operaciones
+          CRUD mediante peticiones estándar (GET, POST, PUT, DELETE), simplificando la comunicación con
+          el backend.
+
+    \item \textbf{MapReduce para consultas:} Implementa vistas mediante funciones MapReduce,
+          permitiendo crear índices y consultas personalizadas sobre los documentos almacenados.
+
+    \item \textbf{Replicación maestro-maestro:} Soporta sincronización bidireccional entre múltiples
+          instancias, lo que facilita la distribución de datos y la tolerancia a fallos.
+
+    \item \textbf{MVCC (Multiversion Concurrency Control):} Utiliza control de concurrencia mediante
+          versiones, evitando bloqueos en lecturas y escrituras simultáneas.
 \end{itemize}
 
 
@@ -102,15 +102,15 @@ orientada a documentos que destaca por su facilidad de integración con aplicaci
 \subsection{Desarrollo y despliegue}
 
 \subsubsection{Creación del contrato}
-Para crear el contrato se hace de manera manual, debido a que tras una breve investigación se concluyó que no había ningún método sencillo para crearlo de forma automática, por lo que se consideró hacerlo de forma manual ya que el coste de tiempo iba a ser menor y el proceso más sencillo. 
-El método elegido fue usar de manera combinada el DCD de IONOS con comprobaciones periódicas en PostMan. Para crear el contrato hay que tener primero una cuenta de IONOS Cloud y darse de alta en el DCD; debido a que este proceso se considera sencillo, no se desarrolla más. Si se quiere obtener más información, 
-se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}. 
+Para crear el contrato se hace de manera manual, debido a que tras una breve investigación se concluyó que no había ningún método sencillo para crearlo de forma automática, por lo que se consideró hacerlo de forma manual ya que el coste de tiempo iba a ser menor y el proceso más sencillo.
+El método elegido fue usar de manera combinada el DCD de IONOS con comprobaciones periódicas en PostMan. Para crear el contrato hay que tener primero una cuenta de IONOS Cloud y darse de alta en el DCD; debido a que este proceso se considera sencillo, no se desarrolla más. Si se quiere obtener más información,
+se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}.
 
-\vspace{0.8cm} 
+\vspace{0.8cm}
 
-El primer problema encontrado fue lograr vincular los recursos a sus SKUs, ya que el nombre de algunos SKUs no es intuitivo; para ello se empezó a usar la API interna de IONOS Cloud \cite{billing-IONOSClaud}. 
-Además, para usarla se necesitaba, aparte de la documentación, un token generado por el contrato ---la forma de obtenerlo es sencilla y no es el objeto del proyecto; para más información se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}---. Una vez se sabe cómo obtener 
-dicho token, hay que crear un plan de uso y control de dichos tokens, debido a que son información delicada. 
+El primer problema encontrado fue lograr vincular los recursos a sus SKUs, ya que el nombre de algunos SKUs no es intuitivo; para ello se empezó a usar la API interna de IONOS Cloud \cite{billing-IONOSCloud}.
+Además, para usarla se necesitaba, aparte de la documentación, un token generado por el contrato ---la forma de obtenerlo es sencilla y no es el objeto del proyecto; para más información se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}---. Una vez se sabe cómo obtener
+dicho token, hay que crear un plan de uso y control de dichos tokens, debido a que son información delicada.
 
 \subsubsection{Plan de gestión de tokens de autenticación}
 \label{iteraciones:gestion-tokens}
@@ -143,53 +143,53 @@ Los tokens de autenticación en IONOS Cloud presentan las siguientes caracterís
 \vspace{0.25cm}
 \begin{enumerate}
     \item \textbf{Generación del token:}
-    \begin{itemize}
-        \item Acceder al DCD: Menú → Management → Token Manager.
-        \item Seleccionar TTL adecuado al caso de uso (para desarrollo: 30-90 días; para producción: evaluar periodicidad de rotación).
-        \item Generar el token y, en la pantalla de visualización, seleccionar \textit{Download} para obtener el archivo de texto.
-    \end{itemize}
-    
+          \begin{itemize}
+              \item Acceder al DCD: Menú → Management → Token Manager.
+              \item Seleccionar TTL adecuado al caso de uso (para desarrollo: 30-90 días; para producción: evaluar periodicidad de rotación).
+              \item Generar el token y, en la pantalla de visualización, seleccionar \textit{Download} para obtener el archivo de texto.
+          \end{itemize}
+
     \item \textbf{Almacenamiento en KeePassXC:}
-    \begin{itemize}
-        \item Crear una entrada específica para cada token en la base de datos de KeePassXC.
-        \item Campos a rellenar:
-        \begin{itemize}
-            \item \textbf{Título:} ``Token IONOS API - [Propósito]'' (ej: ``Token IONOS API - Desarrollo Iteración 1'').
-            \item \textbf{Nombre de usuario:} Identificador del token (Token ID).
-            \item \textbf{Contraseña:} Pegar el valor del token.
-            \item \textbf{URL:} https://api.ionos.com (para integración con navegador).
-            \item \textbf{Notas:} Fecha de generación, TTL seleccionado, fecha de expiración calculada, propósito específico.
-        \end{itemize}
-        \item Adjuntar el archivo de texto descargado como archivo adjunto en la entrada.
-        \item Configurar la entrada para generar TOTP si se requiere autenticación adicional.
-    \end{itemize}
-    
+          \begin{itemize}
+              \item Crear una entrada específica para cada token en la base de datos de KeePassXC.
+              \item Campos a rellenar:
+                    \begin{itemize}
+                        \item \textbf{Título:} ``Token IONOS API - [Propósito]'' (ej: ``Token IONOS API - Desarrollo Iteración 1'').
+                        \item \textbf{Nombre de usuario:} Identificador del token (Token ID).
+                        \item \textbf{Contraseña:} Pegar el valor del token.
+                        \item \textbf{URL:} https://api.ionos.com (para integración con navegador).
+                        \item \textbf{Notas:} Fecha de generación, TTL seleccionado, fecha de expiración calculada, propósito específico.
+                    \end{itemize}
+              \item Adjuntar el archivo de texto descargado como archivo adjunto en la entrada.
+              \item Configurar la entrada para generar TOTP si se requiere autenticación adicional.
+          \end{itemize}
+
     \item \textbf{Rotación y expiración:}
-    \begin{itemize}
-        \item Configurar un recordatorio en el calendario para 7 días antes de la fecha de expiración.
-        \item En la fecha de rotación:
-        \begin{enumerate}
-            \item Generar nuevo token en el DCD.
-            \item Almacenarlo en KeePassXC siguiendo el procedimiento anterior.
-            \item Eliminar el token antiguo desde el DCD.
-            \item Marcar la entrada antigua como expirada o eliminarla de la base de datos.
-        \end{enumerate}
-    \end{itemize}
-    
+          \begin{itemize}
+              \item Configurar un recordatorio en el calendario para 7 días antes de la fecha de expiración.
+              \item En la fecha de rotación:
+                    \begin{enumerate}
+                        \item Generar nuevo token en el DCD.
+                        \item Almacenarlo en KeePassXC siguiendo el procedimiento anterior.
+                        \item Eliminar el token antiguo desde el DCD.
+                        \item Marcar la entrada antigua como expirada o eliminarla de la base de datos.
+                    \end{enumerate}
+          \end{itemize}
+
     \item \textbf{Seguridad adicional:}
-    \begin{itemize}
-        \item La base de datos de KeePassXC debe protegerse con una contraseña maestra robusta (mínimo 15 caracteres con alta entropía).
-        \item Habilitar el bloqueo automático de la base de datos tras periodo de inactividad.
-    \end{itemize}
+          \begin{itemize}
+              \item La base de datos de KeePassXC debe protegerse con una contraseña maestra robusta (mínimo 15 caracteres con alta entropía).
+              \item Habilitar el bloqueo automático de la base de datos tras periodo de inactividad.
+          \end{itemize}
 \end{enumerate}
 
 \subsubsection{Uso del Token}
 
-Teniendo ya clara la gestión de los tokens, se puede usar para la API. En concreto, 
-en este contexto \textit{"https://api.ionos.com/billing/{contract}/products"}\cite{billing-IONOSClaud}, sirviendo esta llamada para obtener la información de los productos que hay en el contrato.
- De este modo se puede comprobar cada elemento que se quiera encontrar. 
+Teniendo ya clara la gestión de los tokens, se puede usar para la API. En concreto,
+en este contexto \textit{"https://api.ionos.com/billing/{contract}/products"}\cite{billing-IONOSCloud}, sirviendo esta llamada para obtener la información de los productos que hay en el contrato.
+De este modo se puede comprobar cada elemento que se quiera encontrar.
 
-Para el uso de llamadas a APIs se usa PostMan. 
+Para el uso de llamadas a APIs se usa PostMan.
 Como primer SKU a detectar se opta por A01000 (IP estática). Para ello se añade una IP estática de forma manual en el DCD y, tras pasar el periodo que tarda en actualizarse
 la base de datos de la API, se hace una llamada y debe aparecer. En este caso debe salir algo similar a:
 
@@ -212,8 +212,8 @@ la base de datos de la API, se hace una llamada y debe aparecer. En este caso de
 \end{lstlisting}
 
 Este proceso hecho de forma manual junto a añadir de manera manual los productos puede ser una tarea proclive a errores, debido a ser una tarea repetitiva,
-por lo que se opta por una solución sencilla y útil para el futuro: debido a que PostMan permite el uso de scripts, se puede crear uno pequeño que compruebe si 
-están los SKUs deseados. 
+por lo que se opta por una solución sencilla y útil para el futuro: debido a que PostMan permite el uso de scripts, se puede crear uno pequeño que compruebe si
+están los SKUs deseados.
 
 \subsubsection{Creación del script de verificación}
 
@@ -223,7 +223,7 @@ Se creó un script en JavaScript para PostMan que verifica los SKUs disponibles.
 \begin{enumerate}
     \item Define un objeto \texttt{requiredResources} con 14 categorías de SKUs (IPs estáticas, VMs, almacenamiento, bases de datos, etc.).
     \item La función \texttt{checkResources()} compara cada SKU requerido con los devueltos por la API.
-    \begin{lstlisting}[label=lst:verificacion-categorias]
+          \begin{lstlisting}[label=lst:verificacion-categorias]
 Object.keys(requiredResources).forEach(category => {
     const resources = requiredResources[category];
     results.available[category] = [];
@@ -236,52 +236,52 @@ Object.keys(requiredResources).forEach(category => {
 
 \end{lstlisting}
     \item Clasifica los resultados en \texttt{available} (encontrados) y \texttt{missing} (no encontrados).
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[width=1\textwidth]{PostMan-Test.png}
-        \caption{Prueba Test}
-        \label{fig:edt}
-    \end{figure}
+          \begin{figure}[h!]
+              \centering
+              \includegraphics[width=1\textwidth]{PostMan-Test.png}
+              \caption{Prueba Test}
+              \label{fig:edt}
+          \end{figure}
     \item Detecta patrones especiales: VMs CUBE (contienen "CUBES") y licencias Windows (empiezan por "WL").
     \item Almacena los resultados en variables de entorno de PostMan.
     \item Genera un reporte en consola con el estado de cada categoría.
     \item Calcula estadísticas globales: total disponibles vs total requeridos.
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[width=0.25\textwidth]{PostMan-Resumen.png}
-        \caption{Prueba Resumen Test}
-        \label{fig:edt}
-    \end{figure}
+          \begin{figure}[h!]
+              \centering
+              \includegraphics[width=0.25\textwidth]{PostMan-Resumen.png}
+              \caption{Prueba Resumen Test}
+              \label{fig:edt}
+          \end{figure}
     \item Ejecuta tests automáticos (código 200, productos no vacíos).
-     \begin{figure}[h!]
-        \centering
-        \includegraphics[width=0.7\textwidth]{PostMan-CodsOK.png}
-        \caption{Prueba Cods. Test}
-        \label{fig:edt}
-    \end{figure}
+          \begin{figure}[h!]
+              \centering
+              \includegraphics[width=0.7\textwidth]{PostMan-CodsOK.png}
+              \caption{Prueba Cods. Test}
+              \label{fig:edt}
+          \end{figure}
 \end{enumerate}
 
 \paragraph{Ventajas}
 
-Automatiza la verificación, proporciona trazabilidad, se integra en PostMan y es fácilmente mantenible. Además esta estructura es migrable al proyecto, permitiendo tener una parte hecha ya. 
+Automatiza la verificación, proporciona trazabilidad, se integra en PostMan y es fácilmente mantenible. Además esta estructura es migrable al proyecto, permitiendo tener una parte hecha ya.
 
 \subsection{Integración del código}
 \subsubsection{Configuración de Entornos}
 Al ser la primera iteración se deben configurar los entornos que se van a usar.
- Esto consiste en la creación del proyecto, su vinculación a Gitlab y Github, 
- el plan de copias de seguridad en físico y la configuración inicial en CouchBD. 
+Esto consiste en la creación del proyecto, su vinculación a Gitlab y Github,
+el plan de copias de seguridad en físico y la configuración inicial en CouchBD.
 \subsubsection{Despliegue del proyecto y vincluación a Gitlab}
 El proyecto se crea directamente desde gitlab debido a que se quiere integrar en un grupo de trabajo, en concreto en el equipo de \textit{Cloud Billing} y \textit{ERP
-} de IONOS Cloud, para que de ese modo, tras la finalizaciób del proyecto, todo el equipo pueda seguir con su mantenimiento. Debido a esto, se sigue además la 
+} de IONOS Cloud, para que de ese modo, tras la finalizaciób del proyecto, todo el equipo pueda seguir con su mantenimiento. Debido a esto, se sigue además la
 estructura de proyectos propia de este equipo. La unica peculiaridad peculiaridad fue el uso de la VPN debido a que el Gitlab que se usa es el del equipo, siendo estos Alemanes.
 
 \subsubsection{Estrategia de copias de seguridad del código fuente usando GitHub y disco físico}
-Para garantizar la integridad y disponibilidad del código fuente desarrollado en este proyecto, 
-se ha establecido una estrategia de copias de seguridad multicapa que complementa el sistema de 
+Para garantizar la integridad y disponibilidad del código fuente desarrollado en este proyecto,
+se ha establecido una estrategia de copias de seguridad multicapa que complementa el sistema de
 control de versiones principal.
 
 \paragraph{Uso de GitLab como sistema de control de versiones principal}
-GitLab actúa como el repositorio principal donde se gestiona el desarrollo activo del proyecto. 
+GitLab actúa como el repositorio principal donde se gestiona el desarrollo activo del proyecto.
 Sus características incluyen:
 \begin{itemize}
     \item Control de versiones con historial completo de cambios.
@@ -291,37 +291,37 @@ Sus características incluyen:
 \end{itemize}
 
 \paragraph{GitHub como repositorio espejo de respaldo}
-A pesar de utilizar GitLab como plataforma principal, se ha configurado GitHub como repositorio 
+A pesar de utilizar GitLab como plataforma principal, se ha configurado GitHub como repositorio
 secundario para proporcionar una capa adicional de redundancia. Esta decisión se fundamenta en:
 
 \begin{itemize}
-    \item \textbf{Independencia entre plataformas:} Al estar alojados en servidores de diferentes 
-    proveedores, una caída o problema en GitLab no compromete el acceso al código.
-    
-    \item \textbf{Redundancia geográfica:} Los datos se replican en centros de datos de diferentes 
-    ubicaciones, protegiendo frente a desastres regionales. Previniendo uno de los posibles riesgos estudiado en en plan de riesgos. 
+    \item \textbf{Independencia entre plataformas:} Al estar alojados en servidores de diferentes
+          proveedores, una caída o problema en GitLab no compromete el acceso al código.
+
+    \item \textbf{Redundancia geográfica:} Los datos se replican en centros de datos de diferentes
+          ubicaciones, protegiendo frente a desastres regionales. Previniendo uno de los posibles riesgos estudiado en en plan de riesgos.
 \end{itemize}
 
 \paragraph{Copia de seguridad en disco físico local}
-Complementando las copias en la nube, se realiza una copia de seguridad periódica en un disco físico 
+Complementando las copias en la nube, se realiza una copia de seguridad periódica en un disco físico
 externo siguiendo estos principios:
 
 \begin{itemize}
-    \item \textbf{Frecuencia de respaldo:} Copia completa del repositorio cada 15 días y copia 
-    incremental de los cambios diarios. 
-    
-    \item \textbf{Almacenamiento seguro:} El disco se mantiene en una ubicación física diferente a la 
-    del equipo de desarrollo, protegiendo frente a robo, incendio o fallo del equipo principal.
-    
-    \item \textbf{Verificación de integridad:} Tras cada backup, se ejecuta una comprobación automática 
-    mediante \texttt{git fsck} para garantizar que el repositorio no esté corrupto.
+    \item \textbf{Frecuencia de respaldo:} Copia completa del repositorio cada 15 días y copia
+          incremental de los cambios diarios.
+
+    \item \textbf{Almacenamiento seguro:} El disco se mantiene en una ubicación física diferente a la
+          del equipo de desarrollo, protegiendo frente a robo, incendio o fallo del equipo principal.
+
+    \item \textbf{Verificación de integridad:} Tras cada backup, se ejecuta una comprobación automática
+          mediante \texttt{git fsck} para garantizar que el repositorio no esté corrupto.
 \end{itemize}
 
 \subsubsection{Configuración en CouchDB}
 Debido a que se está integrado en el grupo de trabajo de \textit{Cloud Billing} y \textit{ERP}, se usa su grupo de bases de datos.
 Lo único que hay que tener en cuenta es el uso de las credenciales, debido a que las credenciales para entrar a CouchBD
-son delicadas --- ya que se accede a todas las configuraciones del equipo --- se usa un protocolo similar al descrito en la 
-sección \hyperref[iteraciones:gestion-tokens]{Plan de gestión de tokens de autenticación}. 
+son delicadas --- ya que se accede a todas las configuraciones del equipo --- se usa un protocolo similar al descrito en la
+sección \hyperref[iteraciones:gestion-tokens]{Plan de gestión de tokens de autenticación}.
 
 Una vez creada la base de datos propia, se crea un documento para vincularlo con el proyecto.
 
@@ -330,15 +330,15 @@ Una vez creada la base de datos propia, se crea un documento para vincularlo con
 El documento almacenado en CouchDB contiene la lógica y parámetros necesarios para las verificaciones:
 
 \begin{itemize}
-    \item \textbf{Identificador:} \texttt{billing-reference-verifier} - Documento raíz que centraliza 
-    toda la configuración del verificador.
-    
-    \item \textbf{Programación de tareas (scheduler):} Define ejecuciones automáticas periódicas, sobre esto se desarrollará en mayor profundidad cuando se hable de ello en concreto. 
-    
+    \item \textbf{Identificador:} \texttt{billing-reference-verifier} - Documento raíz que centraliza
+          toda la configuración del verificador.
+
+    \item \textbf{Programación de tareas (scheduler):} Define ejecuciones automáticas periódicas, sobre esto se desarrollará en mayor profundidad cuando se hable de ello en concreto.
+
 \end{itemize}
 
 \paragraph{Configuración específica para verificación de SKUs}
-El módulo \texttt{utilization} contiene la lista de SKUs a monitorizar, siguiendo la siguiente estructura: 
+El módulo \texttt{utilization} contiene la lista de SKUs a monitorizar, siguiendo la siguiente estructura:
 
 \begin{lstlisting}[caption=Almacenamiento SKUs en CouchDB, label=lst:producto-json]
 {
@@ -351,10 +351,10 @@ El módulo \texttt{utilization} contiene la lista de SKUs a monitorizar, siguien
 \end{lstlisting}
 \subsubsection{Estructura general del proyecto billing-reference-verifier}
 
-El proyecto \texttt{billing-reference-verifier} es una API REST interna desarrollada para IONOS 
-cuyo propósito principal es verificar la utilización de recursos y validar facturas asociadas a 
+El proyecto \texttt{billing-reference-verifier} es una API REST interna desarrollada para IONOS
+cuyo propósito principal es verificar la utilización de recursos y validar facturas asociadas a
 contratos de facturación. Por lo que antes de centrarnos en conceptos tecnicos, se explicará la estructura geenral actual del proyecto.
-Centrandose en estructura y tecnologias. 
+Centrandose en estructura y tecnologias.
 
 \paragraph{Información general}
 \begin{itemize}
@@ -393,25 +393,25 @@ billing-reference-verifier/
 \paragraph{Componentes principales}
 
 \paragraph{Punto de entrada (run.js)}
-Realiza el bootstrap de la aplicación utilizando el framework \texttt{@internal/core}, carga la 
+Realiza el bootstrap de la aplicación utilizando el framework \texttt{@internal/core}, carga la
 configuración definida en \texttt{package.json} e inicializa el servidor y los módulos.
 
 \paragraph{Módulos funcionales}
-\begin{itemize}    
-    \item \textbf{utilization:} Verifica las cantidades diarias de uso frente a los valores 
-    esperados para los SKUs configurados.
+\begin{itemize}
+    \item \textbf{utilization:} Verifica las cantidades diarias de uso frente a los valores
+          esperados para los SKUs configurados.
 \end{itemize}
 
 \paragraph{Helpers}
 \begin{itemize}
-    \item \textbf{actions.js:} Define constantes para los eventos del mediador (como 
-    \texttt{APPLICATION\_RUN}, \texttt{UTILIZATION\_VERIFIER\_COMPLETE}, etc.).
-    
-    \item \textbf{schema.js:} Contiene esquemas Joi para validar las respuestas de la API 
-    (\texttt{invoiceSchema}, \texttt{utilizationSchema}, \texttt{usageSchema}).
-    
-    \item \textbf{utilization.js:} Implementa la clase \texttt{UtilizationHelper} para obtener 
-    datos de los endpoints \texttt{/utilization} y \texttt{/usage} de la API de facturación.
+    \item \textbf{actions.js:} Define constantes para los eventos del mediador (como
+          \texttt{APPLICATION\_RUN}, \texttt{UTILIZATION\_VERIFIER\_COMPLETE}, etc.).
+
+    \item \textbf{schema.js:} Contiene esquemas Joi para validar las respuestas de la API
+          (\texttt{invoiceSchema}, \texttt{utilizationSchema}, \texttt{usageSchema}).
+
+    \item \textbf{utilization.js:} Implementa la clase \texttt{UtilizationHelper} para obtener
+          datos de los endpoints \texttt{/utilization} y \texttt{/usage} de la API de facturación.
 \end{itemize}
 
 \paragraph{Endpoints REST disponibles}
@@ -425,8 +425,8 @@ configuración definida en \texttt{package.json} e inicializa el servidor y los 
 \paragraph{Flujo de datos}
 
 \begin{enumerate}
-    \item Una petición HTTP llega al módulo \texttt{data-api}, que valida los headers (incluyendo 
-    el token Bearer).
+    \item Una petición HTTP llega al módulo \texttt{data-api}, que valida los headers (incluyendo
+          el token Bearer).
     \item El mediador emite un evento al módulo correspondiente según el endpoint solicitado.
     \item El módulo utiliza los helpers para realizar llamadas a la \texttt{billing-api} de IONOS.
     \item Las respuestas se validan mediante los esquemas Joi definidos en \texttt{schema.js}.
@@ -451,9 +451,9 @@ configuración definida en \texttt{package.json} e inicializa el servidor y los 
 \end{itemize}
 
 \paragraph{Autenticación }
-Todas las peticiones requieren el header \texttt{Authorization: Bearer <token>}. Este token se 
-transmite a la \texttt{billing-api} de IONOS para autenticar las operaciones y se gestiona como ya se explicá en 
-\hyperref[iteraciones:gestion-tokens]{el plan de gestión de tokens de autenticación}. 
+Todas las peticiones requieren el header \texttt{Authorization: Bearer <token>}. Este token se
+transmite a la \texttt{billing-api} de IONOS para autenticar las operaciones y se gestiona como ya se explicá en
+\hyperref[iteraciones:gestion-tokens]{el plan de gestión de tokens de autenticación}.
 
 \subsection{Implementación de función de Detección de items continuables}
 El desarollo de esta función se explicará por partes

@@ -1,19 +1,19 @@
 # Fdb version 4
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 1772091897.28601 -1
+["bibtex main"] 0 "main.aux" "main.bbl" "main" 1772097080.35398 -1
   "main.aux" 0 -1 0 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1772091895.30677 "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" "main.pdf" "main" 1772091897.28606 0
-  "%OUTDIR%/main.aux" 1772091897.15704 20126 d342d84de1fbb64eb2fefe817ab97af1 "pdflatex"
-  "%OUTDIR%/main.lof" 1772091897.16267 1025 8b3db86d0fb1943808f647261cc62ef7 "pdflatex"
-  "%OUTDIR%/main.lot" 1772091897.16267 1509 03d5a33975337f95b1cfe2262f8274fa "pdflatex"
-  "%OUTDIR%/main.out" 1772091897.16114 7656 caf5050f131652e0ec0c395cefa5d4b3 "pdflatex"
-  "%OUTDIR%/main.run.xml" 1772091897.16267 2404 c26dd97bcd39844ed065af16e5d03e28 "pdflatex"
-  "%OUTDIR%/main.toc" 1772091897.16267 8828 f55e09efe09a70451204faba9e04f23c "pdflatex"
+["pdflatex"] 1772097078.26546 "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" "main.pdf" "main" 1772097080.35403 0
+  "%OUTDIR%/main.aux" 1772097080.22978 20124 100ecf23f37ad03930badbf5ddd5c99b "pdflatex"
+  "%OUTDIR%/main.lof" 1772097080.23517 1025 8b46b7fb92ddd71a80326403a9c96641 "pdflatex"
+  "%OUTDIR%/main.lot" 1772097080.23517 1509 03d5a33975337f95b1cfe2262f8274fa "pdflatex"
+  "%OUTDIR%/main.out" 1772097080.23356 7656 492f4574e4ee1d83896f1ec6411dd4e0 "pdflatex"
+  "%OUTDIR%/main.run.xml" 1772097080.23517 2404 c26dd97bcd39844ed065af16e5d03e28 "pdflatex"
+  "%OUTDIR%/main.toc" 1772097080.23517 8826 1509b99e69d2090ddf51c5ec61d16181 "pdflatex"
   "/etc/texmf/web2c/texmf.cnf" 1770890366.72124 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" 1772091895.07104 12233 894858155fcdb0b124a0b1ce053caa1a ""
+  "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" 1772093607.69308 12191 c5a854cb1a4f000eaa2c21e2df6f18b8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbi1200.tfm" 1136768653 3072 ccae1a240ab272417e4399fe942df546 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm" 1136768653 3584 2d666ecf6d466d8b007246bc2f94d9da ""
@@ -276,14 +276,14 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1770890382.14762 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1770890448 8214442 d508e942034cc2416dd2e8dff1d5feca ""
-  "anexos/A1-Anexo-ListaItems.tex" 1771329700.20214 7282 ae1188aeabb4be47849708cc22313e32 ""
+  "anexos/A1-Anexo-ListaItems.tex" 1772093416.72972 7810 0abf56c8cb8ceeca13f3a4d74cb41d64 ""
   "anexos/A2-Anexo-ObtenerTockenDCD.tex" 1771329700.20214 2553 9e31749ae61dee3b61bc51e854565669 ""
   "archivos/EDT.pdf" 1771235528 80995 4b13b2afd8b459e24118c51fc6739a46 ""
   "archivos/flujo_API_Canary.drawio.pdf" 1771235528 34088 1b23432f394b120fd84757f11a046983 ""
-  "capitulos/01-introduccion.tex" 1772091741.96311 21484 83fdc95098da001b3e05a66144c88612 ""
+  "capitulos/01-introduccion.tex" 1772097076.01467 22266 03480dc2cc95032fc465a0bc13572ef4 ""
   "capitulos/02-Análisis.tex" 1771235528 10768 28a997da2bff5c07841c56f06d480939 ""
   "capitulos/03-Planificación.tex" 1771500845.09027 22932 96c404aceae6eaabc88f96db8da86897 ""
-  "capitulos/04-Iteraciones.tex" 1771919446.79775 24902 1f5c90cff25916ac29d8b6dd2478923c ""
+  "capitulos/04-Iteraciones.tex" 1772093447.96534 25309 c7279ad79303350c0ae43c1b93b382dd ""
   "imagenes/PostMan-CodsOK.png" 1771415479.91596 40670 c378f8b11ec188857746e26b9d3fe39c ""
   "imagenes/PostMan-Resumen.png" 1771415844.83481 11334 8bce1b747e4bac17e6aae31bcdc58504 ""
   "imagenes/PostMan-Test.png" 1771415108.40216 215805 9e684a09ba3d1f315efa6a045262812d ""
@@ -294,8 +294,8 @@
   "imagenes/interfaz-InicioSesionDCD-1.png" 1771320154.01093 69832 ee75a3d23fe934156bcde2b46348321f ""
   "imagenes/interfaz-InicioSesionDCD-2.png" 1771321753.39277 605182 7c5bb716ab0b032261589d3890ed8977 ""
   "imagenes/logo.jpg" 1771235528 90328 74cab1a2c547d68158cff65a9a2aa6a4 ""
-  "main.bbl" 1772089872.94215 0 d41d8cd98f00b204e9800998ecf8427e "bibtex main"
-  "main.tex" 1772091895.07104 12233 894858155fcdb0b124a0b1ce053caa1a ""
+  "main.bbl" 1772093967.46778 0 d41d8cd98f00b204e9800998ecf8427e "bibtex main"
+  "main.tex" 1772093607.69308 12191 c5a854cb1a4f000eaa2c21e2df6f18b8 ""
   "portada.tex" 1772090051.38627 1681 86312322b127e2c951e7c21be89cc7a5 ""
   (generated)
   "%OUTDIR%/main.aux"
