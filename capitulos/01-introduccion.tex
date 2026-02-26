@@ -166,7 +166,7 @@ su escalabilidad, simplicidad y naturaleza sin estado (cada petición es indepen
 
 \subsection{Concepto y Origen de API Canary}
 
-El término \textbf{``Canary''} proviene de la práctica minera de usar canarios para detectar gases peligrosos. En desarrollo de software, una \textbf{API Canary} se refiere a:
+La empresa ha solicitado específicamente que el sistema de validación se implemente como una API Canary. El término \textbf{``Canary''} proviene de la práctica minera de usar canarios para detectar gases peligrosos: del mismo modo que estos animales alertaban a los mineros ante condiciones peligrosas, una API Canary actúa como sistema de alerta temprana en el software. En desarrollo de software, una \textbf{API Canary} se define como:
 
 \begin{quote}
     Una implementación de API que se despliega gradualmente a un subconjunto de usuarios o sistemas para detectar posibles problemas antes de que el usuario final lo detecte. El método de funcionamiento es una ejecución periódica con una alarma si falla, la frecuencia de dicha ejecución será dependiente de lo crítico que sea el módulo que controla.
@@ -178,16 +178,14 @@ El término \textbf{``Canary''} proviene de la práctica minera de usar canarios
     \centering
     \begin{tabular}{|p{0.3\textwidth}|p{0.6\textwidth}|}
         \hline
-        \textbf{Característica}                                                                                                                                                           & \textbf{Descripción}                                       \\
+        \textbf{Característica}           & \textbf{Descripción}                                       \\
         \hline
         \hline
-        \textbf{Despliegue Gradual}                                                                                                                                                       & Se implementa primero a un pequeño porcentaje del tráfico. \\
+        \textbf{Despliegue Gradual}       & Se implementa primero a un pequeño porcentaje del tráfico. \\
         \hline
-        \textbf{Monitorización Intensiva}                                                                                                                                                 & Se supervisa exhaustivamente en busca de errores.          \\
+        \textbf{Monitorización Intensiva} & Se supervisa exhaustivamente en busca de errores.          \\
         \hline
-        \textbf{Rollback Automático}                                                                                                                                                      & Si se detectan problemas, se revierte automáticamente.     \\
-        \hline
-        \textbf{A/B \textit{Testing}\footnote{Es el proceso de evaluar, verificar y validar software u otros sistemas para asegurar que funcionan según lo esperado, detectando errores}} & Permite comparar versiones nuevas vs. antiguas.            \\
+        \textbf{A/B Testing}              & Permite comparar versiones nuevas vs. antiguas.            \\
         \hline
     \end{tabular}
     \caption{Características de una API Canary}
@@ -200,131 +198,9 @@ La implementación de APIs Canary en sistemas de facturación ofrece:
 
 \begin{itemize}
     \item \textbf{Detección temprana}: Problemas se identifican rápidamente, el tiempo que tarde en detectarse será dependiente de la frecuencia de su ejecución.
-    \item \textbf{Reducción de riesgos}: Errores de facturación afectan solo a un subconjunto de clientes. Ya que al detectarse de forma temprana y le afecta a menos clientes.
-    \item \textbf{Validación en producción}: Pruebas con datos reales sin comprometer todo el sistema. Ya que se crea un cliente real completo para usar en la API.
-    \item \textbf{Mejora continua}: Permite iteraciones rápidas y seguras. Ya que es muy fácil de separar en módulos.
+    \item \textbf{Reducción de riesgos}: Errores de facturación afectan solo a un subconjunto de clientes. Ya que al detectarse de forma temprana, le afecta a menos clientes.
+    \item \textbf{Validación en producción}: Pruebas con datos reales sin comprometer todo el sistema. Se crea un cliente real completo para usar en la API.
+    \item \textbf{Mejora continua}: Permite iteraciones rápidas y seguras. Es muy fácil de separar en módulos.
 \end{itemize}
 
 
-
-\subsection{Flujo de Trabajo Canary}
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.9\textwidth]{archivos/flujo_API_Canary.drawio.pdf}
-    \caption{Diagrama de flujo del proceso de despliegue Canary para APIs}
-    \label{fig:canary-flow}
-\end{figure}
-
-\textbf{Descripción del flujo:}
-\begin{enumerate}
-    \item \textbf{Inicio: Nueva API Canary } - Desarrollo de una nueva  API de validación.
-
-    \item \textbf{Inicio: Nueva Versión API Canary} - Desarrollo de una nueva versión de la API de validación. En la que se inicia la nueva iteración.
-
-    \item \textbf{Inicio: Añadir funciones deseadas} - Se implementan las nuevas funciones deseadas.
-
-    \item \textbf{Comprobación de completitud del usuario de muestra} - Se comprueba que el usuario que se usa para comprobar el correcto funcionamiento de la API tiene todos los recursos necesarios que debe comprobar. En el caso contrario, se modifica para que permita comprobar todas las funciones a comprobar, en su defecto se creará un nuevo perfil para ello.
-
-    \item \textbf{Monitorizar Métricas} - Análisis continuo de errores, latencia y otras métricas clave.
-
-    \item \textbf{Decisión basada en umbrales:}
-          \begin{itemize}
-              \item \textbf{Si errores < Umbral} → Se pasa a la siguiente fase de la API.
-              \item \textbf{Si errores > Umbral} → Rollback automático a versión estable y se revisan las actualizaciones para volver a modificar y lograr hacer funcionales los cambios.
-          \end{itemize}
-
-    \item \textbf{API Canary Exitosa} - Tras terminar todas las fases, se integra y entra la fase de automatizarla para que se ejecute periódicamente.
-\end{enumerate}
-
-% ===== SECCIÓN 1.4: TECNOLOGIAS Y HERRAMIENTAS =====
-
-\section{Tecnologías y Herramientas Utilizadas}
-
-\noindent Para el desarrollo del sistema de validación de facturación cloud, se ha construido una arquitectura tecnológica robusta que combina herramientas modernas de desarrollo, infraestructura contenerizada y patrones de diseño específicos para el dominio de facturación.
-
-\subsubsection{Stack Tecnológico Principal}
-
-\begin{table}[h!]
-    \centering
-    \begin{tabular}{|p{0.25\textwidth}|p{0.7\textwidth}|}
-        \hline
-        \textbf{Categoría}                         & \textbf{Tecnologías}                    \\
-        \hline
-        \hline
-        \textbf{Runtime}                           & Node.js 18+ (LTS)                       \\
-        \hline
-        \textbf{Lenguaje}                          & JavaScript ES6+ con módulos             \\
-        \hline
-        \textbf{Framework Web}                     & Express.js con middleware personalizado \\
-        \hline
-        \textbf{Gestión de Paquetes}               & Yarn 3+ con workspace                   \\
-        \hline
-        \textbf{Testing}                           & Postman                                 \\
-        \hline
-        \textbf{Creación de usuarios de muestreo } & DCD de IONOS                            \\
-        \hline
-        \textbf{Base de Datos Configuración}       & CouchDB para configuración distribuida  \\
-        \hline
-        \textbf{Control de Versiones}              & GitLab para paquetes internos           \\
-        \hline
-        \textbf{Editor de Código}                  & Visual Studio Code                      \\
-        \hline
-        \textbf{Documentación}                     & LaTeX en OverLeaf                       \\
-        \hline
-        \textbf{Creación de diagramas}             & Draw.io                                 \\
-        \hline
-        \textbf{Conexión con equipo }              & VPN a red Alemana                       \\
-    \end{tabular}
-    \caption{Stack tecnológico del proyecto}
-    \label{tab:stack-tecnologico}
-\end{table}
-
-\subsubsection{Dependencias Clave del Proyecto}
-
-\textbf{Dependencias Internas:}
-\begin{itemize}
-    \item \texttt{@internal/core} - Framework base con utilidades de inicialización y configuración
-    \item \texttt{@internal/dev} - Suite de herramientas para desarrollo y debugging
-\end{itemize}
-
-\textbf{Dependencias Externas Críticas:}
-\begin{itemize}
-    \item \texttt{helmet} - Middleware de seguridad para cabeceras HTTP
-    \item \texttt{express} - Framework web minimalista para Node.js
-    \item \texttt{couchdb-nano} - Cliente para integración con CouchDB
-\end{itemize}
-
-\subsubsection{Arquitectura Modular Implementada}
-
-La arquitectura del sistema se organiza en tres capas principales:
-
-\begin{enumerate}
-    \item \textbf{Capa de Infraestructura:}
-          \begin{itemize}
-              \item CouchDB para gestión de configuración centralizada
-          \end{itemize}
-
-    \item \textbf{Capa de Servicios:}
-          \begin{itemize}
-              \item \texttt{data-api}: Servicio de acceso y transformación de datos
-              \item \texttt{invoice-validation}: Motor de validación de facturación
-              \item \texttt{utilization}: Procesamiento de métricas de uso
-          \end{itemize}
-
-    \item \textbf{Capa de Helpers y Utilidades:}
-          \begin{itemize}
-              \item Módulo \texttt{schema}: Validación y transformación de datos
-              \item Módulo \texttt{actions}: Operaciones comunes del negocio
-              \item Módulo \texttt{invoice}: Lógica específica de facturación
-          \end{itemize}
-\end{enumerate}
-
-\subsubsection{Flujo de Desarrollo y Calidad}
-
-\begin{itemize}
-    \item \textbf{Desarrollo Local:} Nodemon para hot-reload durante el desarrollo
-    \item \textbf{Calidad de Código:} ESLint con configuración personalizada
-    \item \textbf{Control de Cambios:} Hooks pre-commit para validaciones automáticas
-    \item \textbf{Integración:} Pipelines CI/CD en GitLab para despliegue continuo
-\end{itemize}

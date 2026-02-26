@@ -1,21 +1,20 @@
 # Fdb version 4
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 1772097080.35398 -1
+["bibtex main"] 0 "main.aux" "main.bbl" "main" 1772098500.76459 -1
   "main.aux" 0 -1 0 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1772097078.26546 "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" "main.pdf" "main" 1772097080.35403 0
-  "%OUTDIR%/main.aux" 1772097080.22978 20124 100ecf23f37ad03930badbf5ddd5c99b "pdflatex"
-  "%OUTDIR%/main.lof" 1772097080.23517 1025 8b46b7fb92ddd71a80326403a9c96641 "pdflatex"
-  "%OUTDIR%/main.lot" 1772097080.23517 1509 03d5a33975337f95b1cfe2262f8274fa "pdflatex"
-  "%OUTDIR%/main.out" 1772097080.23356 7656 492f4574e4ee1d83896f1ec6411dd4e0 "pdflatex"
-  "%OUTDIR%/main.run.xml" 1772097080.23517 2404 c26dd97bcd39844ed065af16e5d03e28 "pdflatex"
-  "%OUTDIR%/main.toc" 1772097080.23517 8826 1509b99e69d2090ddf51c5ec61d16181 "pdflatex"
+["pdflatex"] 1772098498.75943 "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" "main.pdf" "main" 1772098500.76464 0
+  "%OUTDIR%/main.aux" 1772098500.64928 20110 9061367d87a190076abd845d3ee6c86e "pdflatex"
+  "%OUTDIR%/main.lof" 1772098500.65456 1021 71f7301b13609e0757bcebc885229255 "pdflatex"
+  "%OUTDIR%/main.lot" 1772098500.65456 1509 39c29a6e76f72f33299b4026087e1044 "pdflatex"
+  "%OUTDIR%/main.out" 1772098500.65228 7656 0e79391f2c166b283976f5b21670c60b "pdflatex"
+  "%OUTDIR%/main.run.xml" 1772098500.65456 2404 c26dd97bcd39844ed065af16e5d03e28 "pdflatex"
+  "%OUTDIR%/main.toc" 1772098500.65456 8812 7fb88cd95d88978aabe3613f9e92e07c "pdflatex"
   "/etc/texmf/web2c/texmf.cnf" 1770890366.72124 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" 1772093607.69308 12191 c5a854cb1a4f000eaa2c21e2df6f18b8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
-  "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbi1200.tfm" 1136768653 3072 ccae1a240ab272417e4399fe942df546 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm" 1136768653 3584 2d666ecf6d466d8b007246bc2f94d9da ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm" 1136768653 3584 21b378cca2e40816b0e6d74a4dc98f04 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm" 1136768653 3584 402da0b29eafbad07963b1224b222f18 ""
@@ -253,7 +252,6 @@
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1636152094 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1636152094 2900 1537cc8184ad1792082cd229ecc269f4 ""
-  "/usr/share/texmf/fonts/type1/public/cm-super/sfbi1200.pfb" 1770890375.97152 205875 5958bf9326f04501f7006947acfbcae1 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb" 1636152094 145408 43d44302ca7d82d487f511f83e309505 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb" 1770890375.99739 154600 ea54091d31de803b613ba9e80ca51709 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb" 1770890375.99762 140176 d4962f948b4cc0adf4d3dde77a128c95 ""
@@ -280,9 +278,9 @@
   "anexos/A2-Anexo-ObtenerTockenDCD.tex" 1771329700.20214 2553 9e31749ae61dee3b61bc51e854565669 ""
   "archivos/EDT.pdf" 1771235528 80995 4b13b2afd8b459e24118c51fc6739a46 ""
   "archivos/flujo_API_Canary.drawio.pdf" 1771235528 34088 1b23432f394b120fd84757f11a046983 ""
-  "capitulos/01-introduccion.tex" 1772097076.01467 22266 03480dc2cc95032fc465a0bc13572ef4 ""
+  "capitulos/01-introduccion.tex" 1772098496.64128 15873 b97c8d7e8ec7e3ee55d4b85eabbf4a53 ""
   "capitulos/02-Análisis.tex" 1771235528 10768 28a997da2bff5c07841c56f06d480939 ""
-  "capitulos/03-Planificación.tex" 1771500845.09027 22932 96c404aceae6eaabc88f96db8da86897 ""
+  "capitulos/03-Planificación.tex" 1772098496.36628 40852 aba9bcc8305358ea0417b61e35e8233d ""
   "capitulos/04-Iteraciones.tex" 1772093447.96534 25309 c7279ad79303350c0ae43c1b93b382dd ""
   "imagenes/PostMan-CodsOK.png" 1771415479.91596 40670 c378f8b11ec188857746e26b9d3fe39c ""
   "imagenes/PostMan-Resumen.png" 1771415844.83481 11334 8bce1b747e4bac17e6aae31bcdc58504 ""
