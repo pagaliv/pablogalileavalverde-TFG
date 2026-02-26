@@ -87,4 +87,3 @@
 \contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {xlvii}}{appendix.Alph2}%
 \contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {xlvii}}{section.Alph2.1}%
 \contentsline {section}{\numberline {2.2}Obtener token}{\es@scroman {xlviii}}{section.Alph2.2}%
-\contentsline {chapter}{Bibliografía}{\es@scroman {l}}{appendix*.31}%
