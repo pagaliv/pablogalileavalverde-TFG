@@ -28,7 +28,7 @@ En este apartado se describirán los diferentes módulos del EDT relacionandolos
                         \item \textbf{No Funcionales:} Lista de aquellos requisitos que, aunque no añaden funcionalidad al proyecto, son importantes a tener en cuenta para lograr su ejecución.
                         \item \textbf{Funcionales:} Lista de aquellos requisitos necesarios para lograr que el proyecto cumpla con todas las características necesarias para que sea funcional.
                     \end{enumerate}
-              \item \textbf{Lista de items continuables:} Lista con todos los SKUs de los recursos activos del DCD, omitiendo los obsoletos. Esta lista es necesaria para cumplir el requisito RF01.02 y permite identificar los elementos de mayor coste, información requerida para el requisito RF01.03.
+              \item \textbf{Lista de items continuables:} Lista con todos los SKUs de los recursos activos del DCD, omitiendo los obsoletos. Esta lista es necesaria para cumplir el requisito RF01.02 y permite identificar los elementos de mayor coste, información requerida para el requisito RF01.03 y RNF04.
           \end{enumerate}
 
     \item \textbf{Gestión}
@@ -36,7 +36,7 @@ En este apartado se describirán los diferentes módulos del EDT relacionandolos
           \begin{enumerate}
               \item \textbf{Planificación: } Proceso de definir objetivos, tareas, recursos, costos y cronogramas para guiar la ejecución y asegurar el éxito, en el que se decide y especifica el cumplimiento de los requisitos RNF05 a RNF09.
               \item  \textbf{Seguimiento y Control: }Tras la implementación y la finalización del proyecto se hace un seguimiento de su correcto funcionamiento. Fundamental para lograr el requisito RNF01 y RNFO2.
-              \item \textbf{Tecnologías y Herramientas: } Son las metodologías y enfoques que se han usado para la elaboración del proyecto.
+              \item \textbf{Tecnologías y Herramientas: } Son las metodologías y enfoques que se han usado para la elaboración del proyecto y desarrollan los requisitos RNF05 a RNF09
               \item \textbf{Memoria:} El proceso de documentación del proyecto para poder analizarlo.
               \item \textbf{Defensa:} Argumentos y explicación sobre el proyecto para poder exponerlo a un tribunal ante posibles dudas.
           \end{enumerate}
@@ -48,8 +48,8 @@ En este apartado se describirán los diferentes módulos del EDT relacionandolos
                     \setcounter{enumiii}{0} % Reiniciar contador del tercer nivel si es necesario
                     \begin{enumerate}
                         \item \textbf{Detección de items continuables:} La funcionalidad añadida en esta primera iteración se basa en lograr detectar qué SKUs forman parte de la lista creada. Como el contrato será creado por nosotros, se añadirán todos los SKUs, así que todos deberán estar; todo el que falte será un falso positivo.
-                        \item \textbf{Creación de contrato completo:} De manera manual se crea un contrato con todos los SKUs de la lista.
-                        \item \textbf{Configuración de Credenciales:} Esto se hace en todas las iteraciones, por lo que no se explicará en el resto, solo en esta. Se basa en la configuración concreta de CouchDB para el correcto funcionamiento.
+                        \item \textbf{Creación de contrato completo:} De manera manual se crea un contrato con todos los SKUs de la lista. Cumpliendo asi el requisito RF01.01, RF02.01,RF02.01.01,RF02.01.02 y RF02.03.
+                        \item \textbf{Configuración de Credenciales:} Esto se hace en todas las iteraciones, por lo que no se explicará en el resto, solo en esta. Se basa en la configuración concreta de CouchDB para el correcto funcionamiento. Cumpliendo así el requisito RF02.02.
                         \item \textbf{Testeo de funcionamiento: } Al igual que el anterior, este paso se hace en todas las iteraciones, por lo que solo se explicará en esta. En este apartado se crean las comprobaciones del correcto funcionamiento de esta y de las anteriores iteraciones.
                         \item \textbf{Configuración de alertas y rutinas: } Este apartado tiene la misma peculiaridad que los otros dos anteriores, por lo que se explicará solo en esta ocasión y se basa en crear las alertas que se enviarán en caso de fallo dependiendo de la información que ya se disponga, en este caso los SKUs que faltan y también crear el disparador para que se ejecute en cierto momento.
 
