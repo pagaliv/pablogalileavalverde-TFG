@@ -15,7 +15,7 @@ en el resto de iteraciones --- y la creación del contrato.
 
 Uno de los objetivos fundamentales de este proyecto es la creación de la base del proyecto y establecer las tecnologías fundamentales para iniciarlo. Con esto se engloba tanto el lenguaje que se usará
 como la decisión del método de persistencia del código. En este caso ambas decisiones son heredadas, se usa \textit{JavaScript} porque es donde están desarrolladas las librerías internas del equipo de Billing
-de IONOS Cloud y para persistir se guardará en Gitlab de manera habitual y además por seguridad se guardará periodicamente tanto en github como en un disco duro físico.
+de IONOS Cloud y para persistir se guardará en GitLab de manera habitual y, además, por seguridad se guardará periódicamente tanto en GitHub como en un disco duro físico.
 
 
 \vspace{0.8cm}
@@ -263,17 +263,17 @@ Object.keys(requiredResources).forEach(category => {
 
 \paragraph{Ventajas}
 
-Automatiza la verificación, proporciona trazabilidad, se integra en PostMan y es fácilmente mantenible. Además esta estructura es migrable al proyecto, permitiendo tener una parte hecha ya.
+Automatiza la verificación, proporciona trazabilidad, se integra en PostMan y es fácilmente mantenible. Además esta estructura es migrable al proyecto, permitiendo tener una parte ya hecha.
 
 \subsection{Integración del código}
 \subsubsection{Configuración de Entornos}
 Al ser la primera iteración se deben configurar los entornos que se van a usar.
 Esto consiste en la creación del proyecto, su vinculación a Gitlab y Github,
 el plan de copias de seguridad en físico y la configuración inicial en CouchBD.
-\subsubsection{Despliegue del proyecto y vincluación a Gitlab}
-El proyecto se crea directamente desde gitlab debido a que se quiere integrar en un grupo de trabajo, en concreto en el equipo de \textit{Cloud Billing} y \textit{ERP
-} de IONOS Cloud, para que de ese modo, tras la finalizaciób del proyecto, todo el equipo pueda seguir con su mantenimiento. Debido a esto, se sigue además la
-estructura de proyectos propia de este equipo. La unica peculiaridad peculiaridad fue el uso de la VPN debido a que el Gitlab que se usa es el del equipo, siendo estos Alemanes.
+\subsubsection{Despliegue del proyecto y vinculación a GitLab}
+El proyecto se crea directamente desde GitLab debido a que se quiere integrar en un grupo de trabajo, en concreto en el equipo de \textit{Cloud Billing} y \textit{ERP
+} de IONOS Cloud, para que de ese modo, tras la finalización del proyecto, todo el equipo pueda seguir con su mantenimiento. Debido a esto, se sigue además la
+estructura de proyectos propia de este equipo. La única peculiaridad fue el uso de la VPN debido a que el GitLab que se usa es el del equipo, siendo estos alemanes.
 
 \subsubsection{Estrategia de copias de seguridad del código fuente usando GitHub y disco físico}
 Para garantizar la integridad y disponibilidad del código fuente desarrollado en este proyecto,
@@ -299,7 +299,7 @@ secundario para proporcionar una capa adicional de redundancia. Esta decisión s
           proveedores, una caída o problema en GitLab no compromete el acceso al código.
 
     \item \textbf{Redundancia geográfica:} Los datos se replican en centros de datos de diferentes
-          ubicaciones, protegiendo frente a desastres regionales. Previniendo uno de los posibles riesgos estudiado en en plan de riesgos.
+          ubicaciones, protegiendo frente a desastres regionales. Previniendo uno de los posibles riesgos estudiados en el plan de riesgos.
 \end{itemize}
 
 \paragraph{Copia de seguridad en disco físico local}
@@ -319,7 +319,7 @@ externo siguiendo estos principios:
 
 \subsubsection{Configuración en CouchDB}
 Debido a que se está integrado en el grupo de trabajo de \textit{Cloud Billing} y \textit{ERP}, se usa su grupo de bases de datos.
-Lo único que hay que tener en cuenta es el uso de las credenciales, debido a que las credenciales para entrar a CouchBD
+Lo único que hay que tener en cuenta es el uso de las credenciales, debido a que las credenciales para entrar a CouchDB
 son delicadas --- ya que se accede a todas las configuraciones del equipo --- se usa un protocolo similar al descrito en la
 sección \hyperref[iteraciones:gestion-tokens]{Plan de gestión de tokens de autenticación}.
 
@@ -333,7 +333,7 @@ El documento almacenado en CouchDB contiene la lógica y parámetros necesarios 
     \item \textbf{Identificador:} \texttt{billing-reference-verifier} - Documento raíz que centraliza
           toda la configuración del verificador.
 
-    \item \textbf{Programación de tareas (scheduler):} Define ejecuciones automáticas periódicas, sobre esto se desarrollará en mayor profundidad cuando se hable de ello en concreto.
+    \item \textbf{Programación de tareas (scheduler):} Define ejecuciones automáticas periódicas; sobre esto se desarrollará en mayor profundidad cuando se hable de ello en concreto.
 
 \end{itemize}
 
@@ -353,8 +353,8 @@ El módulo \texttt{utilization} contiene la lista de SKUs a monitorizar, siguien
 
 El proyecto \texttt{billing-reference-verifier} es una API REST interna desarrollada para IONOS
 cuyo propósito principal es verificar la utilización de recursos y validar facturas asociadas a
-contratos de facturación. Por lo que antes de centrarnos en conceptos tecnicos, se explicará la estructura geenral actual del proyecto.
-Centrandose en estructura y tecnologias.
+contratos de facturación. Por lo que, antes de centrarnos en conceptos técnicos, se explicará la estructura general actual del proyecto,
+centrándose en estructura y tecnologías.
 
 \paragraph{Información general}
 \begin{itemize}
@@ -452,11 +452,11 @@ configuración definida en \texttt{package.json} e inicializa el servidor y los 
 
 \paragraph{Autenticación }
 Todas las peticiones requieren el header \texttt{Authorization: Bearer <token>}. Este token se
-transmite a la \texttt{billing-api} de IONOS para autenticar las operaciones y se gestiona como ya se explicá en
+transmite a la \texttt{billing-api} de IONOS para autenticar las operaciones y se gestiona como ya se explicó en
 \hyperref[iteraciones:gestion-tokens]{el plan de gestión de tokens de autenticación}.
 
 \subsection{Implementación de función de Detección de items continuables}
-El desarollo de esta función se explicará por partes
+El desarrollo de esta función se explicará por partes.
 
 
 
