@@ -1,17 +1,17 @@
 # Fdb version 4
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 1772098500.76459 -1
+["bibtex main"] 0 "main.aux" "main.bbl" "main" 1772098899.46258 -1
   "main.aux" 0 -1 0 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1772098498.75943 "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" "main.pdf" "main" 1772098500.76464 0
-  "%OUTDIR%/main.aux" 1772098500.64928 20110 9061367d87a190076abd845d3ee6c86e "pdflatex"
-  "%OUTDIR%/main.lof" 1772098500.65456 1021 71f7301b13609e0757bcebc885229255 "pdflatex"
-  "%OUTDIR%/main.lot" 1772098500.65456 1509 39c29a6e76f72f33299b4026087e1044 "pdflatex"
-  "%OUTDIR%/main.out" 1772098500.65228 7656 0e79391f2c166b283976f5b21670c60b "pdflatex"
-  "%OUTDIR%/main.run.xml" 1772098500.65456 2404 c26dd97bcd39844ed065af16e5d03e28 "pdflatex"
-  "%OUTDIR%/main.toc" 1772098500.65456 8812 7fb88cd95d88978aabe3613f9e92e07c "pdflatex"
+["pdflatex"] 1772098897.3916 "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" "main.pdf" "main" 1772098899.46263 0
+  "%OUTDIR%/main.aux" 1772098899.34061 20110 9061367d87a190076abd845d3ee6c86e "pdflatex"
+  "%OUTDIR%/main.lof" 1772098899.34548 1021 71f7301b13609e0757bcebc885229255 "pdflatex"
+  "%OUTDIR%/main.lot" 1772098899.34548 1509 39c29a6e76f72f33299b4026087e1044 "pdflatex"
+  "%OUTDIR%/main.out" 1772098899.34403 7656 0e79391f2c166b283976f5b21670c60b "pdflatex"
+  "%OUTDIR%/main.run.xml" 1772098899.34548 2404 c26dd97bcd39844ed065af16e5d03e28 "pdflatex"
+  "%OUTDIR%/main.toc" 1772098899.34548 8812 7fb88cd95d88978aabe3613f9e92e07c "pdflatex"
   "/etc/texmf/web2c/texmf.cnf" 1770890366.72124 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" 1772093607.69308 12191 c5a854cb1a4f000eaa2c21e2df6f18b8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -278,7 +278,7 @@
   "anexos/A2-Anexo-ObtenerTockenDCD.tex" 1771329700.20214 2553 9e31749ae61dee3b61bc51e854565669 ""
   "archivos/EDT.pdf" 1771235528 80995 4b13b2afd8b459e24118c51fc6739a46 ""
   "archivos/flujo_API_Canary.drawio.pdf" 1771235528 34088 1b23432f394b120fd84757f11a046983 ""
-  "capitulos/01-introduccion.tex" 1772098496.64128 15873 b97c8d7e8ec7e3ee55d4b85eabbf4a53 ""
+  "capitulos/01-introduccion.tex" 1772098897.08261 15770 e333000a13770d15dfb330c56179cd3f ""
   "capitulos/02-Análisis.tex" 1771235528 10768 28a997da2bff5c07841c56f06d480939 ""
   "capitulos/03-Planificación.tex" 1772098496.36628 40852 aba9bcc8305358ea0417b61e35e8233d ""
   "capitulos/04-Iteraciones.tex" 1772093447.96534 25309 c7279ad79303350c0ae43c1b93b382dd ""

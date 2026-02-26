@@ -11,7 +11,7 @@ Este capítulo presenta la motivación, el contexto, objetivos y fundamentos del
 La empresa promotora de este proyecto es Arsys, perteneciente al grupo IONOS, quien identificó
 la necesidad tras la creación y posterior ampliación del
 \textit{DCD}\footnote{Data Center Designer: plataforma gráfica que permite a los clientes de IONOS diseñar
-    y configurar sus propios centros de datos de forma visual.},  Al tratarse de un componente fundamental
+    y configurar sus propios centros de datos de forma visual.}. Al tratarse de un componente fundamental
 para la compañía, se hizo necesario establecer mecanismos de control que garantizaran su correcto
 funcionamiento y permitieran su verificación continua.
 
@@ -39,7 +39,7 @@ Se consideró necesario desarrollar e implementar un sistema de gestión de auto
 
     \item \textbf{Implementar} una API REST para la ejecución y gestión de tests automatizados.
 
-    \item \textbf{Desarrollar} un sistema de detección temprana de inconsistencias mediante técnicas de validación periódica, esto es, comprobaciones automatizadas ejecutadas en intervalos regulares (diarias, semanales o mensuales) para contrastar los cargos facturados contra el consumo real..
+    \item \textbf{Desarrollar} un sistema de detección temprana de inconsistencias mediante técnicas de validación periódica, esto es, comprobaciones automatizadas ejecutadas en intervalos regulares (diarias, semanales o mensuales) para contrastar los cargos facturados con el consumo real.
 
     \item \textbf{Evaluar} la efectividad del sistema propuesto en términos de precisión, rendimiento y reducción de errores.
 
@@ -48,7 +48,7 @@ Se consideró necesario desarrollar e implementar un sistema de gestión de auto
 % ===== SECCIÓN 1.3: Metodología del Proyecto =====
 \section{Metodología del Proyecto}
 
-La metodología que se ha optado por usar, ya que se ha considerado la más adecuada, es una implementación iterativa incremental. La razón para tomar esta decisión es el hecho de que este proyecto es ideal para esta metodología. Esta se basa en la partición del desarrollo en pequeñas fases, permitiendo comprobar en cada iteración que una parte del proyecto ya es funcional y facilitando la realización de ajustes antes de continuar con funcionalidades nuevas.
+La metodología seleccionada para este proyecto es una implementación iterativa incremental, al considerarse la más adecuada para su naturaleza. Esta metodología se basa en la partición del desarrollo en pequeñas fases, permitiendo comprobar en cada iteración que una parte del proyecto ya es funcional y facilitando la realización de ajustes antes de continuar con nuevas funcionalidades.
 
 Para cada iteración se seguirá un proceso estándar:
 
@@ -114,15 +114,15 @@ El DCD tiene muchas herramientas y es importante conocerlas para este proyecto, 
 
     \item \textbf{Inteligencia Artificial: } Tiene una herramienta de apoyo de inteligencia artificial de varios modelos; se mide su uso por medio de \textit{tokens}\footnote{Un \textit{token} es una cadena alfanumérica única y secreta generada por un servidor para autenticar y autorizar a un cliente (aplicación, usuario o dispositivo) al realizar solicitudes.}.
 
-    \item \textbf{Contenedores:} es la categoría que agrupa las herramientas para la modernización de aplicaciones (cloud-native). Ofrece dos servicios esenciales y sinérgicos:
+    \item \textbf{Contenedores:} Es la categoría que agrupa las herramientas para la modernización de aplicaciones (cloud-native). Ofrece dos servicios esenciales y sinérgicos:
           \begin{itemize}
               \item \textbf{Container Registry}: el ``dónde'' guardas tus componentes de software empaquetados (imágenes).
               \item \textbf{Managed Kubernetes}: el ``cómo'' los pones en producción de forma automática, escalable y resistente.
           \end{itemize}
 
-    \item \textbf{Bases de datos: } Conjunto de datos organizado de tal modo que permita obtener con rapidez diversos tipos de información. Hay tanto relacionales como no relacionales, para más información consultar el anexo 1.
+    \item \textbf{Bases de datos: } Conjunto de datos organizado de tal modo que permita obtener con rapidez diversos tipos de información. Existen tanto relacionales como no relacionales; para más información, consultar el Anexo 1.
 
-    \item \textbf{ Almacenamiento y Copias de Seguridad:} En el \textit{DCD}, Storage y Backup son pilares complementarios de la estrategia de datos, siendo el Almacenamiento donde ``viven'' mis datos ahora mismo y las copias de seguridad la manera de recuperar dicha información. Ofrece cinco servicios:
+    \item \textbf{ Almacenamiento y Copias de Seguridad:} En el \textit{DCD}, Storage y Backup son pilares complementarios de la estrategia de datos, siendo el Almacenamiento donde ``viven'' los datos actualmente y las copias de seguridad la manera de recuperar dicha información. Ofrece cinco servicios:
           \begin{itemize}
               \item \textbf{ IONOS Object Storage: } Almacén masivo para archivos y objetos.
               \item \textbf{ Network File Storage: } Sistema de archivos compartido en red.
@@ -134,7 +134,7 @@ El DCD tiene muchas herramientas y es importante conocerlas para este proyecto, 
           \begin{itemize}
               \item \textbf{Administración de direcciones IP: } gestión centralizada de direcciones IP.
               \item \textbf{Puerta de Enlace VPN: }  Servicio que crea un túnel cifrado y seguro entre tu infraestructura en IONOS Cloud y otro sitio.
-              \item \textbf{Red de Distribución de Contenidos: } Una red global de servidores que almacenan en caché copias del contenido est\'atico (im\'agenes, CSS{\textgreater}, JS{\textgreater}, videos) cerca de los usuarios finales.
+              \item \textbf{Red de Distribución de Contenidos: } Una red global de servidores que almacenan en caché copias del contenido estático (imágenes, CSS, JS, vídeos) cerca de los usuarios finales.
               \item \textbf{Cloud DNS: } El servicio de resolución de nombres de dominio gestionado por IONOS. Traduce nombres de dominio (www.tuempresa.com) a direcciones IP (185.100.100.10).
           \end{itemize}
     \item \textbf{Seguridad: } Marco de trabajo integrado que aplica múltiples capas de protección:
