@@ -29,7 +29,7 @@
 \contentsline {subsubsection}{Entregables del Proyecto}{\es@scroman {xvii}}{table.caption.11}%
 \contentsline {section}{\numberline {2.2}Requisitos}{\es@scroman {xvii}}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Estudio de viabilidad}{\es@scroman {xix}}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Requisitos mínimos}{\es@scroman {xix}}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.1}Materiales mínimos}{\es@scroman {xix}}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Viabilidad de constancia de recursos a analizar}{\es@scroman {xix}}{subsection.2.3.2}%
 \contentsline {chapter}{\numberline {3}Planificación}{\es@scroman {xx}}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Descomposición del Proyecto (EDT)}{\es@scroman {xx}}{section.3.1}%
