@@ -449,8 +449,9 @@ transmite a la \texttt{billing-api} de IONOS para autenticar las operaciones y s
 \hyperref[iteraciones:gestion-tokens]{el plan de gestión de tokens de autenticación} y garantizar el cumplimiento del requisito RNF03.
 
 \subsection{Implementación de función de Detección de items continuables}
-Teniendo ya la estructura del proyecto, se inicia el 21 de febrero la función de detección de ítems continuables se implementa en el módulo \texttt{utilization}, que se encarga de verificar la presencia de los SKUs configurados en CouchDB. Esta función se basa en las llamadas a la API de facturación para obtener los datos de utilización y compararlos con la lista de SKUs monitorizados. Para lograr la primera parte del requisito RNF04.02.
-Para ello, se implementa la función \texttt{checkUtilization()} ---que se creó para PostMan y ya se explicó en la sección \hyperref[iteraciones:script-verificacion-postman]{Creación del script de verificación}--- además, como en PostMan, se realizará en dos fases: primero se detectará un SKU concreto y, una vez verificado su correcto funcionamiento, se extenderá al resto de SKUs.
+Una vez definida la estructura del proyecto, el 21 de febrero se inicia la implementación de la función de detección de ítems continuables en el módulo \texttt{utilization}. Esta función realiza llamadas a la API de facturación para obtener los datos de utilización y compararlos con la lista de SKUs monitorizados en CouchDB, logrando así la primera parte del requisito RNF04.02.
+
+Para ello se implementa la función \texttt{checkUtilization()}, basada en el script que se creó para PostMan ---explicado en la sección \hyperref[iteraciones:script-verificacion-postman]{Creación del script de verificación}---. Al igual que en PostMan, el desarrollo se realiza en dos fases: primero se detecta un SKU concreto y, una vez verificado su correcto funcionamiento, se extiende al resto de SKUs.
 
 
 
