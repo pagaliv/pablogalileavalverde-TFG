@@ -211,6 +211,7 @@ la base de datos de la API, se hace una llamada y debe aparecer. En este caso de
 Realizar este proceso de forma manual ---tanto la verificación como la incorporación de productos--- resulta propenso a errores por su naturaleza repetitiva. Por ello, se opta por una solución más fiable y reutilizable: aprovechar la capacidad de PostMan para ejecutar scripts y crear uno que compruebe automáticamente si están presentes los SKUs deseados.
 
 \subsubsection{Creación del script de verificación}
+\label{iteraciones:script-verificacion-postman}
 
 Se creó un script en JavaScript para PostMan que verifica los SKUs disponibles.
 
@@ -448,7 +449,9 @@ transmite a la \texttt{billing-api} de IONOS para autenticar las operaciones y s
 \hyperref[iteraciones:gestion-tokens]{el plan de gestión de tokens de autenticación} y garantizar el cumplimiento del requisito RNF03.
 
 \subsection{Implementación de función de Detección de items continuables}
-Teniendo ya la estructura del proyecto, la función de detección de ítems continuables se implementa en el módulo \texttt{utilization}, que se encarga de verificar la presencia de los SKUs configurados en CouchDB. Esta función se basa en las llamadas a la API de facturación para obtener los datos de utilización y compararlos con la lista de SKUs monitorizados. Para lograr el requisito 
+Teniendo ya la estructura del proyecto, se inicia el 21 de febrero la función de detección de ítems continuables se implementa en el módulo \texttt{utilization}, que se encarga de verificar la presencia de los SKUs configurados en CouchDB. Esta función se basa en las llamadas a la API de facturación para obtener los datos de utilización y compararlos con la lista de SKUs monitorizados. Para lograr la primera parte del requisito RNF04.02.
+Para ello, se implementa la función \texttt{checkUtilization()} ---que se creó para PostMan y ya se explicó en la sección \hyperref[iteraciones:script-verificacion-postman]{Creación del script de verificación}--- además, como en PostMan, se realizará en dos fases: primero se detectará un SKU concreto y, una vez verificado su correcto funcionamiento, se extenderá al resto de SKUs.
+
 
 
 
