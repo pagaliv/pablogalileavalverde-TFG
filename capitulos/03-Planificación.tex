@@ -12,7 +12,7 @@ Una vez definidos los requisitos y la metodología a seguir, el siguiente paso e
     \label{fig:edt}
 \end{figure}
 \subsection{Explicación del EDT}
-En este apartado se describirán los diferentes módulos del EDT relacionandolos con los requisitos.
+En este apartado se describen los diferentes módulos del EDT, relacionándolos con los requisitos.
 \begin{enumerate}
     % Configurar todos los niveles primero
     \renewcommand{\theenumii}{\theenumi.\arabic{enumii}}
@@ -35,8 +35,8 @@ En este apartado se describirán los diferentes módulos del EDT relacionandolos
           \setcounter{enumii}{0} % Reiniciar contador del segundo nivel
           \begin{enumerate}
               \item \textbf{Planificación: } Proceso de definir objetivos, tareas, recursos, costos y cronogramas para guiar la ejecución y asegurar el éxito, en el que se decide y especifica el cumplimiento de los requisitos RNF05 a RNF09.
-              \item  \textbf{Seguimiento y Control: }Tras la implementación y la finalización del proyecto se hace un seguimiento de su correcto funcionamiento. Fundamental para lograr el requisito RNF01 y RNFO2.
-              \item \textbf{Tecnologías y Herramientas: } Son las metodologías y enfoques que se han usado para la elaboración del proyecto y desarrollan los requisitos RNF05 a RNF09
+              \item  \textbf{Seguimiento y Control: }Tras la implementación y la finalización del proyecto se realiza un seguimiento de su correcto funcionamiento. Fundamental para satisfacer los requisitos RNF01 y RNF02.
+              \item \textbf{Tecnologías y Herramientas: } Son las metodologías y enfoques que se han empleado para la elaboración del proyecto y desarrollan los requisitos RNF05 a RNF09
               \item \textbf{Memoria:} El proceso de documentación del proyecto para poder analizarlo.
               \item \textbf{Defensa:} Argumentos y explicación sobre el proyecto para poder exponerlo a un tribunal ante posibles dudas.
           \end{enumerate}
@@ -47,42 +47,42 @@ En este apartado se describirán los diferentes módulos del EDT relacionandolos
               \item \textbf{Iteración 1:} Siendo esta la primera iteración, es en la que se crea la base en la que se basarán el resto de iteraciones, por lo que se deben tomar sus decisiones teniendo en cuenta que podrían afectar al resto del proceso. En esta primera iteración se detectarán los elementos que forman un contrato.
                     \setcounter{enumiii}{0} % Reiniciar contador del tercer nivel si es necesario
                     \begin{enumerate}
-                        \item \textbf{Detección de items continuables:} La funcionalidad añadida en esta primera iteración se basa en lograr detectar qué SKUs forman parte de la lista creada. Como el contrato será creado por nosotros, se añadirán todos los SKUs, así que todos deberán estar; todo el que falte será un falso positivo. Dando el primer paso para cumplir el requisto RF04.02.
-                        \item \textbf{Creación de contrato completo:} De manera manual se crea un contrato con todos los SKUs de la lista. Cumpliendo asi el requisito RF01.01, RF02.01,RF02.01.01,RF02.01.02 y RF02.03.
-                        \item \textbf{Configuración de Credenciales:} Esto se hace en todas las iteraciones, por lo que no se explicará en el resto, solo en esta. Se basa en la configuración concreta de CouchDB para el correcto funcionamiento. Cumpliendo así el requisito RF02.02 y dando pie ha cumplir el requisito RF04.03, ya que en esta configuración es donde se configuran los margenees de tolerancia también.
-                        \item \textbf{Testeo de funcionamiento: } Al igual que el anterior, este paso se hace en todas las iteraciones, por lo que solo se explicará en esta. En este apartado se crean las comprobaciones del correcto funcionamiento de esta y de las anteriores iteraciones. sIENDO CLAVE PARA CUMPLIR EL REQUISITO RNF01. 
-                        \item \textbf{Configuración de alertas y rutinas: } Este apartado tiene la misma peculiaridad que los otros dos anteriores, por lo que se explicará solo en esta ocasión y se basa en crear las alertas que se enviarán en caso de fallo dependiendo de la información que ya se disponga, en este caso los SKUs que faltan y también crear el disparador para que se ejecute en cierto momento. Cumpliendo de este modo el requisito RF04.01,RF05.02 y RF05.02.
+                        \item \textbf{Detección de items continuables:} La funcionalidad añadida en esta primera iteración consiste en detectar qué SKUs forman parte de la lista creada. Como el contrato será creado por nosotros, se añadirán todos los SKUs, así que todos deberán estar; cualquiera que falte constituirá un falso positivo. Esto representa el primer paso para cumplir el requisito RF04.02.
+                        \item \textbf{Creación de contrato completo:} De manera manual se crea un contrato con todos los SKUs de la lista, cumpliendo así los requisitos RF01.01, RF02.01, RF02.01.01, RF02.01.02 y RF02.03.
+                        \item \textbf{Configuración de Credenciales:} Este paso se repite en todas las iteraciones, por lo que no se explicará en las siguientes. Consiste en la configuración concreta de CouchDB para el correcto funcionamiento, cumpliendo así el requisito RF02.02 y sentando las bases para el requisito RF04.03, ya que aquí se definen también los márgenes de tolerancia.
+                        \item \textbf{Testeo de funcionamiento: } De manera similar al anterior, este paso se repite en todas las iteraciones, por lo que solo se detalla aquí. En este apartado se diseñan las comprobaciones del correcto funcionamiento de la iteración actual y las previas, resultando clave para satisfacer el requisito RNF01. 
+                        \item \textbf{Configuración de alertas y rutinas: } Este apartado comparte la misma característica que los dos anteriores, por lo que se describe únicamente aquí. Consiste en definir las alertas que se enviarán en caso de fallo según la información disponible ---en este caso, los SKUs ausentes--- y en establecer el disparador para su ejecución programada. De este modo se satisfacen los requisitos RF04.01, RF05.01 y RF05.02.
 
                     \end{enumerate}
 
 
-              \item \textbf{Iteración 2:} En esta iteración ya se implementa el medir el uso de los SKUs continuables detectados en la iteración anterior y compararla con la esperada.
+              \item \textbf{Iteración 2:} En esta iteración se implementa la medición del uso de los SKUs continuables detectados previamente y su comparación con los valores esperados.
                     \setcounter{enumiii}{0} % Reiniciar contador del tercer nivel si es necesario
                     \begin{enumerate}
                         \item \textbf{Detección de endpoint /usage items continuables: } Para comprobar el uso de los elementos del DCD por medio de su API se puede comprobar con /usage.
-                        \item \textbf{Comprobación de que contrato completo:} Se comprueba que no haya que añadir nada nuevo al contrato, en caso de ser necesario se añade y como será igual en el resto de iteraciones tampoco se añadirá.
+                        \item \textbf{Comprobación de que contrato completo:} Se verifica que no sea necesario añadir elementos nuevos al contrato; en caso afirmativo, se incorporan. Este paso, común a las demás iteraciones, no se volverá a detallar.
                     \end{enumerate}
 
 
               \item \textbf{Iteración 3:} En esta iteración sabiendo el uso de los diferentes elementos se calcula su gasto económico teórico y se comprueba con el real.
                     \setcounter{enumiii}{0} % Reiniciar contador del tercer nivel si es necesario
                     \begin{enumerate}
-                        \item \textbf{Comprobación gasto items continuables: } Sabiendo el gasto se calcula el precio de cada uno y se compara con el proporcionado por la API. Siendo fundamental para cumplir el requisito RF03.01, RF03.02 y RF03.04, cuya realización también esta relacionada con el requisito RF04.02.
+                        \item \textbf{Comprobación gasto items continuables: } Conocido el gasto, se calcula el precio de cada elemento y se contrasta con el proporcionado por la API. Este paso resulta fundamental para satisfacer los requisitos RF03.01, RF03.02 y RF03.04, cuya ejecución también está vinculada al requisito RF04.02.
                     \end{enumerate}
 
 
               \item \textbf{Iteración 4:} En esta iteración se pasa a los items no continuables, por lo que se estudia cómo hacer un gasto relativamente constante de estos.
                     \setcounter{enumiii}{0} % Reiniciar contador del tercer nivel si es necesario
                     \begin{enumerate}
-                        \item \textbf{Comprobación de endpoint /usage items no continuables: } Se comprueba el gasto de items no continuables por medio de su SKU.
-                        \item \textbf{Creación de gasto de tokens automático:} Se estudia cómo lograr un gasto lo más constante posible de tokens. Teniendo en cuenta así el requisito  RF03.01,  RF03.02 y  RF03.04. Cuya realización también esta relacionada con el requisito  RF03.03. 
+                        \item \textbf{Comprobación de endpoint /usage items no continuables: } Se verifica el gasto de items no continuables mediante su SKU.
+                        \item \textbf{Creación de gasto de tokens automático:} Se analiza cómo conseguir un consumo de tokens lo más constante posible, atendiendo así a los requisitos RF03.01, RF03.02 y RF03.04, cuya ejecución también está relacionada con el requisito RF03.03. 
                     \end{enumerate}
 
 
               \item \textbf{Iteración 5:} Teniendo ya el gasto, se calcula su precio y se comprueba con el gasto proporcionado por la API.
                     \setcounter{enumiii}{0} % Reiniciar contador del tercer nivel si es necesario
                     \begin{enumerate}
-                        \item \textbf{Comprobación gasto items no continuables:} Se comprueba el gasto económico de items no continuables por medio de su SKU comparándolo con el obtenido en la API.
+                        \item \textbf{Comprobación gasto items no continuables:} Se verifica el gasto económico de items no continuables mediante su SKU, contrastándolo con el valor obtenido de la API.
                     \end{enumerate}
           \end{enumerate}
 \end{enumerate}
@@ -344,7 +344,7 @@ Sabiendo ya el cronograma se pueden marcar la fecha de finalización de los dist
     \label{tab:placeholder}
 \end{table}
 \section{Plan de contingencias y riesgos}
-Siendo un proyecto de cierto tamaño, hay muchos factores que se pueden no tener en cuenta, debido a que cuanto más grande sea un proyecto más posibles problemas pueden ocurrir, por lo que para poder minimizar esos riesgos, se crea un plan de contingencia ante posibles riesgos, para proteger los activos más valiosos. Para hacerlo, se basará en el análisis de riesgos estudiado en la asignatura de Seguridad de esta titulación, impartida en esta universidad.
+Al tratarse de un proyecto de cierto tamaño, existen múltiples factores que podrían pasar desapercibidos: cuanto mayor es la envergadura del proyecto, mayor es la probabilidad de que surjan problemas. Para minimizar estos riesgos y proteger los activos más valiosos, se ha elaborado un plan de contingencia basado en el análisis de riesgos estudiado en la asignatura de Seguridad de esta titulación.
 \begin{table}[h!]
     \centering
     \small
