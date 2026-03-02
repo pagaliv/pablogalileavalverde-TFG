@@ -36,12 +36,12 @@
 \contentsline {subsection}{\numberline {3.1.1}Explicación del EDT}{\es@scroman {xxii}}{subsection.3.1.1}%
 \contentsline {section}{\numberline {3.2}Estimación de tiempos}{\es@scroman {xxv}}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Cronograma e hitos}{\es@scroman {xxvi}}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Plan de contingencias y riesgos}{\es@scroman {xxviii}}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Flujo de Trabajo Canary}{\es@scroman {xxx}}{subsection.3.4.1}%
-\contentsline {section}{\numberline {3.5}Tecnologías y Herramientas Utilizadas}{\es@scroman {xxxi}}{section.3.5}%
-\contentsline {subsubsection}{Stack Tecnológico Principal}{\es@scroman {xxxi}}{section.3.5}%
-\contentsline {subsubsection}{Dependencias Clave del Proyecto}{\es@scroman {xxxi}}{table.caption.22}%
-\contentsline {subsubsection}{Arquitectura Modular Implementada}{\es@scroman {xxxii}}{table.caption.22}%
+\contentsline {subsection}{\numberline {3.3.1}Flujo de Trabajo Canary}{\es@scroman {xxviii}}{subsection.3.3.1}%
+\contentsline {section}{\numberline {3.4}Plan de contingencias y riesgos}{\es@scroman {xxix}}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Tecnologías y Herramientas Utilizadas}{\es@scroman {xxxii}}{section.3.5}%
+\contentsline {subsubsection}{Stack Tecnológico Principal}{\es@scroman {xxxii}}{section.3.5}%
+\contentsline {subsubsection}{Dependencias Clave del Proyecto}{\es@scroman {xxxii}}{table.caption.22}%
+\contentsline {subsubsection}{Arquitectura Modular Implementada}{\es@scroman {xxxiii}}{table.caption.22}%
 \contentsline {subsubsection}{Flujo de Desarrollo y Calidad}{\es@scroman {xxxiii}}{Item.55}%
 \contentsline {chapter}{\numberline {4}Iteraciones}{\es@scroman {xxxiv}}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Primera Iteración}{\es@scroman {xxxiv}}{section.4.1}%

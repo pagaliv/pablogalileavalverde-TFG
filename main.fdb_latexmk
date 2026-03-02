@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1772436807.54394 "main.bcf" "main.bbl" "main" 1772438237.63007 0
+["biber main"] 1772436807.54394 "main.bcf" "main.bbl" "main" 1772439025.9553 0
   "bibliografia.bib" 1772093342.59019 2804 fd819249790a855a68dfe1af24b5098d ""
-  "main.bcf" 1772438237.52179 107729 295cb8a22bb68ac63392d811d2e5c748 "pdflatex"
+  "main.bcf" 1772439025.83569 107729 295cb8a22bb68ac63392d811d2e5c748 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1772438235.59157 "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" "main.pdf" "main" 1772438237.63033 0
+["pdflatex"] 1772439023.88303 "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" "main.pdf" "main" 1772439025.95559 0
   "/etc/texmf/web2c/texmf.cnf" 1770890366.72124 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" 1772105671.07707 12163 cfc7418b04708ebdb6c728d34f438545 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -275,8 +275,8 @@
   "archivos/flujo_API_Canary.drawio.pdf" 1771235528 34088 1b23432f394b120fd84757f11a046983 ""
   "capitulos/01-introduccion.tex" 1772436833.02241 16320 2dec83b22d145485f2bed3b444b9d3b1 ""
   "capitulos/02-Análisis.tex" 1772437396.20201 14363 5cb95e3618430f83f2c165c53af8e9c6 ""
-  "capitulos/03-Planificación.tex" 1772438235.34892 41757 8cf58828c34a6d91c4a8747e885ef1c7 ""
-  "capitulos/04-Iteraciones.tex" 1772106018.034 25307 b5194bdf78422a6518bdc5ac93d08e6e ""
+  "capitulos/03-Planificación.tex" 1772439021.58169 41805 93f62fe960faef191a46eaa3042b4709 ""
+  "capitulos/04-Iteraciones.tex" 1772438867.7666 25407 9b7156efbaae04218b52027f3e62b236 ""
   "imagenes/PostMan-CodsOK.png" 1771415479.91596 40670 c378f8b11ec188857746e26b9d3fe39c ""
   "imagenes/PostMan-Resumen.png" 1771415844.83481 11334 8bce1b747e4bac17e6aae31bcdc58504 ""
   "imagenes/PostMan-Test.png" 1771415108.40216 215805 9e684a09ba3d1f315efa6a045262812d ""
@@ -287,14 +287,14 @@
   "imagenes/interfaz-InicioSesionDCD-1.png" 1771320154.01093 69832 ee75a3d23fe934156bcde2b46348321f ""
   "imagenes/interfaz-InicioSesionDCD-2.png" 1771321753.39277 605182 7c5bb716ab0b032261589d3890ed8977 ""
   "imagenes/logo.jpg" 1771235528 90328 74cab1a2c547d68158cff65a9a2aa6a4 ""
-  "main.aux" 1772438237.51903 20637 e26f7da42e68d62c14028d9c11f80907 "pdflatex"
+  "main.aux" 1772439025.83234 20755 f295ceb32341ab70ed960c091b19b7b2 "pdflatex"
   "main.bbl" 1772436808.26305 4234 950fb233f832e71f43bc2d8b73caae36 "biber main"
-  "main.lof" 1772438237.52312 1011 bc9b32d68049532f390e943cd1997aaa "pdflatex"
-  "main.lot" 1772438237.52312 1510 b5297a05dee7b9995aded083f973cae9 "pdflatex"
-  "main.out" 1772438237.52171 7766 9df051ead715c4684c5ebde4afde6d99 "pdflatex"
-  "main.run.xml" 1772438237.52312 2404 0748bbc4f9564d661ea0f00967c85001 "pdflatex"
+  "main.lof" 1772439025.83632 1014 9550eb2e73eeab175786322878c0ea5f "pdflatex"
+  "main.lot" 1772439025.83632 1507 75ca7e3e93fdd705ec4e399cdf306f41 "pdflatex"
+  "main.out" 1772439025.83469 7766 40a1cda3e2a22df46420554b55676e27 "pdflatex"
+  "main.run.xml" 1772439025.83632 2404 0748bbc4f9564d661ea0f00967c85001 "pdflatex"
   "main.tex" 1772105671.07707 12163 cfc7418b04708ebdb6c728d34f438545 ""
-  "main.toc" 1772438237.52312 8877 c70c3a34a660ac791100f6546c8a3139 "pdflatex"
+  "main.toc" 1772439025.83632 8882 35992a339847b4cccb698ad26c7b70e3 "pdflatex"
   "portada.tex" 1772090051.38627 1681 86312322b127e2c951e7c21be89cc7a5 ""
   (generated)
   "main.aux"

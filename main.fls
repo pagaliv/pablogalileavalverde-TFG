@@ -510,12 +510,12 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm
+INPUT ./archivos/flujo_API_Canary.drawio.pdf
+INPUT ./archivos/flujo_API_Canary.drawio.pdf
+INPUT ./archivos/flujo_API_Canary.drawio.pdf
+INPUT ./archivos/flujo_API_Canary.drawio.pdf
+INPUT ./archivos/flujo_API_Canary.drawio.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm
-INPUT ./archivos/flujo_API_Canary.drawio.pdf
-INPUT ./archivos/flujo_API_Canary.drawio.pdf
-INPUT ./archivos/flujo_API_Canary.drawio.pdf
-INPUT ./archivos/flujo_API_Canary.drawio.pdf
-INPUT ./archivos/flujo_API_Canary.drawio.pdf
 INPUT ./capitulos/04-Iteraciones.tex
 INPUT ./capitulos/04-Iteraciones.tex
 INPUT ./capitulos/04-Iteraciones.tex

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.2.12)  2 MAR 2026 08:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.2.12)  2 MAR 2026 09:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1191,12 +1191,12 @@ Overfull \hbox (15.73918pt too wide) detected at line 39
  []
 
 
-Overfull \hbox (4.11147pt too wide) detected at line 40
+Overfull \hbox (7.76057pt too wide) detected at line 40
  [][]
  []
 
 
-Overfull \hbox (7.76057pt too wide) detected at line 41
+Overfull \hbox (11.74988pt too wide) detected at line 41
  [][]
  []
 
@@ -1243,7 +1243,7 @@ Overfull \hbox (0.32072pt too wide) detected at line 7
  []
 
 
-Overfull \hbox (4.11147pt too wide) detected at line 8
+Overfull \hbox (15.73918pt too wide) detected at line 8
  [][]
  []
 
@@ -1296,7 +1296,7 @@ Overfull \hbox (11.74988pt too wide) detected at line 12
  []
 
 
-Overfull \hbox (15.73918pt too wide) detected at line 13
+Overfull \hbox (4.11147pt too wide) detected at line 13
  [][]
  []
 
@@ -1460,257 +1460,261 @@ Overfull \hbox (39.02194pt too wide) in paragraph at lines 270--343
 LaTeX Warning: Float too large for page by 5.61954pt on input line 345.
 
 
-Overfull \hbox (13.40439pt too wide) in paragraph at lines 355--355
-[]|\T1/cmr/bx/n/10.95 Probabilidad| 
- []
 
+pdfTeX warning: pdflatex (file ./archivos/flujo_API_Canary.drawio.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<archivos/flujo_API_Canary.drawio.pdf, id=465, 614.295pt x 794.97pt>
+File: archivos/flujo_API_Canary.drawio.pdf Graphic file (type pdf)
+<use archivos/flujo_API_Canary.drawio.pdf>
+Package pdftex.def Info: archivos/flujo_API_Canary.drawio.pdf  used on input line 351.
+(pdftex.def)             Requested size: 396.91325pt x 513.65543pt.
 
-Overfull \hbox (2.12857pt too wide) in paragraph at lines 355--355
-[]|\T1/cmr/bx/n/10.95 Impacto| 
- []
-
-
-Underfull \hbox (badness 7133) in paragraph at lines 355--356
-[]|\T1/cmr/bx/n/10.95 Tipo de
- []
-
-
-Overfull \hbox (3.28725pt too wide) in paragraph at lines 357--357
-[]|\T1/cmr/m/n/10.95 Hardware| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 357--357
-[]|\T1/cmr/m/n/10.95 Destrucción
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 357--357
-\T1/cmr/m/n/10.95 o pér-di-da
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 357--357
-\T1/cmr/m/n/10.95 del or-de-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 357--357
-\T1/cmr/m/n/10.95 na-dor de
- []
-
-
-Underfull \hbox (badness 1571) in paragraph at lines 357--357
-\T1/cmr/m/n/10.95 se ha-rá una es-tra-te-
- []
-
-
-Underfull \hbox (badness 1308) in paragraph at lines 359--359
-[]|\T1/cmr/m/n/10.95 Siendo una
- []
-
-
-Underfull \hbox (badness 4132) in paragraph at lines 359--359
-\T1/cmr/m/n/10.95 so-la per-so-
- []
-
-
-Underfull \hbox (badness 4647) in paragraph at lines 359--359
-\T1/cmr/m/n/10.95 na la que
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 359--359
-\T1/cmr/m/n/10.95 es po-si-ble
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 359--359
-\T1/cmr/m/n/10.95 que se
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 359--359
-\T1/cmr/m/n/10.95 en-cuen-tre
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 359--359
-\T1/cmr/m/n/10.95 in-dis-pues-to
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 359--359
-\T1/cmr/m/n/10.95 por di-ver-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 359--359
-\T1/cmr/m/n/10.95 sas cau-sas
- []
-
-
-Underfull \hbox (badness 7649) in paragraph at lines 359--359
-\T1/cmr/m/n/10.95 lo que se
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 359--359
-\T1/cmr/m/n/10.95 pa-ra-li-za-ría
- []
-
-
-Underfull \hbox (badness 1132) in paragraph at lines 359--359
-\T1/cmr/m/n/10.95 la en-tre-ga real, pa-ra
- []
-
-
-Overfull \hbox (64.9871pt too wide) in paragraph at lines 351--362
- [][] 
- []
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 Underfull \vbox (badness 1152) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 364.
-LaTeX Info: Redefining \% on input line 364.
+LaTeX Info: Redefining \. on input line 358.
+LaTeX Info: Redefining \% on input line 358.
  [26]
-LaTeX Info: Redefining \. on input line 364.
-LaTeX Info: Redefining \% on input line 364.
+LaTeX Info: Redefining \. on input line 358.
+LaTeX Info: Redefining \% on input line 358.
  [27]
-Overfull \hbox (13.40439pt too wide) in paragraph at lines 373--373
+LaTeX Info: Redefining \. on input line 362.
+LaTeX Info: Redefining \% on input line 362.
+ [28 <./archivos/flujo_API_Canary.drawio.pdf>]
+Overfull \hbox (13.40439pt too wide) in paragraph at lines 386--386
 []|\T1/cmr/bx/n/10.95 Probabilidad| 
  []
 
 
-Overfull \hbox (2.12857pt too wide) in paragraph at lines 373--373
+Overfull \hbox (2.12857pt too wide) in paragraph at lines 386--386
 []|\T1/cmr/bx/n/10.95 Impacto| 
  []
 
 
-Underfull \hbox (badness 7133) in paragraph at lines 373--374
+Underfull \hbox (badness 7133) in paragraph at lines 386--387
 []|\T1/cmr/bx/n/10.95 Tipo de
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--375
+Overfull \hbox (3.28725pt too wide) in paragraph at lines 388--388
+[]|\T1/cmr/m/n/10.95 Hardware| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--388
+[]|\T1/cmr/m/n/10.95 Destrucción
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--388
+\T1/cmr/m/n/10.95 o pér-di-da
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--388
+\T1/cmr/m/n/10.95 del or-de-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--388
+\T1/cmr/m/n/10.95 na-dor de
+ []
+
+
+Underfull \hbox (badness 1571) in paragraph at lines 388--388
+\T1/cmr/m/n/10.95 se ha-rá una es-tra-te-
+ []
+
+
+Underfull \hbox (badness 1308) in paragraph at lines 390--390
+[]|\T1/cmr/m/n/10.95 Siendo una
+ []
+
+
+Underfull \hbox (badness 4132) in paragraph at lines 390--390
+\T1/cmr/m/n/10.95 so-la per-so-
+ []
+
+
+Underfull \hbox (badness 4647) in paragraph at lines 390--390
+\T1/cmr/m/n/10.95 na la que
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--390
+\T1/cmr/m/n/10.95 es po-si-ble
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--390
+\T1/cmr/m/n/10.95 que se
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--390
+\T1/cmr/m/n/10.95 en-cuen-tre
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--390
+\T1/cmr/m/n/10.95 in-dis-pues-to
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--390
+\T1/cmr/m/n/10.95 por di-ver-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--390
+\T1/cmr/m/n/10.95 sas cau-sas
+ []
+
+
+Underfull \hbox (badness 7649) in paragraph at lines 390--390
+\T1/cmr/m/n/10.95 lo que se
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--390
+\T1/cmr/m/n/10.95 pa-ra-li-za-ría
+ []
+
+
+Underfull \hbox (badness 1132) in paragraph at lines 390--390
+\T1/cmr/m/n/10.95 la en-tre-ga real, pa-ra
+ []
+
+
+Overfull \hbox (64.9871pt too wide) in paragraph at lines 382--393
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Overfull \hbox (13.40439pt too wide) in paragraph at lines 404--404
+[]|\T1/cmr/bx/n/10.95 Probabilidad| 
+ []
+
+
+Overfull \hbox (2.12857pt too wide) in paragraph at lines 404--404
+[]|\T1/cmr/bx/n/10.95 Impacto| 
+ []
+
+
+Underfull \hbox (badness 7133) in paragraph at lines 404--405
+[]|\T1/cmr/bx/n/10.95 Tipo de
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 406--406
 []|\T1/cmr/m/n/10.95 Trabajando
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--375
+Underfull \hbox (badness 10000) in paragraph at lines 406--406
 \T1/cmr/m/n/10.95 con re-cur-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--375
+Underfull \hbox (badness 10000) in paragraph at lines 406--406
 \T1/cmr/m/n/10.95 pue-de ha-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--375
+Underfull \hbox (badness 10000) in paragraph at lines 406--406
 \T1/cmr/m/n/10.95 in-for-ma-
  []
 
 
-Underfull \hbox (badness 3769) in paragraph at lines 375--375
+Underfull \hbox (badness 3769) in paragraph at lines 406--406
 \T1/cmr/m/n/10.95 ción, co-mo
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--375
+Underfull \hbox (badness 10000) in paragraph at lines 406--406
 \T1/cmr/m/n/10.95 con-tra-se-ñas
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--375
+Underfull \hbox (badness 10000) in paragraph at lines 406--406
 \T1/cmr/m/n/10.95 o to-kens
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--375
+Underfull \hbox (badness 10000) in paragraph at lines 406--406
 \T1/cmr/m/n/10.95 de APIs
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--375
+Underfull \hbox (badness 10000) in paragraph at lines 406--406
 \T1/cmr/m/n/10.95 pri-va-das
  []
 
 
-Underfull \hbox (badness 6559) in paragraph at lines 375--375
+Underfull \hbox (badness 6559) in paragraph at lines 406--406
 \T1/cmr/m/n/10.95 de IO-NOS
  []
 
 
-Underfull \hbox (badness 3396) in paragraph at lines 375--375
+Underfull \hbox (badness 3396) in paragraph at lines 406--406
 \T1/cmr/m/n/10.95 tor-nos se-gu-ros co-mo
  []
 
 
-Underfull \hbox (badness 1147) in paragraph at lines 375--375
+Underfull \hbox (badness 1147) in paragraph at lines 406--406
 \T1/cmr/m/n/10.95 Kee-PassXC y no in-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--377
+Underfull \hbox (badness 10000) in paragraph at lines 408--408
 \T1/cmr/m/n/10.95 las APIs
  []
 
 
-Overfull \hbox (64.9871pt too wide) in paragraph at lines 369--380
+Overfull \hbox (64.9871pt too wide) in paragraph at lines 400--411
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Info: Redefining \. on input line 383.
-LaTeX Info: Redefining \% on input line 383.
-[28]
-LaTeX Info: Redefining \. on input line 383.
-LaTeX Info: Redefining \% on input line 383.
- [29]
-
-pdfTeX warning: pdflatex (file ./archivos/flujo_API_Canary.drawio.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<archivos/flujo_API_Canary.drawio.pdf, id=483, 614.295pt x 794.97pt>
-File: archivos/flujo_API_Canary.drawio.pdf Graphic file (type pdf)
-<use archivos/flujo_API_Canary.drawio.pdf>
-Package pdftex.def Info: archivos/flujo_API_Canary.drawio.pdf  used on input line 389.
-(pdftex.def)             Requested size: 396.91325pt x 513.65543pt.
-LaTeX Info: Redefining \. on input line 400.
-LaTeX Info: Redefining \% on input line 400.
-[30
-
- <./archivos/flujo_API_Canary.drawio.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 444--444
+LaTeX Info: Redefining \. on input line 414.
+LaTeX Info: Redefining \% on input line 414.
+[29]
+LaTeX Info: Redefining \. on input line 414.
+LaTeX Info: Redefining \% on input line 414.
+ [30]
+LaTeX Info: Redefining \. on input line 414.
+LaTeX Info: Redefining \% on input line 414.
+ [31]
+Underfull \hbox (badness 10000) in paragraph at lines 447--447
 []|\T1/cmr/bx/n/12 Base de Da-tos
  []
 
 
-Underfull \hbox (badness 2591) in paragraph at lines 452--452
+Underfull \hbox (badness 2591) in paragraph at lines 455--455
 []|\T1/cmr/bx/n/12 Creación de dia-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 454--454
+Underfull \hbox (badness 10000) in paragraph at lines 457--457
 []|\T1/cmr/bx/n/12 Conexión con
  []
 
 
-Overfull \hbox (27.44775pt too wide) in paragraph at lines 427--456
+Overfull \hbox (27.44775pt too wide) in paragraph at lines 430--460
  [][] 
  []
 
+LaTeX Info: Redefining \. on input line 476.
+LaTeX Info: Redefining \% on input line 476.
+[32
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-LaTeX Info: Redefining \. on input line 480.
-LaTeX Info: Redefining \% on input line 480.
-[31]
-LaTeX Info: Redefining \. on input line 504.
-LaTeX Info: Redefining \% on input line 504.
- [32])
+])
 LaTeX Info: Redefining \. on input line 309.
 LaTeX Info: Redefining \% on input line 309.
  [33] (./capitulos/04-Iteraciones.tex
@@ -1731,7 +1735,7 @@ LaTeX Info: Redefining \% on input line 204.
  [38]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 233.
-<./imagenes/PostMan-Test.png, id=573, 1644.89531pt x 746.03719pt>
+<./imagenes/PostMan-Test.png, id=574, 1644.89531pt x 746.03719pt>
 File: ./imagenes/PostMan-Test.png Graphic file (type png)
 <use ./imagenes/PostMan-Test.png>
 Package pdftex.def Info: ./imagenes/PostMan-Test.png  used on input line 241.
@@ -1743,12 +1747,12 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Info: Redefining \. on input line 247.
 LaTeX Info: Redefining \% on input line 247.
 [39]
-<./imagenes/PostMan-Resumen.png, id=602, 237.88875pt x 112.16907pt>
+<./imagenes/PostMan-Resumen.png, id=603, 237.88875pt x 112.16907pt>
 File: ./imagenes/PostMan-Resumen.png Graphic file (type png)
 <use ./imagenes/PostMan-Resumen.png>
 Package pdftex.def Info: ./imagenes/PostMan-Resumen.png  used on input line 251.
 (pdftex.def)             Requested size: 110.25443pt x 51.98691pt.
-<./imagenes/PostMan-CodsOK.png, id=603, 1414.53468pt x 261.97874pt>
+<./imagenes/PostMan-CodsOK.png, id=604, 1414.53468pt x 261.97874pt>
 File: ./imagenes/PostMan-CodsOK.png Graphic file (type png)
 <use ./imagenes/PostMan-CodsOK.png>
 Package pdftex.def Info: ./imagenes/PostMan-CodsOK.png  used on input line 258.
@@ -1805,12 +1809,12 @@ LaTeX Info: Redefining \. on input line 323.
 LaTeX Info: Redefining \% on input line 323.
  [48] (./anexos/A2-Anexo-ObtenerTockenDCD.tex
 Anexo 2.
-<./imagenes/interfaz-InicioSesionDCD-1.png, id=667, 1434.10782pt x 685.05937pt>
+<./imagenes/interfaz-InicioSesionDCD-1.png, id=668, 1434.10782pt x 685.05937pt>
 File: ./imagenes/interfaz-InicioSesionDCD-1.png Graphic file (type png)
 <use ./imagenes/interfaz-InicioSesionDCD-1.png>
 Package pdftex.def Info: ./imagenes/interfaz-InicioSesionDCD-1.png  used on input line 12.
 (pdftex.def)             Requested size: 298.75394pt x 142.7064pt.
-<./imagenes/interfaz-InicioSesionDCD-2.png, id=668, 1440.13031pt x 690.32906pt>
+<./imagenes/interfaz-InicioSesionDCD-2.png, id=669, 1440.13031pt x 690.32906pt>
 File: ./imagenes/interfaz-InicioSesionDCD-2.png Graphic file (type png)
 <use ./imagenes/interfaz-InicioSesionDCD-2.png>
 Package pdftex.def Info: ./imagenes/interfaz-InicioSesionDCD-2.png  used on input line 22.
@@ -1820,12 +1824,12 @@ File: ./imagenes/interfaz-DCD-1.png Graphic file (type png)
 <use ./imagenes/interfaz-DCD-1.png>
 Package pdftex.def Info: ./imagenes/interfaz-DCD-1.png  used on input line 34.
 (pdftex.def)             Requested size: 355.65944pt x 177.96907pt.
-<./imagenes/interfaz-DCD-3.png, id=678, 271.76532pt x 322.95656pt>
+<./imagenes/interfaz-DCD-3.png, id=679, 271.76532pt x 322.95656pt>
 File: ./imagenes/interfaz-DCD-3.png Graphic file (type png)
 <use ./imagenes/interfaz-DCD-3.png>
 Package pdftex.def Info: ./imagenes/interfaz-DCD-3.png  used on input line 46.
 (pdftex.def)             Requested size: 128.0374pt x 152.1592pt.
-<./imagenes/interfaz-DCD-tokens.png, id=679, 622.57594pt x 216.81pt>
+<./imagenes/interfaz-DCD-tokens.png, id=680, 622.57594pt x 216.81pt>
 File: ./imagenes/interfaz-DCD-tokens.png Graphic file (type png)
 <use ./imagenes/interfaz-DCD-tokens.png>
 Package pdftex.def Info: ./imagenes/interfaz-DCD-tokens.png  used on input line 54.
@@ -1855,24 +1859,24 @@ L3 programming layer <2024-01-22>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 9DF051EAD715C4684C5EBDE4AFDE6D99;7766.
+(rerunfilecheck)             Checksum: 40A1CDA3E2A22DF46420554B55676E27;7766.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39562 strings out of 474222
- 768453 string characters out of 5748733
+ 39563 strings out of 474222
+ 768477 string characters out of 5748733
  2032975 words of memory out of 5000000
- 60958 multiletter control sequences out of 15000+600000
+ 60959 multiletter control sequences out of 15000+600000
  581536 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,13n,87p,1186b,2345s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfxc1200.pfb>
-Output written on main.pdf (52 pages, 1709857 bytes).
+Output written on main.pdf (52 pages, 1710113 bytes).
 PDF statistics:
- 851 PDF objects out of 1000 (max. 8388607)
- 721 compressed objects within 8 object streams
+ 852 PDF objects out of 1000 (max. 8388607)
+ 722 compressed objects within 8 object streams
  243 named destinations out of 1000 (max. 500000)
  425 words of extra memory for PDF output out of 10000 (max. 10000000)
 
