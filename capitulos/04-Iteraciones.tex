@@ -97,17 +97,19 @@ orientada a documentos que destaca por su facilidad de integración con aplicaci
 \subsection{Desarrollo y despliegue}
 
 \subsubsection{Creación del contrato}
-El requisito RF01.01 exige disponer de un usuario exclusivo para las pruebas, por lo que es necesario crear un contrato dedicado. Tras una breve investigación se concluyó que no existía ningún método sencillo para crearlo de forma automática, de modo que se optó por hacerlo manualmente, ya que el coste de tiempo era menor y el proceso más directo. La creación del contrato se inició el 15 de febrero y se finalizó el 19 de febrero de 2026.
+El requisito RF01.01 exige un usuario exclusivo para las pruebas, por lo que es necesario crear un contrato dedicado. Tras una breve investigación se concluyó que no existía un método sencillo para crearlo de forma automática; se optó por hacerlo manualmente, ya que el coste de tiempo era menor y el proceso más directo. La creación del contrato se inició el 15 de febrero y finalizó el 19 de febrero de 2026.
 
-El método elegido combina el DCD de IONOS con comprobaciones periódicas en PostMan. Como paso previo hay que disponer de una cuenta de IONOS Cloud y darse de alta en el DCD; al tratarse de un proceso sencillo, no se detalla aquí. Si se desea más información, se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}.
+El método elegido combina el DCD de IONOS con comprobaciones periódicas en PostMan. Como paso previo hay que disponer de una cuenta de IONOS Cloud y darse de alta en el DCD; al tratarse de un proceso sencillo, no se detalla aquí ---si se desea más información, se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}---.
 
-Previamente a la creación del contrato, es necesario elaborar la lista de SKUs que se quieren detectar. Para ello se utilizó la documentación de IONOS Cloud~\cite{billing-IONOSCloud} y se creó el \hyperref[anexo:Lista-de-SKUs]{Anexo 1} con los SKUs preseleccionados, teniendo en cuenta los requisitos RF01.03 y RNF04, y cumpliendo el requisito RF01.02. Dicha lista se elaboró el 6 de febrero de 2026, respetando las fechas establecidas.
+Al añadir los \textit{items} de la lista al contrato se completa el requisito RF02.01 y sus dependencias. Una vez incorporados, estos recursos permanecen activos todos los meses, lo que satisface ---para los \textit{items} continuables--- el requisito RF02.03: sin modificaciones, el consumo mensual será predecible y estable.
+
+Previamente a la creación del contrato se elaboró la lista de SKUs a detectar, utilizando la documentación de IONOS Cloud~\cite{billing-IONOSCloud}. El resultado se recoge en el \hyperref[anexo:Lista-de-SKUs]{Anexo 1}, con los SKUs preseleccionados teniendo en cuenta los requisitos RF01.03 y RNF04, y cumpliendo el requisito RF01.02. Dicha lista se completó el 6 de febrero de 2026, respetando las fechas establecidas.
 
 \vspace{0.5cm}
 
-El primer problema encontrado fue vincular los recursos a sus SKUs, ya que la denominación de algunos de ellos no es intuitiva. Para resolverlo se recurrió a la API interna de IONOS Cloud~\cite{billing-IONOSCloud}.
+El primer problema encontrado fue vincular los recursos a sus SKUs, ya que la denominación de algunos no es intuitiva. Para resolverlo se recurrió a la API interna de IONOS Cloud~\cite{billing-IONOSCloud}.
 
-Para utilizar dicha API se necesitaba, además de la documentación, un token generado por el contrato ---la forma de obtenerlo es sencilla y no es objeto del proyecto; para más información se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}---. Una vez obtenido el token, resulta imprescindible crear un plan de uso y control de estos tokens, dado que constituyen información delicada.
+Para utilizar dicha API se necesitaba, además de la documentación, un token generado por el contrato ---la forma de obtenerlo es sencilla y no es objeto del proyecto; para más información véase el \hyperref[anexo:crear-cuenta-token]{Anexo 2}---. Una vez obtenido, resulta imprescindible crear un plan de uso y control de estos tokens, dado que constituyen información delicada.
 
 \subsubsection{Plan de gestión de tokens de autenticación}
 \label{iteraciones:gestion-tokens}
@@ -443,10 +445,10 @@ configuración definida en \texttt{package.json} e inicializa el servidor y los 
 \paragraph{Autenticación }
 Todas las peticiones requieren el header \texttt{Authorization: Bearer <token>}. Este token se
 transmite a la \texttt{billing-api} de IONOS para autenticar las operaciones y se gestiona como ya se explicó en
-\hyperref[iteraciones:gestion-tokens]{el plan de gestión de tokens de autenticación}.
+\hyperref[iteraciones:gestion-tokens]{el plan de gestión de tokens de autenticación} y garantizar el cumplimiento del requisito RNF03.
 
 \subsection{Implementación de función de Detección de items continuables}
-Teniendo ya la estructura del proyecto, el 
+Teniendo ya la estructura del proyecto, la función de detección de ítems continuables se implementa en el módulo \texttt{utilization}, que se encarga de verificar la presencia de los SKUs configurados en CouchDB. Esta función se basa en las llamadas a la API de facturación para obtener los datos de utilización y compararlos con la lista de SKUs monitorizados. Para lograr el requisito 
 
 
 
