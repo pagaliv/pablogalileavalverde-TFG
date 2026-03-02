@@ -50,14 +50,14 @@
 \contentsline {subsubsection}{Verificación de SKUs con PostMan}{\es@scroman {xxxvi}}{subsection.4.1.1}%
 \contentsline {paragraph}{Conceptos básicos de PostMan para la verificación de SKUs}{\es@scroman {xxxvii}}{subsection.4.1.1}%
 \contentsline {subsubsection}{Base de datos con CouchDB}{\es@scroman {xxxvii}}{subsection.4.1.1}%
-\contentsline {paragraph}{Características principales de CouchDB para el proyecto}{\es@scroman {xxxvii}}{subsection.4.1.1}%
+\contentsline {paragraph}{Características principales de CouchDB para el proyecto}{\es@scroman {xxxviii}}{subsection.4.1.1}%
 \contentsline {subsection}{\numberline {4.1.2}Desarrollo y despliegue}{\es@scroman {xxxviii}}{subsection.4.1.2}%
 \contentsline {subsubsection}{Creación del contrato}{\es@scroman {xxxviii}}{subsection.4.1.2}%
-\contentsline {subsubsection}{Plan de gestión de tokens de autenticación}{\es@scroman {xxxviii}}{subsection.4.1.2}%
+\contentsline {subsubsection}{Plan de gestión de tokens de autenticación}{\es@scroman {xxxix}}{subsection.4.1.2}%
 \contentsline {paragraph}{Justificación de la herramienta}{\es@scroman {xxxix}}{subsection.4.1.2}%
 \contentsline {paragraph}{Ciclo de vida de los tokens en IONOS Cloud}{\es@scroman {xxxix}}{subsection.4.1.2}%
-\contentsline {paragraph}{Procedimiento de gestión segura}{\es@scroman {xxxix}}{subsection.4.1.2}%
-\contentsline {subsubsection}{Uso del Token}{\es@scroman {xl}}{Item.63}%
+\contentsline {paragraph}{Procedimiento de gestión segura}{\es@scroman {xl}}{subsection.4.1.2}%
+\contentsline {subsubsection}{Uso del Token}{\es@scroman {xli}}{Item.63}%
 \contentsline {subsubsection}{Creación del script de verificación}{\es@scroman {xli}}{lstnumber.4.1.15}%
 \contentsline {paragraph}{Funcionamiento}{\es@scroman {xli}}{lstnumber.4.1.15}%
 \contentsline {paragraph}{Ventajas}{\es@scroman {xlii}}{figure.caption.25}%
@@ -69,23 +69,23 @@
 \contentsline {paragraph}{GitHub como repositorio espejo de respaldo}{\es@scroman {xliv}}{subsection.4.1.3}%
 \contentsline {paragraph}{Copia de seguridad en disco físico local}{\es@scroman {xliv}}{subsection.4.1.3}%
 \contentsline {subsubsection}{Configuración en CouchDB}{\es@scroman {xliv}}{subsection.4.1.3}%
-\contentsline {paragraph}{Estructura del documento de configuración}{\es@scroman {xliv}}{subsection.4.1.3}%
+\contentsline {paragraph}{Estructura del documento de configuración}{\es@scroman {xlv}}{subsection.4.1.3}%
 \contentsline {paragraph}{Configuración específica para verificación de SKUs}{\es@scroman {xlv}}{subsection.4.1.3}%
 \contentsline {subsubsection}{Estructura general del proyecto billing-reference-verifier}{\es@scroman {xlv}}{lstnumber.4.2.7}%
 \contentsline {paragraph}{Información general}{\es@scroman {xlv}}{lstnumber.4.2.7}%
-\contentsline {paragraph}{Arquitectura de directorios}{\es@scroman {xlv}}{lstnumber.4.2.7}%
+\contentsline {paragraph}{Arquitectura de directorios}{\es@scroman {xlvi}}{lstnumber.4.2.7}%
 \contentsline {paragraph}{Componentes principales}{\es@scroman {xlvi}}{lstnumber.4.2.7}%
 \contentsline {paragraph}{Punto de entrada (run.js)}{\es@scroman {xlvi}}{lstnumber.4.2.7}%
 \contentsline {paragraph}{Módulos funcionales}{\es@scroman {xlvi}}{lstnumber.4.2.7}%
 \contentsline {paragraph}{Helpers}{\es@scroman {xlvi}}{lstnumber.4.2.7}%
-\contentsline {paragraph}{Endpoints REST disponibles}{\es@scroman {xlvi}}{lstnumber.4.2.7}%
+\contentsline {paragraph}{Endpoints REST disponibles}{\es@scroman {xlvii}}{lstnumber.4.2.7}%
 \contentsline {paragraph}{Flujo de datos}{\es@scroman {xlvii}}{lstnumber.4.2.7}%
 \contentsline {paragraph}{Dependencias externas}{\es@scroman {xlvii}}{Item.76}%
 \contentsline {paragraph}{Patrones de diseño utilizados}{\es@scroman {xlvii}}{Item.76}%
-\contentsline {paragraph}{Autenticación }{\es@scroman {xlvii}}{Item.76}%
-\contentsline {subsection}{\numberline {4.1.4}Implementación de función de Detección de items continuables}{\es@scroman {xlvii}}{subsection.4.1.4}%
-\contentsline {chapter}{\numberline {1}Lista de SKUs}{\es@scroman {xlviii}}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {li}}{appendix.Alph2}%
-\contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {li}}{section.Alph2.1}%
-\contentsline {section}{\numberline {2.2}Obtener token}{\es@scroman {lii}}{section.Alph2.2}%
-\contentsline {chapter}{Bibliografía}{\es@scroman {liv}}{appendix*.31}%
+\contentsline {paragraph}{Autenticación }{\es@scroman {xlviii}}{Item.76}%
+\contentsline {subsection}{\numberline {4.1.4}Implementación de función de Detección de items continuables}{\es@scroman {xlviii}}{subsection.4.1.4}%
+\contentsline {chapter}{\numberline {1}Lista de SKUs}{\es@scroman {xlix}}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {lii}}{appendix.Alph2}%
+\contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {lii}}{section.Alph2.1}%
+\contentsline {section}{\numberline {2.2}Obtener token}{\es@scroman {liii}}{section.Alph2.2}%
+\contentsline {chapter}{Bibliografía}{\es@scroman {lv}}{appendix*.31}%
