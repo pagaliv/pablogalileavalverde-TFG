@@ -84,6 +84,7 @@
 \contentsline {paragraph}{Patrones de diseño utilizados}{\es@scroman {xlvii}}{Item.76}%
 \contentsline {paragraph}{Autenticación }{\es@scroman {xlviii}}{Item.76}%
 \contentsline {subsection}{\numberline {4.1.4}Implementación de función de Detección de items continuables}{\es@scroman {xlviii}}{subsection.4.1.4}%
+\contentsline {subsubsection}{Creación de endpoint y decisión de formato de URL}{\es@scroman {xlviii}}{subsection.4.1.4}%
 \contentsline {chapter}{\numberline {1}Lista de SKUs}{\es@scroman {xlix}}{appendix.Alph1}%
 \contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {lii}}{appendix.Alph2}%
 \contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {lii}}{section.Alph2.1}%
