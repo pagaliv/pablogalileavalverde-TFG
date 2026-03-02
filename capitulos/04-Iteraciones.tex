@@ -101,7 +101,7 @@ orientada a documentos que destaca por su facilidad de integración con aplicaci
 \subsubsection{Creación del contrato}
 Para crear el contrato se hace de manera manual, debido a que tras una breve investigación se concluyó que no había ningún método sencillo para crearlo de forma automática, por lo que se consideró hacerlo de forma manual ya que el coste de tiempo iba a ser menor y el proceso más sencillo.
 El método elegido fue usar de manera combinada el DCD de IONOS con comprobaciones periódicas en PostMan. Para crear el contrato hay que tener primero una cuenta de IONOS Cloud y darse de alta en el DCD; debido a que este proceso se considera sencillo, no se desarrolla más. Si se quiere obtener más información,
-se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}.
+se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}. Además hay qye hacer la lista de SKUs que se quieren detectar, para lo que se ha usado la documentación de IONOS Cloud~\cite{billing-IONOSCloud} y se ha creado el \hyperref[anexo:Lista-de-SKUs]{Anexo 1} con los SKUs preseleccionados, dicha tarea se realizó el 6 de febrero de 2026, cumpliendo así con las fechas establecidas.
 
 \vspace{0.8cm}
 
@@ -114,7 +114,7 @@ dicho token, hay que crear un plan de uso y control de dichos tokens, debido a q
 Para garantizar la seguridad en el acceso a la API de IONOS Cloud, se establece un plan de gestión de tokens de autenticación utilizando \textbf{KeePassXC} como gestor de contraseñas especializado.
 
 \paragraph{Justificación de la herramienta}
-\vspace{0.25cm}
+\vspace{0.25cm} 
 KeePassXC es un gestor de contraseñas de código abierto, auditado de forma independiente, que proporciona cifrado robusto (AES-256, Twofish o ChaCha20) para la información almacenada \cite{keepassxc-audit}. Entre sus características más relevantes para este proyecto destacan:
 \begin{itemize}
     \item Capacidad de generar contraseñas y tokens seguros.

@@ -85,8 +85,8 @@
       \list{organization}{1}{%
         {KeePassXC Team}%
       }
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labeltitlesource}{title}
       \field{note}{Auditoría de seguridad realizada por Zaur Molotnikov}
       \field{title}{KeePassXC Audit Report}
@@ -102,8 +102,8 @@
       \list{organization}{1}{%
         {KeePassXC Team}%
       }
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labeltitlesource}{title}
       \field{title}{KeePassXC - Features}
       \field{year}{2025}
@@ -118,8 +118,8 @@
       \list{organization}{1}{%
         {IONOS Cloud Documentation}%
       }
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labeltitlesource}{title}
       \field{title}{Manage Authentication Tokens}
       \field{year}{2025}
