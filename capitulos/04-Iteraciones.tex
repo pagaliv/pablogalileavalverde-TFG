@@ -13,9 +13,7 @@ en el resto de iteraciones --- y la creación del contrato.
 
 \vspace{0.8cm}
 
-Uno de los objetivos fundamentales de este proyecto es la creación de la base del proyecto y establecer las tecnologías fundamentales para iniciarlo. Con esto se engloba tanto el lenguaje que se usará
-como la decisión del método de persistencia del código. En este caso ambas decisiones son heredadas, se usa \textit{JavaScript} porque es donde están desarrolladas las librerías internas del equipo de Billing
-de IONOS Cloud y para persistir se guardará en GitLab de manera habitual y, además, por seguridad se guardará periódicamente tanto en GitHub como en un disco duro físico, como se explicó en la sección \hyperref[sec:plan-contingencias]{Plan de contingencias y riesgos}.
+Uno de los objetivos fundamentales de esta iteración es sentar las bases del proyecto y definir las tecnologías que se emplearán. Esto abarca tanto el lenguaje de programación como el sistema de control de versiones. En este caso, ambas decisiones son heredadas: se usa \textit{JavaScript} porque es el lenguaje en el que están desarrolladas las librerías internas del equipo de Billing de IONOS Cloud, y para el versionado se utiliza GitLab de manera habitual. Además, por seguridad, el código se respalda periódicamente tanto en GitHub como en un disco duro físico, como se explicó en la sección \hyperref[sec:plan-contingencias]{Plan de contingencias y riesgos}.
 
 
 \vspace{0.8cm}
@@ -83,11 +81,11 @@ orientada a documentos que destaca por su facilidad de integración con aplicaci
           facilita su manipulación desde aplicaciones JavaScript como la que estamos desarrollando.
 
     \item \textbf{API RESTful nativa:} CouchDB expone una API HTTP que permite realizar operaciones
-          CRUD mediante peticiones estándar (GET, POST, PUT, DELETE), simplificando la comunicación con
-          el backend, simplificando la integración con nuestro proyecto.
+          CRUD mediante peticiones estándar (GET, POST, PUT, DELETE), lo que simplifica tanto la comunicación con
+          el backend como la integración con nuestro proyecto.
 
     \item \textbf{Replicación maestro-maestro:} Soporta sincronización bidireccional entre múltiples
-          instancias, lo que facilita la distribución de datos y la tolerancia a fallos. Siendo esto importante para cumplir con el requisito RNF01.
+          instancias, lo que facilita la distribución de datos y la tolerancia a fallos, aspecto relevante para cumplir el requisito RNF01.
 
     \item \textbf{MVCC (Multiversion Concurrency Control):} Utiliza control de concurrencia mediante
           versiones, evitando bloqueos en lecturas y escrituras simultáneas, ayudando a cumplir el requisito RNF01.
@@ -113,7 +111,7 @@ Para utilizar dicha API se necesitaba, además de la documentación, un token ge
 
 \subsubsection{Plan de gestión de tokens de autenticación}
 \label{iteraciones:gestion-tokens}
-Para garantizar la seguridad en el acceso a la API de IONOS Cloud, se establece un plan de gestión de tokens de autenticación utilizando \textbf{KeePassXC} como gestor de contraseñas especializado. Cumpliendo así el requisito RNF03.
+Para garantizar la seguridad en el acceso a la API de IONOS Cloud, se establece un plan de gestión de tokens de autenticación utilizando \textbf{KeePassXC} como gestor de contraseñas especializado, cumpliendo así el requisito RNF03.
 
 \paragraph{Justificación de la herramienta}
 \vspace{0.25cm} 
@@ -184,11 +182,9 @@ Los tokens de autenticación en IONOS Cloud presentan las siguientes caracterís
 
 \subsubsection{Uso del Token}
 
-Teniendo ya clara la gestión de los tokens, se puede usar para la API. En concreto,
-en este contexto \textit{"https://api.ionos.com/billing/{contract}/products"}\cite{billing-IONOSCloud}, sirviendo esta llamada para obtener la información de los productos que hay en el contrato.
-De este modo se puede comprobar cada elemento que se quiera encontrar.
+Una vez definida la gestión de los tokens, estos se pueden utilizar para realizar llamadas a la API de facturación. En concreto, se emplea el endpoint \textit{"https://api.ionos.com/billing/\{contract\}/products"}~\cite{billing-IONOSCloud}, que devuelve la información de los productos asociados al contrato. De este modo es posible verificar la presencia de cada recurso deseado.
 
-Para el uso de llamadas a APIs se usa PostMan.
+Para ejecutar estas llamadas se utiliza PostMan.
 Como primer SKU a detectar se opta por A01000 (IP estática). Para ello se añade una IP estática de forma manual en el DCD y, tras pasar el periodo que tarda en actualizarse
 la base de datos de la API, se hace una llamada y debe aparecer. En este caso debe salir algo similar a:
 
@@ -266,10 +262,9 @@ Automatiza la verificación, proporciona trazabilidad, se integra en PostMan y e
 \subsubsection{Configuración de Entornos}
 Al ser la primera iteración se deben configurar los entornos que se van a usar.
 Esto consiste en la creación del proyecto, su vinculación a GitLab y GitHub,
-el plan de copias de seguridad en físico y la configuración inicial en CouchDB. Siendo estas tareas indispensables para cumplir tanto el requisito RF02.02,RF04.03 y RF05.01.  
+el plan de copias de seguridad en físico y la configuración inicial en CouchDB. Estas tareas son indispensables para cumplir los requisitos RNF10, RF02.02, RF04.03 y RF05.01.  
 \subsubsection{Despliegue del proyecto y vinculación a GitLab}
-El proyecto se crea directamente desde GitLab ---cumpliendo así el requisito RNFO8--- debido a que se quiere integrar en un grupo de trabajo, concretamente en el equipo de \textit{Cloud Billing} y \textit{ERP} de IONOS Cloud, para que de ese modo, tras la finalización del proyecto, todo el equipo pueda seguir con su mantenimiento. Debido a esto, se sigue además la
-estructura de proyectos propia de este equipo. La única peculiaridad fue el uso de la VPN debido a que el GitLab que se usa es el del equipo, siendo estos alemanes.
+El proyecto se crea directamente desde GitLab ---cumpliendo así el requisito RNF08--- porque se desea integrarlo en el grupo de trabajo del equipo de \textit{Cloud Billing} y \textit{ERP} de IONOS Cloud, de modo que, tras la finalización del proyecto, todo el equipo pueda continuar con su mantenimiento. Por este motivo se sigue, además, la estructura de proyectos propia del equipo. La única peculiaridad fue la necesidad de usar la VPN, ya que el GitLab empleado es el corporativo del equipo, alojado en Alemania.
 
 \subsubsection{Estrategia de copias de seguridad del código fuente usando GitHub y disco físico}
 Para garantizar la integridad y disponibilidad del código fuente desarrollado en este proyecto,
@@ -327,7 +322,7 @@ El documento almacenado en CouchDB contiene la lógica y parámetros necesarios 
 
 \begin{itemize}
     \item \textbf{Identificador:} \texttt{billing-reference-verifier} - Documento raíz que centraliza
-          toda la configuración del verificador.
+          toda la configuración del verificador. Este nombre coincide con el del proyecto, estandarizado por el grupo de trabajo, lo que cumple parcialmente el requisito RNF09.
 
     \item \textbf{Programación de tareas (scheduler):} Define ejecuciones automáticas periódicas; sobre esto se desarrollará en mayor profundidad cuando se hable de ello en concreto.
 
@@ -349,8 +344,7 @@ El módulo \texttt{utilization} contiene la lista de SKUs a monitorizar, siguien
 
 El proyecto \texttt{billing-reference-verifier} es una API REST interna desarrollada para IONOS
 cuyo propósito principal es verificar la utilización de recursos y validar facturas asociadas a
-contratos de facturación. Por lo que, antes de centrarnos en conceptos técnicos, se explicará la estructura general actual del proyecto,
-centrándose en estructura y tecnologías.
+contratos de facturación. Antes de abordar los detalles técnicos, se describe a continuación la estructura general del proyecto y las tecnologías que lo componen. Cumpliendo asi el requisito RNF09.
 
 \paragraph{Información general}
 \begin{itemize}
