@@ -99,19 +99,21 @@ orientada a documentos que destaca por su facilidad de integración con aplicaci
 \subsection{Desarrollo y despliegue}
 
 \subsubsection{Creación del contrato}
-Para crear el contrato se hace de manera manual, debido a que tras una breve investigación se concluyó que no había ningún método sencillo para crearlo de forma automática, por lo que se consideró hacerlo de forma manual ya que el coste de tiempo iba a ser menor y el proceso más sencillo.
-El método elegido fue usar de manera combinada el DCD de IONOS con comprobaciones periódicas en PostMan. Para crear el contrato hay que tener primero una cuenta de IONOS Cloud y darse de alta en el DCD; debido a que este proceso se considera sencillo, no se desarrolla más. Si se quiere obtener más información,
-se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}. Además hay qye hacer la lista de SKUs que se quieren detectar, para lo que se ha usado la documentación de IONOS Cloud~\cite{billing-IONOSCloud} y se ha creado el \hyperref[anexo:Lista-de-SKUs]{Anexo 1} con los SKUs preseleccionados, dicha tarea se realizó el 6 de febrero de 2026, cumpliendo así con las fechas establecidas.
+El requisito RF01.01 exige disponer de un usuario exclusivo para las pruebas, por lo que es necesario crear un contrato dedicado. Tras una breve investigación se concluyó que no existía ningún método sencillo para crearlo de forma automática, de modo que se optó por hacerlo manualmente, ya que el coste de tiempo era menor y el proceso más directo. La creación del contrato se inició el 15 de febrero y se finalizó el 19 de febrero de 2026.
 
-\vspace{0.8cm}
+El método elegido combina el DCD de IONOS con comprobaciones periódicas en PostMan. Como paso previo hay que disponer de una cuenta de IONOS Cloud y darse de alta en el DCD; al tratarse de un proceso sencillo, no se detalla aquí. Si se desea más información, se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}.
 
-El primer problema encontrado fue lograr vincular los recursos a sus SKUs, ya que el nombre de algunos SKUs no es intuitivo; para ello se empezó a usar la API interna de IONOS Cloud \cite{billing-IONOSCloud}.
-Además, para usarla se necesitaba, aparte de la documentación, un token generado por el contrato ---la forma de obtenerlo es sencilla y no es el objeto del proyecto; para más información se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}---. Una vez se sabe cómo obtener
-dicho token, hay que crear un plan de uso y control de dichos tokens, debido a que son información delicada.
+Previamente a la creación del contrato, es necesario elaborar la lista de SKUs que se quieren detectar. Para ello se utilizó la documentación de IONOS Cloud~\cite{billing-IONOSCloud} y se creó el \hyperref[anexo:Lista-de-SKUs]{Anexo 1} con los SKUs preseleccionados, teniendo en cuenta los requisitos RF01.03 y RNF04, y cumpliendo el requisito RF01.02. Dicha lista se elaboró el 6 de febrero de 2026, respetando las fechas establecidas.
+
+\vspace{0.5cm}
+
+El primer problema encontrado fue vincular los recursos a sus SKUs, ya que la denominación de algunos de ellos no es intuitiva. Para resolverlo se recurrió a la API interna de IONOS Cloud~\cite{billing-IONOSCloud}.
+
+Para utilizar dicha API se necesitaba, además de la documentación, un token generado por el contrato ---la forma de obtenerlo es sencilla y no es objeto del proyecto; para más información se puede consultar el \hyperref[anexo:crear-cuenta-token]{Anexo 2}---. Una vez obtenido el token, resulta imprescindible crear un plan de uso y control de estos tokens, dado que constituyen información delicada.
 
 \subsubsection{Plan de gestión de tokens de autenticación}
 \label{iteraciones:gestion-tokens}
-Para garantizar la seguridad en el acceso a la API de IONOS Cloud, se establece un plan de gestión de tokens de autenticación utilizando \textbf{KeePassXC} como gestor de contraseñas especializado.
+Para garantizar la seguridad en el acceso a la API de IONOS Cloud, se establece un plan de gestión de tokens de autenticación utilizando \textbf{KeePassXC} como gestor de contraseñas especializado. Cumpliendo así el requisito RNF03.
 
 \paragraph{Justificación de la herramienta}
 \vspace{0.25cm} 
@@ -208,9 +210,7 @@ la base de datos de la API, se hace una llamada y debe aparecer. En este caso de
 }
 \end{lstlisting}
 
-Este proceso hecho de forma manual junto a añadir de manera manual los productos puede ser una tarea proclive a errores, debido a ser una tarea repetitiva,
-por lo que se opta por una solución sencilla y útil para el futuro: debido a que PostMan permite el uso de scripts, se puede crear uno pequeño que compruebe si
-están los SKUs deseados.
+Realizar este proceso de forma manual ---tanto la verificación como la incorporación de productos--- resulta propenso a errores por su naturaleza repetitiva. Por ello, se opta por una solución más fiable y reutilizable: aprovechar la capacidad de PostMan para ejecutar scripts y crear uno que compruebe automáticamente si están presentes los SKUs deseados.
 
 \subsubsection{Creación del script de verificación}
 
@@ -239,7 +239,7 @@ Object.keys(requiredResources).forEach(category => {
               \caption{Prueba Test}
               \label{fig:edt}
           \end{figure}
-    \item Detecta patrones especiales: VMs CUBE (contienen "CUBES") y licencias Windows (empiezan por "WL").
+    \item Detecta patrones especiales: VMs CUBE (contienen ``CUBES'') y licencias Windows (empiezan por ``WL'').
     \item Almacena los resultados en variables de entorno de PostMan.
     \item Genera un reporte en consola con el estado de cada categoría.
     \item Calcula estadísticas globales: total disponibles vs total requeridos.
@@ -266,9 +266,9 @@ Automatiza la verificación, proporciona trazabilidad, se integra en PostMan y e
 \subsubsection{Configuración de Entornos}
 Al ser la primera iteración se deben configurar los entornos que se van a usar.
 Esto consiste en la creación del proyecto, su vinculación a GitLab y GitHub,
-el plan de copias de seguridad en físico y la configuración inicial en CouchDB.
+el plan de copias de seguridad en físico y la configuración inicial en CouchDB. Siendo estas tareas indispensables para cumplir tanto el requisito RF02.02,RF04.03 y RF05.01.  
 \subsubsection{Despliegue del proyecto y vinculación a GitLab}
-El proyecto se crea directamente desde GitLab debido a que se quiere integrar en un grupo de trabajo, concretamente en el equipo de \textit{Cloud Billing} y \textit{ERP} de IONOS Cloud, para que de ese modo, tras la finalización del proyecto, todo el equipo pueda seguir con su mantenimiento. Debido a esto, se sigue además la
+El proyecto se crea directamente desde GitLab ---cumpliendo así el requisito RNFO8--- debido a que se quiere integrar en un grupo de trabajo, concretamente en el equipo de \textit{Cloud Billing} y \textit{ERP} de IONOS Cloud, para que de ese modo, tras la finalización del proyecto, todo el equipo pueda seguir con su mantenimiento. Debido a esto, se sigue además la
 estructura de proyectos propia de este equipo. La única peculiaridad fue el uso de la VPN debido a que el GitLab que se usa es el del equipo, siendo estos alemanes.
 
 \subsubsection{Estrategia de copias de seguridad del código fuente usando GitHub y disco físico}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.2.12)  2 MAR 2026 10:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.2.12)  2 MAR 2026 12:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1263,7 +1263,7 @@ Overfull \hbox (3.09366pt too wide) detected at line 11
  []
 
 
-Overfull \hbox (3.09366pt too wide) detected at line 12
+Overfull \hbox (7.08296pt too wide) detected at line 12
  [][]
  []
 
@@ -1409,23 +1409,23 @@ Overfull \hbox (3.28029pt too wide) in paragraph at lines 100--101
  []
 
 
-Overfull \hbox (13.97435pt too wide) in paragraph at lines 158--158
+Overfull \hbox (13.97435pt too wide) in paragraph at lines 160--160
 []|\T1/cmr/m/n/12 RF02.01.01| 
  []
 
 
-Overfull \hbox (13.97435pt too wide) in paragraph at lines 160--160
+Overfull \hbox (13.97435pt too wide) in paragraph at lines 162--162
 []|\T1/cmr/m/n/12 RF02.01.02| 
  []
 
-LaTeX Info: Redefining \. on input line 195.
-LaTeX Info: Redefining \% on input line 195.
+LaTeX Info: Redefining \. on input line 197.
+LaTeX Info: Redefining \% on input line 197.
 [18]
-LaTeX Info: Redefining \. on input line 195.
-LaTeX Info: Redefining \% on input line 195.
+LaTeX Info: Redefining \. on input line 197.
+LaTeX Info: Redefining \% on input line 197.
  [19]
-LaTeX Info: Redefining \. on input line 195.
-LaTeX Info: Redefining \% on input line 195.
+LaTeX Info: Redefining \. on input line 197.
+LaTeX Info: Redefining \% on input line 197.
  [20])
 LaTeX Info: Redefining \. on input line 304.
 LaTeX Info: Redefining \% on input line 304.
@@ -1746,26 +1746,26 @@ Cap\'{\i }tulo 4.
 LaTeX Info: Redefining \. on input line 88.
 LaTeX Info: Redefining \% on input line 88.
  [37]
-LaTeX Info: Redefining \. on input line 120.
-LaTeX Info: Redefining \% on input line 120.
+LaTeX Info: Redefining \. on input line 118.
+LaTeX Info: Redefining \% on input line 118.
  [38]
-LaTeX Info: Redefining \. on input line 155.
-LaTeX Info: Redefining \% on input line 155.
+LaTeX Info: Redefining \. on input line 154.
+LaTeX Info: Redefining \% on input line 154.
  [39]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 193.
-LaTeX Info: Redefining \. on input line 197.
-LaTeX Info: Redefining \% on input line 197.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 195.
+LaTeX Info: Redefining \. on input line 199.
+LaTeX Info: Redefining \% on input line 199.
  [40]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 230.
-<./imagenes/PostMan-Test.png, id=584, 1644.89531pt x 746.03719pt>
+LaTeX Info: Redefining \. on input line 234.
+LaTeX Info: Redefining \% on input line 234.
+ [41]
+<./imagenes/PostMan-Test.png, id=618, 1644.89531pt x 746.03719pt>
 File: ./imagenes/PostMan-Test.png Graphic file (type png)
 <use ./imagenes/PostMan-Test.png>
 Package pdftex.def Info: ./imagenes/PostMan-Test.png  used on input line 238.
 (pdftex.def)             Requested size: 441.01773pt x 200.02116pt.
-LaTeX Info: Redefining \. on input line 242.
-LaTeX Info: Redefining \% on input line 242.
- [41]
 <./imagenes/PostMan-Resumen.png, id=619, 237.88875pt x 112.16907pt>
 File: ./imagenes/PostMan-Resumen.png Graphic file (type png)
 <use ./imagenes/PostMan-Resumen.png>
@@ -1776,22 +1776,31 @@ File: ./imagenes/PostMan-CodsOK.png Graphic file (type png)
 <use ./imagenes/PostMan-CodsOK.png>
 Package pdftex.def Info: ./imagenes/PostMan-CodsOK.png  used on input line 255.
 (pdftex.def)             Requested size: 308.71106pt x 57.17178pt.
-LaTeX Info: Redefining \. on input line 264.
-LaTeX Info: Redefining \% on input line 264.
- [42 <./imagenes/PostMan-Test.png> <./imagenes/PostMan-Resumen.png> <./imagenes/PostMan-CodsOK.png>]
-LaTeX Info: Redefining \. on input line 296.
-LaTeX Info: Redefining \% on input line 296.
- [43]
-LaTeX Info: Redefining \. on input line 339.
-LaTeX Info: Redefining \% on input line 339.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+LaTeX Info: Redefining \. on input line 270.
+LaTeX Info: Redefining \% on input line 270.
+[42 <./imagenes/PostMan-Test.png> <./imagenes/PostMan-Resumen.png>]
+Overfull \hbox (10.2748pt too wide) in paragraph at lines 271--273
+[]\T1/cmr/m/n/12 El pro-yec-to se crea di-rec-ta-men-te des-de GitLab ---cumpliendo así el re-qui-si-to RNFO8---
+ []
+
+LaTeX Info: Redefining \. on input line 292.
+LaTeX Info: Redefining \% on input line 292.
+[43 <./imagenes/PostMan-CodsOK.png>]
+LaTeX Info: Redefining \. on input line 333.
+LaTeX Info: Redefining \% on input line 333.
  [44]
+LaTeX Info: Redefining \. on input line 375.
+LaTeX Info: Redefining \% on input line 375.
+ [45]
 Overfull \hbox (9.64722pt too wide) in paragraph at lines 379--379
 []\T1/cmtt/m/n/12 |   |   |-- invoice.js              # Helper para operaciones de facturas[] 
  []
 
-LaTeX Info: Redefining \. on input line 380.
-LaTeX Info: Redefining \% on input line 380.
-[45]
+
 Overfull \hbox (15.82071pt too wide) in paragraph at lines 382--382
 []\T1/cmtt/m/n/12 |   +-- modules/                    # Modulos funcionales de la aplicacion[] 
  []
@@ -1816,8 +1825,8 @@ Overfull \hbox (8.9668pt too wide) in paragraph at lines 416--417
 []\T1/cmtt/m/n/12 GET /data/v1/utilization/check/:contractId \T1/cmr/m/n/12 --- Ve-ri-fi-ca la pre-sen-cia de ítems
  []
 
-LaTeX Info: Redefining \. on input line 427.
-LaTeX Info: Redefining \% on input line 427.
+LaTeX Info: Redefining \. on input line 426.
+LaTeX Info: Redefining \% on input line 426.
 [46])
 LaTeX Info: Redefining \. on input line 321.
 LaTeX Info: Redefining \% on input line 321.
@@ -1884,15 +1893,15 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39570 strings out of 474222
- 768576 string characters out of 5748733
+ 39568 strings out of 474222
+ 768546 string characters out of 5748733
  2044975 words of memory out of 5000000
- 60963 multiletter control sequences out of 15000+600000
+ 60961 multiletter control sequences out of 15000+600000
  581536 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,13n,87p,1186b,2345s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfxc1200.pfb>
-Output written on main.pdf (54 pages, 1713321 bytes).
+Output written on main.pdf (54 pages, 1713683 bytes).
 PDF statistics:
  869 PDF objects out of 1000 (max. 8388607)
  737 compressed objects within 8 object streams
