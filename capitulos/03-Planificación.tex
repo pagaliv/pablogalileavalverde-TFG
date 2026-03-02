@@ -47,11 +47,11 @@ En este apartado se describirán los diferentes módulos del EDT relacionandolos
               \item \textbf{Iteración 1:} Siendo esta la primera iteración, es en la que se crea la base en la que se basarán el resto de iteraciones, por lo que se deben tomar sus decisiones teniendo en cuenta que podrían afectar al resto del proceso. En esta primera iteración se detectarán los elementos que forman un contrato.
                     \setcounter{enumiii}{0} % Reiniciar contador del tercer nivel si es necesario
                     \begin{enumerate}
-                        \item \textbf{Detección de items continuables:} La funcionalidad añadida en esta primera iteración se basa en lograr detectar qué SKUs forman parte de la lista creada. Como el contrato será creado por nosotros, se añadirán todos los SKUs, así que todos deberán estar; todo el que falte será un falso positivo.
+                        \item \textbf{Detección de items continuables:} La funcionalidad añadida en esta primera iteración se basa en lograr detectar qué SKUs forman parte de la lista creada. Como el contrato será creado por nosotros, se añadirán todos los SKUs, así que todos deberán estar; todo el que falte será un falso positivo. Dando el primer paso para cumplir el requisto RF04.02.
                         \item \textbf{Creación de contrato completo:} De manera manual se crea un contrato con todos los SKUs de la lista. Cumpliendo asi el requisito RF01.01, RF02.01,RF02.01.01,RF02.01.02 y RF02.03.
                         \item \textbf{Configuración de Credenciales:} Esto se hace en todas las iteraciones, por lo que no se explicará en el resto, solo en esta. Se basa en la configuración concreta de CouchDB para el correcto funcionamiento. Cumpliendo así el requisito RF02.02.
-                        \item \textbf{Testeo de funcionamiento: } Al igual que el anterior, este paso se hace en todas las iteraciones, por lo que solo se explicará en esta. En este apartado se crean las comprobaciones del correcto funcionamiento de esta y de las anteriores iteraciones.
-                        \item \textbf{Configuración de alertas y rutinas: } Este apartado tiene la misma peculiaridad que los otros dos anteriores, por lo que se explicará solo en esta ocasión y se basa en crear las alertas que se enviarán en caso de fallo dependiendo de la información que ya se disponga, en este caso los SKUs que faltan y también crear el disparador para que se ejecute en cierto momento.
+                        \item \textbf{Testeo de funcionamiento: } Al igual que el anterior, este paso se hace en todas las iteraciones, por lo que solo se explicará en esta. En este apartado se crean las comprobaciones del correcto funcionamiento de esta y de las anteriores iteraciones. sIENDO CLAVE PARA CUMPLIR EL REQUISITO RNF01. 
+                        \item \textbf{Configuración de alertas y rutinas: } Este apartado tiene la misma peculiaridad que los otros dos anteriores, por lo que se explicará solo en esta ocasión y se basa en crear las alertas que se enviarán en caso de fallo dependiendo de la información que ya se disponga, en este caso los SKUs que faltan y también crear el disparador para que se ejecute en cierto momento. Cumpliendo de este modo el requisito RF04.01 y RF05.02.
 
                     \end{enumerate}
 
@@ -75,7 +75,7 @@ En este apartado se describirán los diferentes módulos del EDT relacionandolos
                     \setcounter{enumiii}{0} % Reiniciar contador del tercer nivel si es necesario
                     \begin{enumerate}
                         \item \textbf{Comprobación de endpoint /usage items no continuables: } Se comprueba el gasto de items no continuables por medio de su SKU.
-                        \item \textbf{Creación de gasto de tokens automático:} Se estudia cómo lograr un gasto lo más constante posible de tokens.
+                        \item \textbf{Creación de gasto de tokens automático:} Se estudia cómo lograr un gasto lo más constante posible de tokens. Teniendo en cuenta así el requisito  RF03.01,  RF03.02 y  RF03.04. Cuya realización también esta relacionada con el requisito  RF03.03. 
                     \end{enumerate}
 
 
