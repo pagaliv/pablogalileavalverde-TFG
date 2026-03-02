@@ -6,7 +6,7 @@
 \section{Primera Iteración}
 \subsection{Planificación}
 Siendo esta la primera iteración, es en la que más se desarrolla para que en las siguientes iteraciones todo resulte más sencillo.
-Esta iteración se basa en 4 puntos: La creación de la función para detectar los \textit{items} continuables;
+Esta iteración se basa en 4 puntos: la creación de la función para detectar los \textit{items} continuables;
 las configuraciones iniciales en CouchDB; la creación de las primeras alarmas --- después de crearlas, solo habrá que modificar su contenido
 en el resto de iteraciones --- y la creación del contrato.
 
@@ -76,24 +76,21 @@ clave de PostMan:
 Para las configuraciones, exceptuando los tokens y las claves, hemos optado por utilizar \textbf{CouchDB}\Cite{CouchDB-Info}, una base de datos NoSQL
 orientada a documentos que destaca por su facilidad de integración con aplicaciones web.
 
-\paragraph{Características principales de CouchDB}
+\paragraph{Características principales de CouchDB para el proyecto}
 
 \begin{itemize}
     \item \textbf{Almacenamiento basado en JSON:} Los datos se guardan como documentos JSON, lo que
-          facilita su manipulación desde aplicaciones JavaScript.
+          facilita su manipulación desde aplicaciones JavaScript como la que estamos desarrollando.
 
     \item \textbf{API RESTful nativa:} CouchDB expone una API HTTP que permite realizar operaciones
           CRUD mediante peticiones estándar (GET, POST, PUT, DELETE), simplificando la comunicación con
-          el backend.
-
-    \item \textbf{MapReduce para consultas:} Implementa vistas mediante funciones MapReduce,
-          permitiendo crear índices y consultas personalizadas sobre los documentos almacenados.
+          el backend, simplificando la integración con nuestro proyecto.
 
     \item \textbf{Replicación maestro-maestro:} Soporta sincronización bidireccional entre múltiples
-          instancias, lo que facilita la distribución de datos y la tolerancia a fallos.
+          instancias, lo que facilita la distribución de datos y la tolerancia a fallos. Siendo esto importante para cumplir con el requisito RNF01.
 
     \item \textbf{MVCC (Multiversion Concurrency Control):} Utiliza control de concurrencia mediante
-          versiones, evitando bloqueos en lecturas y escrituras simultáneas.
+          versiones, evitando bloqueos en lecturas y escrituras simultáneas, ayudando a cumplir el requisito RNF01.
 \end{itemize}
 
 
@@ -131,7 +128,7 @@ KeePassXC es un gestor de contraseñas de código abierto, auditado de forma ind
 \vspace{0.25cm}
 Los tokens de autenticación en IONOS Cloud presentan las siguientes características \cite{ionos-token-management}:
 \begin{itemize}
-    \item Se generan a través del \textit{ Authentication Token Manager} en el DCD.
+    \item Se generan a través del \textit{Authentication Token Manager} en el DCD.
     \item Cada token tiene un TTL (\textit{Time To Live}) configurable entre 1 hora y 365 días.
     \item El valor del token solo se muestra una única vez durante su generación.
     \item Es posible descargar el token como archivo de texto en el momento de creación.
@@ -263,16 +260,15 @@ Object.keys(requiredResources).forEach(category => {
 
 \paragraph{Ventajas}
 
-Automatiza la verificación, proporciona trazabilidad, se integra en PostMan y es fácilmente mantenible. Además esta estructura es migrable al proyecto, permitiendo tener una parte ya hecha.
+Automatiza la verificación, proporciona trazabilidad, se integra en PostMan y es fácilmente mantenible. Además, esta estructura es migrable al proyecto, permitiendo tener una parte ya hecha.
 
 \subsection{Integración del código}
 \subsubsection{Configuración de Entornos}
 Al ser la primera iteración se deben configurar los entornos que se van a usar.
-Esto consiste en la creación del proyecto, su vinculación a Gitlab y Github,
-el plan de copias de seguridad en físico y la configuración inicial en CouchBD.
+Esto consiste en la creación del proyecto, su vinculación a GitLab y GitHub,
+el plan de copias de seguridad en físico y la configuración inicial en CouchDB.
 \subsubsection{Despliegue del proyecto y vinculación a GitLab}
-El proyecto se crea directamente desde GitLab debido a que se quiere integrar en un grupo de trabajo, en concreto en el equipo de \textit{Cloud Billing} y \textit{ERP
-} de IONOS Cloud, para que de ese modo, tras la finalización del proyecto, todo el equipo pueda seguir con su mantenimiento. Debido a esto, se sigue además la
+El proyecto se crea directamente desde GitLab debido a que se quiere integrar en un grupo de trabajo, concretamente en el equipo de \textit{Cloud Billing} y \textit{ERP} de IONOS Cloud, para que de ese modo, tras la finalización del proyecto, todo el equipo pueda seguir con su mantenimiento. Debido a esto, se sigue además la
 estructura de proyectos propia de este equipo. La única peculiaridad fue el uso de la VPN debido a que el GitLab que se usa es el del equipo, siendo estos alemanes.
 
 \subsubsection{Estrategia de copias de seguridad del código fuente usando GitHub y disco físico}
@@ -299,12 +295,12 @@ secundario para proporcionar una capa adicional de redundancia. Esta decisión s
           proveedores, una caída o problema en GitLab no compromete el acceso al código.
 
     \item \textbf{Redundancia geográfica:} Los datos se replican en centros de datos de diferentes
-          ubicaciones, protegiendo frente a desastres regionales. Previniendo uno de los posibles riesgos estudiados en el plan de riesgos.
+          ubicaciones, protegiendo frente a desastres regionales. Esto previene uno de los posibles riesgos estudiados en el plan de riesgos.
 \end{itemize}
 
 \paragraph{Copia de seguridad en disco físico local}
 Complementando las copias en la nube, se realiza una copia de seguridad periódica en un disco físico
-externo siguiendo estos principios:
+externo siguiendo estos principios: 
 
 \begin{itemize}
     \item \textbf{Frecuencia de respaldo:} Copia completa del repositorio cada 15 días y copia
@@ -318,9 +314,9 @@ externo siguiendo estos principios:
 \end{itemize}
 
 \subsubsection{Configuración en CouchDB}
-Debido a que se está integrado en el grupo de trabajo de \textit{Cloud Billing} y \textit{ERP}, se usa su grupo de bases de datos.
-Lo único que hay que tener en cuenta es el uso de las credenciales, debido a que las credenciales para entrar a CouchDB
-son delicadas --- ya que se accede a todas las configuraciones del equipo --- se usa un protocolo similar al descrito en la
+Debido a que el proyecto está integrado en el grupo de trabajo de \textit{Cloud Billing} y \textit{ERP}, se utiliza su grupo de bases de datos.
+Lo único que hay que tener en cuenta es el uso de las credenciales; dado que las credenciales para acceder a CouchDB
+son delicadas ---ya que se accede a todas las configuraciones del equipo---, se emplea un protocolo similar al descrito en la
 sección \hyperref[iteraciones:gestion-tokens]{Plan de gestión de tokens de autenticación}.
 
 Una vez creada la base de datos propia, se crea un documento para vincularlo con el proyecto.
