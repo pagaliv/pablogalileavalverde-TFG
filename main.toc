@@ -94,8 +94,9 @@
 \contentsline {subsubsection}{Pruebas automatizadas}{\es@scroman {lii}}{subsection.4.1.6}%
 \contentsline {subsection}{\numberline {4.1.7}Configuración de alertas}{\es@scroman {liii}}{subsection.4.1.7}%
 \contentsline {subsection}{\numberline {4.1.8}Conclusiones de la iteración}{\es@scroman {liv}}{subsection.4.1.8}%
-\contentsline {chapter}{\numberline {1}Lista de SKUs}{\es@scroman {lv}}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {lviii}}{appendix.Alph2}%
-\contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {lviii}}{section.Alph2.1}%
-\contentsline {section}{\numberline {2.2}Obtener token}{\es@scroman {lix}}{section.Alph2.2}%
-\contentsline {chapter}{Bibliografía}{\es@scroman {lxi}}{appendix*.32}%
+\contentsline {section}{\numberline {4.2}Iteración 2c}{\es@scroman {lv}}{section.4.2}%
+\contentsline {chapter}{\numberline {1}Lista de SKUs}{\es@scroman {lvi}}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {lix}}{appendix.Alph2}%
+\contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {lix}}{section.Alph2.1}%
+\contentsline {section}{\numberline {2.2}Obtener token}{\es@scroman {lx}}{section.Alph2.2}%
+\contentsline {chapter}{Bibliografía}{\es@scroman {lxii}}{appendix*.33}%
