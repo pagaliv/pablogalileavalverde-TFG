@@ -84,9 +84,18 @@
 \contentsline {paragraph}{Patrones de diseño utilizados}{\es@scroman {xlvii}}{Item.76}%
 \contentsline {paragraph}{Autenticación }{\es@scroman {xlviii}}{Item.76}%
 \contentsline {subsection}{\numberline {4.1.4}Implementación de función de Detección de items continuables}{\es@scroman {xlviii}}{subsection.4.1.4}%
-\contentsline {subsubsection}{Creación de endpoint y decisión de formato de URL}{\es@scroman {xlviii}}{subsection.4.1.4}%
-\contentsline {chapter}{\numberline {1}Lista de SKUs}{\es@scroman {xlix}}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {lii}}{appendix.Alph2}%
-\contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {lii}}{section.Alph2.1}%
-\contentsline {section}{\numberline {2.2}Obtener token}{\es@scroman {liii}}{section.Alph2.2}%
-\contentsline {chapter}{Bibliografía}{\es@scroman {lv}}{appendix*.31}%
+\contentsline {paragraph}{Validación de respuestas con Joi}{\es@scroman {xlviii}}{subsection.4.1.4}%
+\contentsline {subsubsection}{Creación de endpoint y decisión de formato de URL}{\es@scroman {l}}{lstnumber.4.5.7}%
+\contentsline {subsection}{\numberline {4.1.5}Desarrollo e implementación}{\es@scroman {l}}{subsection.4.1.5}%
+\contentsline {subsubsection}{Configuración de PostMan}{\es@scroman {l}}{subsection.4.1.5}%
+\contentsline {subsubsection}{Configuración de ejecución programada}{\es@scroman {li}}{subsection.4.1.5}%
+\contentsline {subsection}{\numberline {4.1.6}Pruebas y validación}{\es@scroman {li}}{subsection.4.1.6}%
+\contentsline {subsubsection}{Pruebas manuales con PostMan}{\es@scroman {li}}{subsection.4.1.6}%
+\contentsline {subsubsection}{Pruebas automatizadas}{\es@scroman {lii}}{subsection.4.1.6}%
+\contentsline {subsection}{\numberline {4.1.7}Configuración de alertas}{\es@scroman {liii}}{subsection.4.1.7}%
+\contentsline {subsection}{\numberline {4.1.8}Conclusiones de la iteración}{\es@scroman {liv}}{subsection.4.1.8}%
+\contentsline {chapter}{\numberline {1}Lista de SKUs}{\es@scroman {lv}}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {lviii}}{appendix.Alph2}%
+\contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {lviii}}{section.Alph2.1}%
+\contentsline {section}{\numberline {2.2}Obtener token}{\es@scroman {lix}}{section.Alph2.2}%
+\contentsline {chapter}{Bibliografía}{\es@scroman {lxi}}{appendix*.32}%

@@ -453,12 +453,187 @@ Una vez definida la estructura del proyecto, el 21 de febrero se inicia la imple
 
 Para ello se implementa la función \texttt{checkUtilization()}, basada en el script que se creó para PostMan ---explicado en la sección \hyperref[iteraciones:script-verificacion-postman]{Creación del script de verificación}---. Al igual que en PostMan, el desarrollo se realiza en dos fases: primero se detecta un SKU concreto y, una vez verificado su correcto funcionamiento, se extiende al resto de SKUs.
 
+\paragraph{Validación de respuestas con Joi}
+
+Para garantizar la integridad de los datos recibidos de la API de facturación, se ha implementado la validación de las respuestas mediante esquemas \texttt{Joi}, definidos en el helper \texttt{schema.js}. Esto permite detectar de forma temprana respuestas inesperadas o malformadas de la API, devolviendo un error controlado en lugar de propagar datos incorrectos al resultado de la verificación. Además se ha creado la verificación de todos los futuros datos necesarios, es decir, ahora solo se necesitan los datos de utilización, pero se ha creado la validación de las facturas y del uso para futuras iteraciones, lo que cumple el requisito RNF06.
+
+El archivo \texttt{schema.js} define tres esquemas de validación, cada uno adaptado a un endpoint distinto de la API de facturación:
+
+\begin{itemize}
+    \item \textbf{\texttt{invoiceSchema}:} Valida las respuestas de facturas procedentes de NetSuite. Incluye la verificación del total facturado (unidad y cantidad), metadatos de la factura (fechas, identificadores de factura, contrato y cliente) y un array de \textit{datacenters}, cada uno con su ubicación, medidores y descuentos (\textit{rebates}). Un aspecto destacable es la validación del formato del identificador de factura mediante una expresión regular:
+\end{itemize}
+
+\begin{lstlisting}[caption=Validación del formato de invoiceId, label=lst:invoice-pattern]
+metadata: joi.object({
+    invoiceId: joi.string().pattern(/^GY\d+$/).required(),
+    contractId: joi.string().required(),
+    postingPeriod: joi.string().pattern(/^\d{4}-\d{2}$/).required()
+    // ...
+}).required()
+\end{lstlisting}
+
+Esto garantiza que el identificador de factura siga siempre el patrón esperado por el sistema, rechazando respuestas con formatos incorrectos. De forma similar, el \texttt{postingPeriod} se valida contra el formato \texttt{YYYY-MM}.
+
+\begin{itemize}
+    \item \textbf{\texttt{utilizationSchema}:} Valida las respuestas del endpoint \texttt{/utilization}, que es el utilizado en esta iteración para detectar los ítems continuables. La estructura es más compleja, ya que cada medidor incluye referencias UUID a recursos y servidores, tipo de recurso, rango de fechas y región geográfica. Un ejemplo representativo de la validación de un medidor:
+\end{itemize}
+
+\begin{lstlisting}[caption=Validación de un medidor en utilizationSchema, label=lst:utilization-meter]
+meters: joi.array().items(
+    joi.object({
+        id: joi.string().uuid().required(),
+        resourceId: joi.string().uuid().required().allow(null),
+        serverId: joi.string().uuid().required().allow(null).allow(''),
+        type: joi.string().required(),
+        meterId: joi.string().required(),
+        region: joi.string().required(),
+        quantity: joi.object({
+            quantity: joi.number().required(),
+            unit: joi.string().required()
+        }).required()
+    }).required()
+).required()
+\end{lstlisting}
+
+Es relevante el uso de \texttt{.allow(null)} y \texttt{.allow('')} en campos como \texttt{resourceId} y \texttt{serverId}, ya que no todos los recursos del DCD tienen un servidor o recurso físico asociado de forma directa, pero el campo debe estar presente en la respuesta. Sin esta flexibilidad, la validación rechazaría respuestas legítimas de la API.
+
+\begin{itemize}
+    \item \textbf{\texttt{usageSchema}:} Valida las respuestas del endpoint \texttt{/usage}, que se utilizará en iteraciones posteriores. Su estructura es más sencilla que la del esquema de utilización, pero incorpora un aspecto interesante: la cantidad puede venir como número o como cadena numérica, lo que se resuelve con \texttt{alternatives()}:
+\end{itemize}
+
+\begin{lstlisting}[caption=Validación flexible de cantidad en usageSchema, label=lst:usage-alternatives]
+quantity: joi.object({
+    quantity: joi.alternatives().try(
+        joi.number(),
+        joi.string().regex(/^\d+(?:\.\d+)?$/)
+    ).required(),
+    unit: joi.string().required()
+}).required()
+\end{lstlisting}
+
+Esta flexibilidad es necesaria porque la API de facturación devuelve en ocasiones valores numéricos como cadenas de texto (por ejemplo, \texttt{"4.5"} en lugar de \texttt{4.5}), comportamiento que puede variar entre versiones o entre distintos tipos de recursos.
+
+Los tres esquemas comparten un conjunto de validadores comunes de Joi: \texttt{required()} para campos obligatorios, \texttt{optional()} para opcionales, \texttt{pattern()} para expresiones regulares, \texttt{valid()} para valores permitidos (como \texttt{'EU'} y \texttt{'US'} en la ubicación de los datacenters), \texttt{uuid()} para identificadores universales y \texttt{array().items()} para validar arrays de objetos con estructura definida.
+
 \subsubsection{Creación de endpoint y decisión de formato de URL}
-mañana sigo
+Debido a que no hay ningún requisito que especifique el formato de la URL, se opta por un formato RESTful que refleje claramente la acción realizada. Se decide utilizar el endpoint \texttt{GET /data/v1/utilization/check/:contractId}, donde \texttt{contractId} es un parámetro dinámico que permite especificar el contrato para el cual se desea realizar la verificación de utilización. Este formato es intuitivo y sigue las convenciones REST, facilitando su comprensión y uso por parte de otros desarrolladores o sistemas que puedan integrarse con esta API en el futuro.
+Sin embargo, no se puede garantizar que este formato se mantenga en el futuro, ya que no hay un requisito que lo especifique, por lo que podría cambiarse en futuras iteraciones si el cliente lo considera necesario. Por ello, se documenta claramente en el README del proyecto para asegurar que cualquier cambio futuro se realice de manera controlada y con conocimiento de las partes involucradas.
 
 
+\subsection{Desarrollo e implementación}
+
+La primera tarea llevada a cabo en esta primera iteración ha sido la configuración de los entornos necesarios para el desarrollo del sistema. Esta fase incluye principalmente el despliegue del proyecto en GitLab, la configuración de la base de datos CouchDB y su vinculación con el proyecto, y la preparación del entorno de pruebas mediante PostMan. Aunque también se han creado los repositorios de respaldo en GitHub y se ha configurado la VPN para acceder a la infraestructura corporativa, estas acciones se consideran triviales dentro del alcance técnico del proyecto.
+
+\subsubsection{Configuración de PostMan}
+Para la realización de pruebas sobre las peticiones HTTP a la API de facturación de IONOS Cloud, se ha configurado PostMan. La herramienta permite simular las llamadas que realizará el sistema de verificación, facilitando la creación y prueba de peticiones REST antes de integrarlas en el código.
+
+Se han configurado los siguientes elementos:
+\begin{itemize}
+    \item \textbf{Collection:} Se ha creado una colección específica denominada \textit{billing-reference-verifier} para agrupar todas las peticiones de verificación.
+    \item \textbf{Variables de entorno:} Se han definido variables para la URL base de la API de IONOS Cloud, el \texttt{contractId} de pruebas y el token de autenticación Bearer, evitando así tener que introducirlos manualmente en cada petición.
+\end{itemize}
+
+Es importante configurar correctamente los encabezados, el cuerpo de las peticiones según lo requiera cada endpoint de la API de facturación, ya que una configuración incorrecta puede provocar errores difíciles de diagnosticar.
+
+Tras reunirse con el cliente, se sugerieron por su parte dos cambios, la primera el estandarizar el contrato y eliminarlo de la URL de la petición, denido a que siempre se usará el mismo contrato y en el caso de querer usar otro en el futuro se puede modificar en la configuración. La segunda fue usar desde PostMan \texttt{Authorization: Bearer <token>} en lugar de una variable personalizada, para que sea más fácil de usar y entender. Ambos cambios se implementarán en la proxima iteración.
+
+%% TODO: Si quieres incluir el esquema Joi utilizado (utilizationSchema, usageSchema, etc.), añádelo aquí.
 
 
+\subsubsection{Configuración de ejecución programada}
+
+Para automatizar las verificaciones y cumplir el requisito RF04.01, se ha configurado un \textit{scheduler} en el documento de CouchDB que define la periodicidad de ejecución de las comprobaciones.
+
+%% TODO: Añadir aquí los detalles concretos del scheduler: frecuencia (diaria, semanal, etc.),
+%% formato de la configuración en CouchDB y cómo se dispara la ejecución (cron job, servicio interno, etc.).
+
+De esta forma, el sistema realiza verificaciones de manera autónoma sin necesidad de intervención manual, generando alertas únicamente cuando se detectan discrepancias.
+
+\subsection{Pruebas y validación}
+
+Para verificar el correcto funcionamiento de la iteración se han diseñado pruebas a dos niveles: pruebas manuales con PostMan y pruebas automatizadas integradas en el proyecto.
+
+\subsubsection{Pruebas manuales con PostMan}
+
+Se han ejecutado peticiones al endpoint \texttt{GET /data/v1/utilization/check/:contractId} desde PostMan, verificando que:
+\begin{itemize}
+    \item La respuesta devuelve un código 200 cuando la petición es correcta.
+    \item Todos los SKUs de la lista se encuentran en la categoría \texttt{available}.
+    \item La respuesta incluye la estructura esperada: \texttt{result}, \texttt{summary} y \texttt{timestamp}.
+    \item Al eliminar un recurso del contrato de pruebas de forma temporal, el SKU correspondiente aparece en la categoría \texttt{missing} y se dispara la alerta configurada.
+\end{itemize}
 
 
+\subsubsection{Pruebas automatizadas}
+
+Se han implementado pruebas automatizadas en el archivo \texttt{test/test-usage-validate.js} que verifican la correcta validación de los esquemas Joi frente a las respuestas de la API. El enfoque elegido consiste en definir dos muestras de datos ---una válida y otra inválida--- y comprobar que el esquema acepta la primera y rechaza la segunda.
+
+La muestra válida reproduce una respuesta real del endpoint \texttt{/usage}, con un datacenter de ubicación \texttt{EU}, un medidor con SKU \texttt{A01000} (IP estática) y una cantidad expresada como cadena numérica (\texttt{"0.87"}), lo que permite verificar simultáneamente la estructura general y el comportamiento del validador \texttt{alternatives()} descrito anteriormente:
+
+\begin{lstlisting}[caption=Muestra válida para el test de validación, label=lst:valid-sample]
+const validSample = {
+    startDate: '2025-11-01',
+    endDate: '2025-11-26',
+    datacenters: [{
+        id: 'a786c097-d6a6-531c-a55d-6e72ce4c35c5',
+        name: '',
+        location: 'EU',
+        meters: [{
+            meterId: 'A01000',
+            meterDesc: '30d per static IP address',
+            quantity: { quantity: '0.87', unit: '30Days' }
+        }]
+    }],
+    metadata: { customerId: '117048209', contractId: '036348704' }
+};
+\end{lstlisting}
+
+La muestra inválida introduce intencionadamente dos errores: una cantidad con un valor no numérico (\texttt{"not-a-number"}) y la ausencia del campo obligatorio \texttt{contractId} en los metadatos. De este modo se comprueba que el esquema detecta tanto errores de formato como campos ausentes:
+
+\begin{lstlisting}[caption=Muestra inválida para el test de validación, label=lst:invalid-sample]
+const invalidSample = {
+    // ...misma estructura...
+    meters: [{
+        meterId: 'A01000',
+        meterDesc: '30d per static IP address',
+        quantity: { quantity: 'not-a-number', unit: '30Days' }
+    }],
+    metadata: { customerId: '117048209' } // contractId ausente
+};
+\end{lstlisting}
+
+Las aserciones se realizan con el módulo estándar \texttt{assert} de Node.js, verificando que la validación de la muestra válida no produzca errores y que la muestra inválida sí los genere:
+
+\begin{lstlisting}[caption=Aserciones del test, label=lst:test-assertions]
+const { error: vError } = usageSchema.validate(validSample, { convert: true });
+assert.strictEqual(vError, undefined, 'validSample should pass');
+
+const { error: iError } = usageSchema.validate(invalidSample, { convert: true });
+assert(iError, 'invalidSample should fail');
+\end{lstlisting}
+
+La opción \texttt{convert: true} permite que Joi transforme automáticamente los tipos cuando sea posible (por ejemplo, cadenas de fecha a objetos \texttt{Date}), simulando así el comportamiento real del sistema en producción. El test se ejecuta mediante \texttt{node test/test-usage-validate.js} y devuelve un código de salida 0 en caso de éxito o 1 en caso de fallo, lo que facilita su integración en pipelines CI/CD.
+
+
+\subsection{Configuración de alertas}
+
+Para cumplir los requisitos RF05.01 y RF05.02, se ha implementado un sistema de notificaciones que se dispara cuando la verificación detecta SKUs ausentes. En esta primera iteración, la alerta informa de los SKUs que no han sido encontrados en el contrato, permitiendo al equipo actuar de forma inmediata.
+
+La configuración de alertas definitiva se realizará utilizando la infraestructura propia del equipo de Billing y ERP. Sin embargo, al tratarse de una primera iteración, se ha optado por una solución provisional más sencilla: el envío de notificaciones mediante \textit{webhooks} de Google Chat. Este mecanismo permite enviar mensajes a un espacio de Google Chat mediante una simple petición HTTP POST a una URL generada por la propia plataforma, sin necesidad de configurar servicios intermedios ni gestionar autenticación adicional.
+
+El contenido de la alerta incluye:
+
+
+Esta solución es suficiente para las primeras fases del proyecto, ya que permite al equipo recibir notificaciones en tiempo real sin un coste de implementación elevado. En la Figura~\ref{fig:alerta-iteracion1} se muestra un ejemplo de alerta recibida en Google Chat durante esta iteración.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Alerta1Iteracion.png}
+    \caption{Ejemplo de alerta de la primera iteración recibida en Google Chat}
+    \label{fig:alerta-iteracion1}
+\end{figure}
+
+En iteraciones posteriores, cuando se integre el sistema de alertas del equipo, bastará con sustituir la llamada al webhook por el mecanismo correspondiente, sin modificar la lógica de detección que genera el contenido de la alerta.
+
+\subsection{Conclusiones de la iteración}
 
