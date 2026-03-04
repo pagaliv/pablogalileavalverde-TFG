@@ -662,43 +662,100 @@ En cuanto a la planificación temporal, aunque la iteración se ha finalizado an
 
 \section{Iteración 2}
 \subsection{Planificación}
-En esta iteración se trabajará principalmente en ampliar las funcionalidades del sistema de verificación, además de implementar las mejoras solicitadas por el cliente durante la revisión de la primera iteración.
-\textbf{Verificación de facturas:} Se implementará la funcionalidad de verificación de uso de los items mejorando la función creada en la iteración anterior. El objetivo es comparar los datos de las facturas de NetSuite con los esperados según la configuración, detectando discrepancias en importes o ítems facturados.
+En esta iteración se trabajará principalmente en ampliar las funcionalidades del sistema de verificación, evolucionando desde la simple detección de existencia de SKUs hacia la verificación de cantidades de uso. Además, se implementarán las mejoras solicitadas por el cliente durante la revisión de la primera iteración.
 
-\textbf{Mejora del sistema de alertas:} Se ampliará el contenido de las alertas para incluir información más detallada y relevante, facilitando el diagnóstico cuando se detecten discrepancias.
+\textbf{Verificación de cantidades de uso:} En la iteración anterior se implementó la detección de existencia de SKUs (\texttt{existence-only}). Ahora se ampliará esta funcionalidad para verificar que las cantidades de uso reportadas por la API coincidan con los valores esperados. Esto permitirá detectar anomalías como recursos que reportan menos cores, RAM o almacenamiento del esperado.
 
-\textbf{Cambios solicitados por el cliente:} Se implementara los dos cambios sugeridos en la reunión de cierre de la iteración anterior. Por un lado, estandarizar el contrato eliminándolo de la URL del endpoint ---ya que siempre se utilizará el mismo contrato de pruebas y, si se desea cambiar en el futuro, se modificará en la configuración de CouchDB---. Por otro lado, modificar PostMan para utilizar \texttt{Authorization: Bearer <token>} de forma estándar, mejorando la claridad y facilitando el uso por parte de otros miembros del equipo.
+\textbf{Sistema de thresholds:} Se implementará un sistema de umbrales configurable que permita distinguir entre situaciones de \textit{warning} (desviación menor) y \textit{error} (desviación crítica), adaptándose a las diferentes tolerancias según el tipo de recurso.
+
+\textbf{Cambios solicitados por el cliente:} Se implementarán los dos cambios sugeridos en la reunión de cierre de la iteración anterior. Por un lado, estandarizar el contrato eliminándolo de la URL del endpoint ---ya que siempre se utilizará el mismo contrato de pruebas y, si se desea cambiar en el futuro, se modificará en la configuración de CouchDB---. Por otro lado, modificar PostMan para utilizar \texttt{Authorization: Bearer <token>} de forma estándar, mejorando la claridad y facilitando el uso por parte de otros miembros del equipo.
 
 
 \subsection{Análisis}
 
+\subsubsection{Tipos de verificación: existence-only vs precise}
+Tras analizar los diferentes SKUs monitorizados, se identifican dos categorías de verificación necesarias:
+
+\begin{itemize}
+    \item \textbf{existence-only:} Para recursos cuya cantidad puede variar legítimamente (almacenamiento consumido, tráfico de red, licencias por uso). En estos casos, basta con verificar que el SKU aparece en la respuesta de la API.
+    
+    \item \textbf{precise:} Para recursos con cantidades fijas y predecibles (cores de CPU, GB de RAM). Estos requieren comparar el valor reportado con el esperado, aplicando umbrales de tolerancia.
+\end{itemize}
+
+Por ejemplo, el SKU \texttt{C05000} (cores de CPU) tiene un valor esperado de 8 cores, mientras que \texttt{S01000} (almacenamiento HDD) solo requiere verificar su existencia, ya que el consumo real puede variar.
+
+\subsubsection{Sistema de thresholds}
+Para los SKUs con verificación \texttt{precise}, se definen dos niveles de alerta basados en el ratio entre el valor real y el esperado:
+
+\begin{itemize}
+    \item \textbf{Warning:} Se activa cuando el ratio cae por debajo del umbral de warning (típicamente 0.99). Indica una desviación menor que requiere atención pero no es crítica.
+    
+    \item \textbf{Error:} Se activa cuando el ratio cae por debajo del umbral de error (típicamente 0.975). Indica una discrepancia significativa que requiere acción inmediata.
+\end{itemize}
+
+Estos umbrales son configurables por SKU en CouchDB, permitiendo ajustar la sensibilidad según las características de cada recurso.
+
 \subsubsection{Estandarización del contrato en la configuración}
-Actualmente, el \texttt{contractId} se pasa como parámetro en la URL del endpoint (\texttt{/check/:contractId}). Tras analizar los casos de uso previstos, se concluye que el sistema operará siempre sobre un único contrato de referencia, por lo que tiene sentido centralizar este valor en la configuración de CouchDB.
-
-El documento de configuración en CouchDB se modificará para incluir un campo \texttt{defaultContractId} que será leído automáticamente por el módulo de verificación. De este modo, los endpoints se simplificarán y el cambio de contrato ---si fuera necesario en el futuro--- se gestionará únicamente desde la base de datos, sin necesidad de modificar las llamadas a la API.
-
-\subsubsection{Verificación de facturas}
-El endpoint \texttt{/utilization} permite verificar los recursos activos en tiempo real, pero no valida que la facturación mensual sea correcta. Para completar el ciclo de verificación, es necesario contrastar los datos de las facturas emitidas por NetSuite con los valores esperados.
-
-La API de facturación de IONOS Cloud expone el endpoint \texttt{/invoices}, que devuelve las facturas asociadas a un contrato. El esquema \texttt{invoiceSchema} definido en la iteración anterior permite validar la estructura de estas respuestas, garantizando que contienen los campos necesarios para la verificación.
+Actualmente, el \texttt{contractId} se pasa como parámetro en la URL del endpoint (\texttt{/check/:contractId}). Tras analizar los casos de uso previstos, se concluye que el sistema operará siempre sobre un único contrato de referencia, por lo que tiene sentido centralizar este valor en la configuración del scheduler de CouchDB.
 
 \subsection{Desarrollo y pruebas}
 
+\subsubsection{Configuración de itemsToCheck en CouchDB}
+Se ha ampliado la estructura de configuración del módulo \texttt{utilization} en CouchDB para soportar ambos tipos de verificación. Cada ítem ahora incluye:
+
+\begin{lstlisting}[caption=Estructura de itemsToCheck en CouchDB, label=lst:items-to-check]
+{
+    "itemsToCheck": [
+        {
+            "sku": "C05000",
+            "value": 8,
+            "verification": "precise",
+            "thresholds": {
+                "warning": 0.99,
+                "error": 0.975
+            }
+        },
+        {
+            "sku": "S01000",
+            "verification": "existence-only"
+        }
+    ]
+}
+\end{lstlisting}
+
+Esta estructura permite definir de forma declarativa qué verificación aplicar a cada SKU, facilitando la adición de nuevos recursos sin modificar el código.
+
+\subsubsection{Implementación de la verificación de cantidades}
+Se ha creado la función \texttt{checkQuantities()} que extiende la verificación básica de existencia:
+
+\begin{lstlisting}[caption=Función de verificación de cantidades, label=lst:check-quantities]
+function checkQuantity(item, apiValue) {
+    if (item.verification === 'existence-only') {
+        return { status: 'ok', type: 'existence' };
+    }
+    
+    const ratio = apiValue / item.value;
+    const thresholds = item.thresholds;
+    
+    if (ratio < thresholds.error) {
+        return { status: 'error', ratio, expected: item.value, actual: apiValue };
+    } else if (ratio < thresholds.warning) {
+        return { status: 'warning', ratio, expected: item.value, actual: apiValue };
+    }
+    return { status: 'ok', ratio };
+}
+\end{lstlisting}
+
+La función calcula el ratio entre el valor real y el esperado, comparándolo con los umbrales configurados para determinar el nivel de alerta.
+
 \subsubsection{Modificación del endpoint de utilización}
-Se ha refactorizado el endpoint de verificación de utilización para eliminar el parámetro \texttt{:contractId} de la URL. El nuevo endpoint es:
+Se ha refactorizado el endpoint de verificación para eliminar el parámetro \texttt{:contractId} de la URL. El nuevo endpoint es:
 
 \begin{verbatim}
 GET /data/v1/utilization/check
 \end{verbatim}
 
-El \texttt{contractId} se obtiene ahora directamente desde la configuración almacenada en CouchDB mediante el campo \texttt{defaultContractId}. Esto simplifica las llamadas y centraliza la gestión del contrato.
-
-En el módulo \texttt{utilization/index.js}, la obtención del contrato se realiza al inicializar el módulo:
-
-\begin{lstlisting}[caption=Obtención del contractId desde CouchDB, label=lst:get-contract]
-const config = await couchdb.get('billing-reference-verifier');
-const contractId = config.defaultContractId;
-\end{lstlisting}
+El \texttt{contractId} se obtiene ahora directamente desde la configuración del scheduler en CouchDB. Esto simplifica las llamadas y centraliza la gestión del contrato.
 
 \subsubsection{Configuración de PostMan con Bearer Token estándar}
 Se ha actualizado la colección de PostMan para utilizar la pestaña \textit{Authorization} con tipo \texttt{Bearer Token} en lugar de una variable personalizada en los headers. Este cambio:
@@ -709,59 +766,36 @@ Se ha actualizado la colección de PostMan para utilizar la pestaña \textit{Aut
     \item Facilita el uso por parte de otros miembros del equipo que estén familiarizados con PostMan.
 \end{itemize}
 
-La variable de entorno \texttt{\{\{bearer\_token\}\}} se mantiene, pero ahora se referencia desde el campo estándar de autenticación.
+\subsubsection{Scheduler para verificación de cantidades diarias}
+Se ha configurado un nuevo thread en el scheduler de CouchDB específico para la verificación de cantidades:
 
-\subsubsection{Implementación de verificación de facturas}
-Se ha creado un nuevo endpoint para la verificación de facturas:
-
-\begin{verbatim}
-GET /data/v1/invoice/verify
-\end{verbatim}
-
-Este endpoint realiza las siguientes operaciones:
-
-\begin{enumerate}
-    \item Obtiene la factura más reciente del contrato configurado desde la API de NetSuite.
-    \item Valida la estructura de la respuesta mediante \texttt{invoiceSchema}.
-    \item Compara los SKUs facturados con la lista de SKUs esperados en la configuración.
-    \item Verifica que los importes estén dentro de los rangos esperados (tolerancia configurable).
-    \item Genera un informe con las discrepancias encontradas.
-\end{enumerate}
-
-La función principal de verificación sigue una estructura similar a \texttt{checkUtilization()}:
-
-\begin{lstlisting}[caption=Estructura de verificación de facturas, label=lst:verify-invoice]
-async function verifyInvoice() {
-    const invoice = await invoiceHelper.getLatestInvoice(contractId);
-    const { error } = invoiceSchema.validate(invoice);
-    if (error) {
-        return { status: 'error', message: 'Invalid invoice structure' };
-    }
-    
-    const discrepancies = compareWithExpected(invoice, expectedValues);
-    return {
-        status: discrepancies.length > 0 ? 'warning' : 'ok',
-        invoice: invoice.metadata,
-        discrepancies
-    };
+\begin{lstlisting}[caption=Configuración del scheduler para cantidades diarias, label=lst:scheduler-quantities]
+{
+    "thread": "utilization-verifier:daily-quantities",
+    "enabled": true,
+    "mutex": true,
+    "timeout": 3600000,
+    "action": "utilization-verifier:daily-quantities:request",
+    "endAction": "utilization-verifier:daily-quantities:complete"
 }
 \end{lstlisting}
 
+Este scheduler puede programarse con expresiones cron independientes del verificador de existencia, permitiendo ejecutar las verificaciones de cantidades con una frecuencia diferente si fuera necesario.
+
 \subsubsection{Mejora del contenido de las alertas}
-Se ha ampliado el formato de las alertas enviadas a Google Chat para incluir información más útil en el diagnóstico:
+Se ha ampliado el formato de las alertas enviadas a Google Chat para incluir información específica de la verificación de cantidades:
 
 \begin{itemize}
-    \item \textbf{Tipo de verificación:} Indica si la alerta proviene de la verificación de utilización o de facturas.
-    \item \textbf{Timestamp detallado:} Fecha y hora exacta de la detección.
-    \item \textbf{Resumen cuantitativo:} Número de SKUs verificados, encontrados y ausentes.
-    \item \textbf{Lista de discrepancias:} Detalle de cada SKU o importe que presenta anomalías.
-    \item \textbf{Enlace a documentación:} URL a la wiki del proyecto para consultar el procedimiento de actuación.
+    \item \textbf{Nivel de alerta:} Diferencia visual entre warnings y errores.
+    \item \textbf{Detalles de la discrepancia:} Valor esperado, valor real y ratio calculado.
+    \item \textbf{SKUs afectados:} Lista agrupada por nivel de severidad.
+    \item \textbf{Timestamp:} Fecha y hora exacta de la detección.
 \end{itemize}
 
 \subsection{Evaluación}
-En esta iteración se han implementado las mejoras solicitadas por el cliente, estandarizando el acceso al contrato y mejorando la configuración de PostMan. Además, se ha ampliado significativamente la funcionalidad del sistema con la verificación de facturas, lo que permite detectar discrepancias no solo en los recursos activos sino también en los importes facturados.
+En esta iteración se ha evolucionado el sistema de verificación desde la simple detección de existencia hacia una verificación cuantitativa completa. El sistema de thresholds permite detectar tanto desviaciones menores (warnings) como críticas (errores), proporcionando información más precisa sobre el estado de los recursos.
 
-Las alertas mejoradas proporcionan información más completa, reduciendo el tiempo necesario para diagnosticar y resolver incidencias.
+Los cambios solicitados por el cliente se han implementado correctamente, simplificando el uso de la API y mejorando la configuración de PostMan.
 
 \begin{table}[H]
     \centering
@@ -769,13 +803,14 @@ Las alertas mejoradas proporcionan información más completa, reduciendo el tie
         \hline
         \textbf{Tarea} & \textbf{Estimadas (h)} & \textbf{Reales (h)} & \textbf{Desviación}\\ 
         \hline
+        Implementación verificación cantidades & 10h & 12h & +20\% \\
+        Sistema de thresholds & 4h & 4h & 0\% \\
         Estandarización del contrato & 2h & 2h & 0\% \\
         Configuración Bearer Token en PostMan & 1h & 1h & 0\% \\
-        Implementación verificación facturas & 12h & 14h & +16.7\% \\
-        Mejora del sistema de alertas & 4h & 3h & -25\% \\
+        Mejora del sistema de alertas & 3h & 3h & 0\% \\
         Pruebas y validación & 4h & 4h & 0\% \\
         \hline
-        \textbf{Total} & \textbf{23h} & \textbf{24h} & \textbf{+4.3\%} \\
+        \textbf{Total} & \textbf{24h} & \textbf{26h} & \textbf{+8.3\%} \\
         \hline
     \end{tabular}
     \caption{Comparativa de horas estimadas vs reales en la Iteración 2}
