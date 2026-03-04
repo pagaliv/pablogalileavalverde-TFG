@@ -664,7 +664,7 @@ En cuanto a la planificación temporal, aunque la iteración se ha finalizado an
 \subsection{Planificación}
 En esta iteración se trabajará principalmente en ampliar las funcionalidades del sistema de verificación, evolucionando desde la simple detección de existencia de SKUs hacia la verificación de cantidades de uso. Además, se implementarán las mejoras solicitadas por el cliente durante la revisión de la primera iteración.
 
-\textbf{Verificación de cantidades de uso:} En la iteración anterior se implementó la detección de existencia de SKUs (\texttt{existence-only}). Ahora se ampliará esta funcionalidad para verificar que las cantidades de uso reportadas por la API coincidan con los valores esperados. Esto permitirá detectar anomalías como recursos que reportan menos cores, RAM o almacenamiento del esperado.
+\textbf{Verificación de cantidades de uso:} En la iteración anterior se implementó la detección de existencia de SKUs (\texttt{existence-only}). Ahora se ampliará esta funcionalidad para verificar que las cantidades de uso reportadas por la API coincidan con los valores esperados. Esto permitirá detectar anomalías como recursos que reportan menos cores, RAM o almacenamiento del esperado. Además de ser el preambulo final para lograr el requisito RF04.02. 
 
 \textbf{Sistema de thresholds:} Se implementará un sistema de umbrales configurable que permita distinguir entre situaciones de \textit{warning} (desviación menor) y \textit{error} (desviación crítica), adaptándose a las diferentes tolerancias según el tipo de recurso.
 
@@ -677,12 +677,12 @@ En esta iteración se trabajará principalmente en ampliar las funcionalidades d
 Tras analizar los diferentes SKUs monitorizados, se identifican dos categorías de verificación necesarias:
 
 \begin{itemize}
-    \item \textbf{existence-only:} Para recursos cuya cantidad puede variar legítimamente (almacenamiento consumido, tráfico de red, licencias por uso). En estos casos, basta con verificar que el SKU aparece en la respuesta de la API.
+    \item \textbf{existence-only:} Para recursos cuyo consumo puede variar legítimamente (almacenamiento utilizado, tráfico de red, licencias por uso variable). En estos casos, basta con verificar que existe consumo mayor que cero, sin comparar contra un valor esperado concreto.
     
-    \item \textbf{precise:} Para recursos con cantidades fijas y predecibles (cores de CPU, GB de RAM). Estos requieren comparar el valor reportado con el esperado, aplicando umbrales de tolerancia.
+    \item \textbf{precise:} Para recursos con cantidades fijas y predecibles (cores de CPU, GB de RAM). Estos requieren calcular el valor esperado y compararlo con el reportado por la API, aplicando umbrales de tolerancia para detectar discrepancias.
 \end{itemize}
 
-Por ejemplo, el SKU \texttt{C05000} (cores de CPU) tiene un valor esperado de 8 cores, mientras que \texttt{S01000} (almacenamiento HDD) solo requiere verificar su existencia, ya que el consumo real puede variar.
+Por ejemplo, el SKU \texttt{C05000} (cores de CPU) tiene un valor base de 8 cores que debe mantenerse constante, mientras que \texttt{MKS1000} (almacenamiento en Kubernetes) solo requiere verificar que existe consumo.
 
 \subsubsection{Sistema de thresholds}
 Para los SKUs con verificación \texttt{precise}, se definen dos niveles de alerta basados en el ratio entre el valor real y el esperado:
@@ -710,13 +710,24 @@ Se ha ampliado la estructura de configuración del módulo \texttt{utilization} 
             "sku": "C05000",
             "value": 8,
             "verification": "precise",
+            "calculationType": "cpu-hours",
             "thresholds": {
                 "warning": 0.99,
                 "error": 0.975
             }
         },
         {
-            "sku": "S01000",
+            "sku": "R01000",
+            "value": 44,
+            "verification": "precise",
+            "calculationType": "ram-hours",
+            "thresholds": {
+                "warning": 0.999,
+                "error": 0.99
+            }
+        },
+        {
+            "sku": "MKS1000",
             "verification": "existence-only"
         }
     ]
@@ -725,37 +736,92 @@ Se ha ampliado la estructura de configuración del módulo \texttt{utilization} 
 
 Esta estructura permite definir de forma declarativa qué verificación aplicar a cada SKU, facilitando la adición de nuevos recursos sin modificar el código.
 
-\subsubsection{Implementación de la verificación de cantidades}
-Se ha creado la función \texttt{checkQuantities()} que extiende la verificación básica de existencia:
+\subsubsection{Endpoint de verificación de cantidades diarias}
+Se ha creado un nuevo endpoint específico para la verificación de cantidades diarias:
 
-\begin{lstlisting}[caption=Función de verificación de cantidades, label=lst:check-quantities]
-function checkQuantity(item, apiValue) {
-    if (item.verification === 'existence-only') {
-        return { status: 'ok', type: 'existence' };
-    }
-    
-    const ratio = apiValue / item.value;
-    const thresholds = item.thresholds;
-    
-    if (ratio < thresholds.error) {
-        return { status: 'error', ratio, expected: item.value, actual: apiValue };
-    } else if (ratio < thresholds.warning) {
-        return { status: 'warning', ratio, expected: item.value, actual: apiValue };
-    }
-    return { status: 'ok', ratio };
+\begin{verbatim}
+GET /data/v1/utilization/check-daily-quantity/:contractId
+\end{verbatim}
+
+Este endpoint realiza el siguiente proceso interno:
+\begin{enumerate}
+    \item Calcula los días transcurridos en el período de facturación actual.
+    \item Obtiene los datos de uso desde la billing-api mediante \texttt{/\{contractId\}/usage}.
+    \item Agrega el consumo por SKU utilizando la función \texttt{aggregateUsageData()}.
+    \item Compara los valores actuales contra los esperados para cada SKU configurado.
+\end{enumerate}
+
+\subsubsection{Cálculo del valor esperado}
+Para los SKUs con verificación \texttt{precise}, el valor esperado se calcula mediante la fórmula:
+
+\begin{equation}
+\texttt{expected} = \texttt{value} \times 24 \text{ horas} \times \texttt{días\_transcurridos}
+\end{equation}
+
+Donde \texttt{value} es el valor base configurado (por ejemplo, 8 cores) y \texttt{días\_transcurridos} son los días desde el inicio del período de facturación hasta ayer.
+
+\subsubsection{Agregación de datos de uso}
+La función \texttt{aggregateUsageData()} procesa la respuesta de la billing-api y agrupa el consumo por SKU:
+
+\begin{lstlisting}[caption=Función de agregación de datos de uso, label=lst:aggregate-usage]
+function aggregateUsageData(usageData) {
+    const aggregated = {};
+    usageData.datacenters.forEach(dc => {
+        dc.meters.forEach(meter => {
+            const sku = meter.meterId;
+            if (!aggregated[sku]) {
+                aggregated[sku] = 0;
+            }
+            aggregated[sku] += parseFloat(meter.quantity.quantity);
+        });
+    });
+    return aggregated;
 }
 \end{lstlisting}
 
-La función calcula el ratio entre el valor real y el esperado, comparándolo con los umbrales configurados para determinar el nivel de alerta.
+\subsubsection{Verificación y comparación}
+La función \texttt{processItemVerification()} determina el tipo de verificación a aplicar:
 
-\subsubsection{Modificación del endpoint de utilización}
-Se ha refactorizado el endpoint de verificación para eliminar el parámetro \texttt{:contractId} de la URL. El nuevo endpoint es:
+\begin{lstlisting}[caption=Lógica de verificación por tipo, label=lst:process-verification]
+if (itemConfig.verification === 'existence-only') {
+    return this.generateExistenceVerification(sku, actualValue);
+}
+// Para verificacion precise:
+const expected = itemConfig.value * 24 * daysElapsed;
+const ratio = (actualValue / expected) * 100;
+return this.evaluateWithThresholds(sku, actualValue, expected, ratio);
+\end{lstlisting}
 
-\begin{verbatim}
-GET /data/v1/utilization/check
-\end{verbatim}
+\subsubsection{Respuesta del endpoint}
+El endpoint devuelve una respuesta estructurada con el resultado de cada verificación:
 
-El \texttt{contractId} se obtiene ahora directamente desde la configuración del scheduler en CouchDB. Esto simplifica las llamadas y centraliza la gestión del contrato.
+\begin{lstlisting}[caption=Ejemplo de respuesta del endpoint de cantidades diarias, label=lst:response-daily]
+{
+  "ok": true,
+  "message": "daily-quantities check completed",
+  "contractId": "36348704",
+  "period": "this month until yesterday (3 days)",
+  "daysCalculated": 3,
+  "results": [
+    {
+      "sku": "C05000",
+      "status": "ok",
+      "actual": 1920.00,
+      "expected": 1920.00,
+      "ratio": 100,
+      "calculationMethod": "precise"
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "ok": 8,
+    "warnings": 1,
+    "errors": 1
+  }
+}
+\end{lstlisting}
+
+El campo \texttt{ratio} se expresa como porcentaje, donde 100 indica coincidencia perfecta entre el valor actual y el esperado.
 
 \subsubsection{Configuración de PostMan con Bearer Token estándar}
 Se ha actualizado la colección de PostMan para utilizar la pestaña \textit{Authorization} con tipo \texttt{Bearer Token} en lugar de una variable personalizada en los headers. Este cambio:

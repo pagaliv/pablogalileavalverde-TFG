@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 1772615796.6633 -1
+["biber main"] 0 "main.bcf" "main.bbl" "main" 1772618582.32176 -1
   "bibliografia.bib" 1772093342.59019 2804 fd819249790a855a68dfe1af24b5098d ""
-  "main.bcf" 1772615796.55009 107802 464c935ab4613fae7855cf359a6e9de1 "pdflatex"
+  "main.bcf" 1772618582.19778 107802 464c935ab4613fae7855cf359a6e9de1 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1772615794.46552 "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" "main.pdf" "main" 1772615796.66355 0
+["pdflatex"] 1772618579.85927 "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" "main.pdf" "main" 1772618582.32203 0
   "/etc/texmf/web2c/texmf.cnf" 1770890366.72124 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/pgalileavalverde/Documents/PabloGalileaValverdeTFG/main.tex" 1772105671.07707 12163 cfc7418b04708ebdb6c728d34f438545 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -28,6 +28,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm2488.tfm" 1136768653 3584 406ad7b70d9a41f7833f92b6313150c8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecti1000.tfm" 1136768653 3072 3bce340d4c075dffe6d4ec732b4c32fe ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecti1200.tfm" 1136768653 3072 8b5a64dc91775463bc95e2d818524028 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt0800.tfm" 1136768653 1536 0b0b8ca286de6a006b681926403f35cd ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm" 1136768653 1536 06717a2b50de47d4087ac0e6cd759455 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1095.tfm" 1136768653 1536 a988bfe554c1f79514bd46d13c3c64ce ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1200.tfm" 1136768653 1536 487c9b46984a816c7ed238d0674595c7 ""
@@ -53,6 +54,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty" 1575674566 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
@@ -276,7 +278,7 @@
   "capitulos/01-introduccion.tex" 1772441960.49683 16559 4fd8cdce3915b3e9bb90bfbad5c90dac ""
   "capitulos/02-Análisis.tex" 1772523563.77235 15540 3b4b084ae7668640c5e471bec8060fa2 ""
   "capitulos/03-Planificación.tex" 1772444422.08813 43447 5ea8120697e63b8886a23accee1534e0 ""
-  "capitulos/04-Iteraciones.tex" 1772615794.28099 51254 39edf2bcd931acf9b7f658d91e435238 ""
+  "capitulos/04-Iteraciones.tex" 1772618576.96985 54847 e31cd6115891e301590369699242b9b5 ""
   "imagenes/Alerta1Iteracion.png" 1772531479.0212 237824 e672275e42b8f18c642c05ff34238f7f ""
   "imagenes/PostMan-CodsOK.png" 1771415479.91596 40670 c378f8b11ec188857746e26b9d3fe39c ""
   "imagenes/PostMan-Resumen.png" 1771415844.83481 11334 8bce1b747e4bac17e6aae31bcdc58504 ""
@@ -288,14 +290,14 @@
   "imagenes/interfaz-InicioSesionDCD-1.png" 1771320154.01093 69832 ee75a3d23fe934156bcde2b46348321f ""
   "imagenes/interfaz-InicioSesionDCD-2.png" 1771321753.39277 605182 7c5bb716ab0b032261589d3890ed8977 ""
   "imagenes/logo.jpg" 1771235528 90328 74cab1a2c547d68158cff65a9a2aa6a4 ""
-  "main.aux" 1772615796.54609 27778 224297fe8c5da34174f3c32c3090a74a "pdflatex"
+  "main.aux" 1772618582.19223 29599 201283a24132f0652bc7292ee1608641 "pdflatex"
   "main.bbl" 1772444638.91279 4234 5582822e2be0beec2418387f106b2d1e "biber main"
-  "main.lof" 1772615796.5507 1185 bee9bcfd56b669935f0a45ccbe4d462d "pdflatex"
-  "main.lot" 1772615796.5507 1820 9328c6067671a08921e2054b46824606 "pdflatex"
-  "main.out" 1772615796.54909 9470 108c012e34668afa40fb45ea18e26b8a "pdflatex"
-  "main.run.xml" 1772615796.5507 2404 0748bbc4f9564d661ea0f00967c85001 "pdflatex"
+  "main.lof" 1772618582.19918 1185 bee9bcfd56b669935f0a45ccbe4d462d "pdflatex"
+  "main.lot" 1772618582.19918 1818 850e7e9ccfabc32c0878540cedefc40b "pdflatex"
+  "main.out" 1772618582.19705 9470 108c012e34668afa40fb45ea18e26b8a "pdflatex"
+  "main.run.xml" 1772618582.19918 2404 0748bbc4f9564d661ea0f00967c85001 "pdflatex"
   "main.tex" 1772105671.07707 12163 cfc7418b04708ebdb6c728d34f438545 ""
-  "main.toc" 1772615796.5507 11259 c7a5a5ad5f2388cbdb20832d07c60d22 "pdflatex"
+  "main.toc" 1772618582.19918 11874 f078d366680cd4fee5f29e1095200f6b "pdflatex"
   "portada.tex" 1772090051.38627 1681 86312322b127e2c951e7c21be89cc7a5 ""
   (generated)
   "main.aux"
