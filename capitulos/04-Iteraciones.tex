@@ -645,7 +645,7 @@ En cuanto a la planificación temporal, aunque la iteración se ha finalizado an
     \centering
     \begin{tabular}{|l|c|c|c|}
         \hline
-        \textbf{Tarea} & \textbf{Horas Estimadas} & \textbf{Horas Reales} & \textbf{Desviación}\\ 
+        \textbf{Tarea} & \textbf{Estimadas (h)} & \textbf{Reales (h)} & \textbf{Desviación}\\ 
         \hline
         Detección de items continuables & 16h & 16h & 0\% \\
         Creación de contrato completo & 12h & 16h & +25\% \\
@@ -661,3 +661,123 @@ En cuanto a la planificación temporal, aunque la iteración se ha finalizado an
 \end{table}
 
 \section{Iteración 2}
+\subsection{Planificación}
+En esta iteración se trabajará principalmente en ampliar las funcionalidades del sistema de verificación, además de implementar las mejoras solicitadas por el cliente durante la revisión de la primera iteración.
+\textbf{Verificación de facturas:} Se implementará la funcionalidad de verificación de uso de los items mejorando la función creada en la iteración anterior. El objetivo es comparar los datos de las facturas de NetSuite con los esperados según la configuración, detectando discrepancias en importes o ítems facturados.
+
+\textbf{Mejora del sistema de alertas:} Se ampliará el contenido de las alertas para incluir información más detallada y relevante, facilitando el diagnóstico cuando se detecten discrepancias.
+
+\textbf{Cambios solicitados por el cliente:} Se implementara los dos cambios sugeridos en la reunión de cierre de la iteración anterior. Por un lado, estandarizar el contrato eliminándolo de la URL del endpoint ---ya que siempre se utilizará el mismo contrato de pruebas y, si se desea cambiar en el futuro, se modificará en la configuración de CouchDB---. Por otro lado, modificar PostMan para utilizar \texttt{Authorization: Bearer <token>} de forma estándar, mejorando la claridad y facilitando el uso por parte de otros miembros del equipo.
+
+
+\subsection{Análisis}
+
+\subsubsection{Estandarización del contrato en la configuración}
+Actualmente, el \texttt{contractId} se pasa como parámetro en la URL del endpoint (\texttt{/check/:contractId}). Tras analizar los casos de uso previstos, se concluye que el sistema operará siempre sobre un único contrato de referencia, por lo que tiene sentido centralizar este valor en la configuración de CouchDB.
+
+El documento de configuración en CouchDB se modificará para incluir un campo \texttt{defaultContractId} que será leído automáticamente por el módulo de verificación. De este modo, los endpoints se simplificarán y el cambio de contrato ---si fuera necesario en el futuro--- se gestionará únicamente desde la base de datos, sin necesidad de modificar las llamadas a la API.
+
+\subsubsection{Verificación de facturas}
+El endpoint \texttt{/utilization} permite verificar los recursos activos en tiempo real, pero no valida que la facturación mensual sea correcta. Para completar el ciclo de verificación, es necesario contrastar los datos de las facturas emitidas por NetSuite con los valores esperados.
+
+La API de facturación de IONOS Cloud expone el endpoint \texttt{/invoices}, que devuelve las facturas asociadas a un contrato. El esquema \texttt{invoiceSchema} definido en la iteración anterior permite validar la estructura de estas respuestas, garantizando que contienen los campos necesarios para la verificación.
+
+\subsection{Desarrollo y pruebas}
+
+\subsubsection{Modificación del endpoint de utilización}
+Se ha refactorizado el endpoint de verificación de utilización para eliminar el parámetro \texttt{:contractId} de la URL. El nuevo endpoint es:
+
+\begin{verbatim}
+GET /data/v1/utilization/check
+\end{verbatim}
+
+El \texttt{contractId} se obtiene ahora directamente desde la configuración almacenada en CouchDB mediante el campo \texttt{defaultContractId}. Esto simplifica las llamadas y centraliza la gestión del contrato.
+
+En el módulo \texttt{utilization/index.js}, la obtención del contrato se realiza al inicializar el módulo:
+
+\begin{lstlisting}[caption=Obtención del contractId desde CouchDB, label=lst:get-contract]
+const config = await couchdb.get('billing-reference-verifier');
+const contractId = config.defaultContractId;
+\end{lstlisting}
+
+\subsubsection{Configuración de PostMan con Bearer Token estándar}
+Se ha actualizado la colección de PostMan para utilizar la pestaña \textit{Authorization} con tipo \texttt{Bearer Token} en lugar de una variable personalizada en los headers. Este cambio:
+
+\begin{itemize}
+    \item Aprovecha la interfaz nativa de PostMan para gestión de tokens.
+    \item Permite heredar la autenticación a nivel de colección, evitando configurarla en cada petición.
+    \item Facilita el uso por parte de otros miembros del equipo que estén familiarizados con PostMan.
+\end{itemize}
+
+La variable de entorno \texttt{\{\{bearer\_token\}\}} se mantiene, pero ahora se referencia desde el campo estándar de autenticación.
+
+\subsubsection{Implementación de verificación de facturas}
+Se ha creado un nuevo endpoint para la verificación de facturas:
+
+\begin{verbatim}
+GET /data/v1/invoice/verify
+\end{verbatim}
+
+Este endpoint realiza las siguientes operaciones:
+
+\begin{enumerate}
+    \item Obtiene la factura más reciente del contrato configurado desde la API de NetSuite.
+    \item Valida la estructura de la respuesta mediante \texttt{invoiceSchema}.
+    \item Compara los SKUs facturados con la lista de SKUs esperados en la configuración.
+    \item Verifica que los importes estén dentro de los rangos esperados (tolerancia configurable).
+    \item Genera un informe con las discrepancias encontradas.
+\end{enumerate}
+
+La función principal de verificación sigue una estructura similar a \texttt{checkUtilization()}:
+
+\begin{lstlisting}[caption=Estructura de verificación de facturas, label=lst:verify-invoice]
+async function verifyInvoice() {
+    const invoice = await invoiceHelper.getLatestInvoice(contractId);
+    const { error } = invoiceSchema.validate(invoice);
+    if (error) {
+        return { status: 'error', message: 'Invalid invoice structure' };
+    }
+    
+    const discrepancies = compareWithExpected(invoice, expectedValues);
+    return {
+        status: discrepancies.length > 0 ? 'warning' : 'ok',
+        invoice: invoice.metadata,
+        discrepancies
+    };
+}
+\end{lstlisting}
+
+\subsubsection{Mejora del contenido de las alertas}
+Se ha ampliado el formato de las alertas enviadas a Google Chat para incluir información más útil en el diagnóstico:
+
+\begin{itemize}
+    \item \textbf{Tipo de verificación:} Indica si la alerta proviene de la verificación de utilización o de facturas.
+    \item \textbf{Timestamp detallado:} Fecha y hora exacta de la detección.
+    \item \textbf{Resumen cuantitativo:} Número de SKUs verificados, encontrados y ausentes.
+    \item \textbf{Lista de discrepancias:} Detalle de cada SKU o importe que presenta anomalías.
+    \item \textbf{Enlace a documentación:} URL a la wiki del proyecto para consultar el procedimiento de actuación.
+\end{itemize}
+
+\subsection{Evaluación}
+En esta iteración se han implementado las mejoras solicitadas por el cliente, estandarizando el acceso al contrato y mejorando la configuración de PostMan. Además, se ha ampliado significativamente la funcionalidad del sistema con la verificación de facturas, lo que permite detectar discrepancias no solo en los recursos activos sino también en los importes facturados.
+
+Las alertas mejoradas proporcionan información más completa, reduciendo el tiempo necesario para diagnosticar y resolver incidencias.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Tarea} & \textbf{Estimadas (h)} & \textbf{Reales (h)} & \textbf{Desviación}\\ 
+        \hline
+        Estandarización del contrato & 2h & 2h & 0\% \\
+        Configuración Bearer Token en PostMan & 1h & 1h & 0\% \\
+        Implementación verificación facturas & 12h & 14h & +16.7\% \\
+        Mejora del sistema de alertas & 4h & 3h & -25\% \\
+        Pruebas y validación & 4h & 4h & 0\% \\
+        \hline
+        \textbf{Total} & \textbf{23h} & \textbf{24h} & \textbf{+4.3\%} \\
+        \hline
+    \end{tabular}
+    \caption{Comparativa de horas estimadas vs reales en la Iteración 2}
+    \label{tab:horas-iteracion2}
+\end{table}
