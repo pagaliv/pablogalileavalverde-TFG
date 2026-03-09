@@ -110,8 +110,8 @@
 \contentsline {subsubsection}{Configuración de PostMan con Bearer Token estándar}{\es@scroman {lix}}{lstnumber.4.12.23}%
 \contentsline {subsubsection}{Scheduler para verificación de cantidades diarias}{\es@scroman {lx}}{lstnumber.4.12.23}%
 \contentsline {subsection}{\numberline {4.2.4}Evaluación y reunión con el cliente}{\es@scroman {lx}}{subsection.4.2.4}%
-\contentsline {chapter}{\numberline {1}Lista de SKUs}{\es@scroman {lxi}}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {lxiv}}{appendix.Alph2}%
-\contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {lxiv}}{section.Alph2.1}%
-\contentsline {section}{\numberline {2.2}Obtener token}{\es@scroman {lxv}}{section.Alph2.2}%
-\contentsline {chapter}{Bibliografía}{\es@scroman {lxvii}}{appendix*.34}%
+\contentsline {chapter}{\numberline {1}Lista de SKUs}{\es@scroman {lxii}}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {lxv}}{appendix.Alph2}%
+\contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {lxv}}{section.Alph2.1}%
+\contentsline {section}{\numberline {2.2}Obtener token}{\es@scroman {lxvi}}{section.Alph2.2}%
+\contentsline {chapter}{Bibliografía}{\es@scroman {lxviii}}{appendix*.34}%
