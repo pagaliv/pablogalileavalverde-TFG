@@ -109,7 +109,7 @@
 \contentsline {subsubsection}{Respuesta del endpoint}{\es@scroman {lix}}{lstnumber.4.11.7}%
 \contentsline {subsubsection}{Configuración de PostMan con Bearer Token estándar}{\es@scroman {lix}}{lstnumber.4.12.23}%
 \contentsline {subsubsection}{Scheduler para verificación de cantidades diarias}{\es@scroman {lx}}{lstnumber.4.12.23}%
-\contentsline {subsection}{\numberline {4.2.4}Evaluación}{\es@scroman {lx}}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.4}Evaluación y reunión con el cliente}{\es@scroman {lx}}{subsection.4.2.4}%
 \contentsline {chapter}{\numberline {1}Lista de SKUs}{\es@scroman {lxi}}{appendix.Alph1}%
 \contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {lxiv}}{appendix.Alph2}%
 \contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {lxiv}}{section.Alph2.1}%
