@@ -671,13 +671,13 @@ En esta iteración se trabajará principalmente en ampliar las funcionalidades d
 \textbf{Cambios solicitados por el cliente:} Se implementarán los dos cambios sugeridos en la reunión de cierre de la iteración anterior. Por un lado, estandarizar el contrato eliminándolo de la URL del endpoint ---ya que siempre se utilizará el mismo contrato de pruebas y, si se desea cambiar en el futuro, se modificará en la configuración de CouchDB---. Por otro lado, modificar PostMan para utilizar \texttt{Authorization: Bearer <token>} de forma estándar, mejorando la claridad y facilitando el uso por parte de otros miembros del equipo.
 
 
-\subsection{Análisis}
+\subsection{Análisis} 
 
 \subsubsection{Tipos de verificación: existence-only vs precise}
 Tras analizar los diferentes SKUs monitorizados, se identifican dos categorías de verificación necesarias:
 
 \begin{itemize}
-    \item \textbf{existence-only:} Para recursos cuyo consumo puede variar legítimamente (almacenamiento utilizado, tráfico de red, licencias por uso variable). En estos casos, basta con verificar que existe consumo mayor que cero, sin comparar contra un valor esperado concreto.
+    \item \textbf{existence-only:} Para recursos cuyo consumo puede variar legítimamente (IPs estaticas, Bases de datos). En estos casos, basta con verificar que existe consumo mayor que cero, sin comparar contra un valor esperado concreto.
     
     \item \textbf{precise:} Para recursos con cantidades fijas y predecibles (cores de CPU, GB de RAM). Estos requieren calcular el valor esperado y compararlo con el reportado por la API, aplicando umbrales de tolerancia para detectar discrepancias.
 \end{itemize}
@@ -693,10 +693,12 @@ Para los SKUs con verificación \texttt{precise}, se definen dos niveles de aler
     \item \textbf{Error:} Se activa cuando el ratio cae por debajo del umbral de error (típicamente 0.975). Indica una discrepancia significativa que requiere acción inmediata.
 \end{itemize}
 
-Estos umbrales son configurables por SKU en CouchDB, permitiendo ajustar la sensibilidad según las características de cada recurso.
+Estos umbrales son configurables por SKU en CouchDB, permitiendo ajustar la sensibilidad según las características de cada recurso. Ya que hay recursos como los cores de CPU donde una desviación del 1\% puede ser relevante, mientras que en otros como el almacenamiento en Kubernetes, la mera ausencia de consumo es suficiente para generar una alerta.
 
 \subsubsection{Estandarización del contrato en la configuración}
 Actualmente, el \texttt{contractId} se pasa como parámetro en la URL del endpoint (\texttt{/check/:contractId}). Tras analizar los casos de uso previstos, se concluye que el sistema operará siempre sobre un único contrato de referencia, por lo que tiene sentido centralizar este valor en la configuración del scheduler de CouchDB.
+
+Es importante aclarar que el contrato no se elimina del endpoint en ningún momento. Sin embargo, en los endpoints de chequeo, test y debug (\texttt{/check}, \texttt{/test}, \texttt{/debug}) se omitirá el parámetro \texttt{contractId} de la URL, ya que estos endpoints utilizarán siempre el contrato de pruebas configurado en CouchDB. En cambio, para el resto de endpoints se mantiene el \texttt{contractId} como parámetro en la URL, permitiendo así modificar fácilmente el contrato objetivo sin necesidad de alterar la configuración almacenada en la base de datos.
 
 \subsection{Desarrollo y pruebas}
 
@@ -714,16 +716,6 @@ Se ha ampliado la estructura de configuración del módulo \texttt{utilization} 
             "thresholds": {
                 "warning": 0.99,
                 "error": 0.975
-            }
-        },
-        {
-            "sku": "R01000",
-            "value": 44,
-            "verification": "precise",
-            "calculationType": "ram-hours",
-            "thresholds": {
-                "warning": 0.999,
-                "error": 0.99
             }
         },
         {
@@ -848,15 +840,7 @@ Se ha configurado un nuevo thread en el scheduler de CouchDB específico para la
 
 Este scheduler puede programarse con expresiones cron independientes del verificador de existencia, permitiendo ejecutar las verificaciones de cantidades con una frecuencia diferente si fuera necesario.
 
-\subsubsection{Mejora del contenido de las alertas}
-Se ha ampliado el formato de las alertas enviadas a Google Chat para incluir información específica de la verificación de cantidades:
 
-\begin{itemize}
-    \item \textbf{Nivel de alerta:} Diferencia visual entre warnings y errores.
-    \item \textbf{Detalles de la discrepancia:} Valor esperado, valor real y ratio calculado.
-    \item \textbf{SKUs afectados:} Lista agrupada por nivel de severidad.
-    \item \textbf{Timestamp:} Fecha y hora exacta de la detección.
-\end{itemize}
 
 \subsection{Evaluación}
 En esta iteración se ha evolucionado el sistema de verificación desde la simple detección de existencia hacia una verificación cuantitativa completa. El sistema de thresholds permite detectar tanto desviaciones menores (warnings) como críticas (errores), proporcionando información más precisa sobre el estado de los recursos.

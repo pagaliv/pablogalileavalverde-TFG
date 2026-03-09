@@ -100,19 +100,18 @@
 \contentsline {subsubsection}{Tipos de verificación: existence-only vs precise}{\es@scroman {lv}}{subsection.4.2.2}%
 \contentsline {subsubsection}{Sistema de thresholds}{\es@scroman {lvi}}{subsection.4.2.2}%
 \contentsline {subsubsection}{Estandarización del contrato en la configuración}{\es@scroman {lvi}}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Desarrollo y pruebas}{\es@scroman {lvi}}{subsection.4.2.3}%
-\contentsline {subsubsection}{Configuración de itemsToCheck en CouchDB}{\es@scroman {lvi}}{subsection.4.2.3}%
-\contentsline {subsubsection}{Endpoint de verificación de cantidades diarias}{\es@scroman {lvii}}{lstnumber.4.9.28}%
+\contentsline {subsection}{\numberline {4.2.3}Desarrollo y pruebas}{\es@scroman {lvii}}{subsection.4.2.3}%
+\contentsline {subsubsection}{Configuración de itemsToCheck en CouchDB}{\es@scroman {lvii}}{subsection.4.2.3}%
+\contentsline {subsubsection}{Endpoint de verificación de cantidades diarias}{\es@scroman {lvii}}{lstnumber.4.9.18}%
 \contentsline {subsubsection}{Cálculo del valor esperado}{\es@scroman {lviii}}{Item.80}%
 \contentsline {subsubsection}{Agregación de datos de uso}{\es@scroman {lviii}}{equation.4.2.1}%
 \contentsline {subsubsection}{Verificación y comparación}{\es@scroman {lviii}}{lstnumber.4.10.13}%
 \contentsline {subsubsection}{Respuesta del endpoint}{\es@scroman {lix}}{lstnumber.4.11.7}%
 \contentsline {subsubsection}{Configuración de PostMan con Bearer Token estándar}{\es@scroman {lix}}{lstnumber.4.12.23}%
 \contentsline {subsubsection}{Scheduler para verificación de cantidades diarias}{\es@scroman {lx}}{lstnumber.4.12.23}%
-\contentsline {subsubsection}{Mejora del contenido de las alertas}{\es@scroman {lx}}{lstnumber.4.13.8}%
 \contentsline {subsection}{\numberline {4.2.4}Evaluación}{\es@scroman {lx}}{subsection.4.2.4}%
-\contentsline {chapter}{\numberline {1}Lista de SKUs}{\es@scroman {lxii}}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {lxv}}{appendix.Alph2}%
-\contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {lxv}}{section.Alph2.1}%
-\contentsline {section}{\numberline {2.2}Obtener token}{\es@scroman {lxvi}}{section.Alph2.2}%
-\contentsline {chapter}{Bibliografía}{\es@scroman {lxviii}}{appendix*.34}%
+\contentsline {chapter}{\numberline {1}Lista de SKUs}{\es@scroman {lxi}}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {2}Crear cuenta y obtener token}{\es@scroman {lxiv}}{appendix.Alph2}%
+\contentsline {section}{\numberline {2.1}Creación de la Cuenta}{\es@scroman {lxiv}}{section.Alph2.1}%
+\contentsline {section}{\numberline {2.2}Obtener token}{\es@scroman {lxv}}{section.Alph2.2}%
+\contentsline {chapter}{Bibliografía}{\es@scroman {lxvii}}{appendix*.34}%
