@@ -851,7 +851,270 @@ En resumen, la variación en los tiempos de esta iteración se debe a que fue ne
 Además de que se decidio desglosar y plasmar también el tiempo de reunión con el cliente, ya que aunque es una tarea que no aporta valor directo al desarrollo, es necesaria para la correcta evolución del proyecto y para garantizar que se cumplen las expectativas del cliente, por lo que se considera relevante incluirla en la comparativa de horas.
 
 \begin{table}[H]
-    \centering
+    \centering\section{Iteración 2} \subsection{Planificación} En esta
+    iteración se trabajará principalmente en ampliar las funcionalidades del
+    sistema de verificación, evolucionando desde la simple detección de
+    existencia de SKUs hacia la verificación de cantidades de uso. Además, se
+    implementarán las mejoras solicitadas por el cliente durante la revisión de
+    la primera iteración.
+    
+    \textbf{Verificación de cantidades de uso:} En la iteración anterior se
+    implementó la detección de existencia de SKUs (\texttt{existence-only}).
+    Ahora se ampliará esta funcionalidad para verificar que las cantidades de
+    uso reportadas por la API coincidan con los valores esperados. Esto
+    permitirá detectar anomalías como recursos que reportan menos cores, RAM o
+    almacenamiento del esperado. Además de ser el preambulo final para lograr el
+    requisito RF04.02.
+    
+    \textbf{Sistema de thresholds:} Se implementará un sistema de umbrales
+    configurable que permita distinguir entre situaciones de \textit{warning}
+    (desviación menor) y \textit{error} (desviación crítica), adaptándose a las
+    diferentes tolerancias según el tipo de recurso.
+    
+    \textbf{Cambios solicitados por el cliente:} Se implementarán los dos
+    cambios sugeridos en la reunión de cierre de la iteración anterior. Por un
+    lado, estandarizar el contrato eliminándolo de la URL del endpoint ---ya que
+    siempre se utilizará el mismo contrato de pruebas y, si se desea cambiar en
+    el futuro, se modificará en la configuración de CouchDB---. Por otro lado,
+    modificar PostMan para utilizar \texttt{Authorization: Bearer <token>} de
+    forma estándar, mejorando la claridad y facilitando el uso por parte de
+    otros miembros del equipo.
+    
+    \subsection{Análisis}
+    
+    \subsubsection{Tipos de verificación: existence-only vs precise} Tras
+    analizar los diferentes SKUs monitorizados, se identifican dos categorías de
+    verificación necesarias:
+    
+    \begin{itemize} \item \textbf{existence-only:} Para recursos cuyo consumo
+    puede variar legítimamente (IPs estaticas, Bases de datos). En estos casos,
+    basta con verificar que existe consumo mayor que cero, sin comparar contra
+    un valor esperado concreto. \item \textbf{precise:} Para recursos con
+    cantidades fijas y predecibles (cores de CPU, GB de RAM). Estos requieren
+    calcular el valor esperado y compararlo con el reportado por la API,
+    aplicando umbrales de tolerancia para detectar discrepancias. \end{itemize}
+    
+    Por ejemplo, el SKU \texttt{C05000} (cores de CPU) tiene un valor base de 8
+    cores que debe mantenerse constante, mientras que \texttt{MKS1000}
+    (almacenamiento en Kubernetes) solo requiere verificar que existe consumo.
+    
+    \subsubsection{Sistema de thresholds} Para los SKUs con verificación
+    \texttt{precise}, se definen dos niveles de alerta basados en el ratio entre
+    el valor real y el esperado:
+    
+    \begin{itemize} \item \textbf{Warning:} Se activa cuando el ratio cae por
+    debajo del umbral de warning (típicamente 0.99). Indica una desviación menor
+    que requiere atención pero no es crítica. \item \textbf{Error:} Se activa
+    cuando el ratio cae por debajo del umbral de error (típicamente 0.975).
+    Indica una discrepancia significativa que requiere acción inmediata.
+    \end{itemize}
+    
+    Estos umbrales son configurables por SKU en CouchDB, permitiendo ajustar la
+    sensibilidad según las características de cada recurso. Ya que hay recursos
+    como los cores de CPU donde una desviación del 1\% puede ser relevante,
+    mientras que en otros como el almacenamiento en Kubernetes, la mera ausencia
+    de consumo es suficiente para generar una alerta.
+    
+    \subsubsection{Estandarización del contrato en la configuración}
+    Actualmente, el \texttt{contractId} se pasa como parámetro en la URL del
+    endpoint (\texttt{/check/:contractId}). Tras analizar los casos de uso
+    previstos, se concluye que el sistema operará siempre sobre un único
+    contrato de referencia, por lo que tiene sentido centralizar este valor en
+    la configuración del scheduler de CouchDB.
+    
+    Es importante aclarar que el contrato no se elimina del endpoint en ningún
+    momento. Sin embargo, en los endpoints de chequeo, test y debug
+    (\texttt{/check}, \texttt{/test}, \texttt{/debug}) se omitirá el parámetro
+    \texttt{contractId} de la URL, ya que estos endpoints utilizarán siempre el
+    contrato de pruebas configurado en CouchDB. En cambio, para el resto de
+    endpoints se mantiene el \texttt{contractId} como parámetro en la URL,
+    permitiendo así modificar fácilmente el contrato objetivo sin necesidad de
+    alterar la configuración almacenada en la base de datos.
+    
+    \subsection{Desarrollo y pruebas}
+
+\subsubsection{Configuración de itemsToCheck en CouchDB}
+Se ha ampliado la estructura de configuración del módulo \texttt{utilization} en CouchDB para soportar ambos tipos de verificación. Cada ítem ahora incluye:
+
+\begin{lstlisting}[caption=Estructura de itemsToCheck en CouchDB, label=lst:items-to-check]
+{
+    "itemsToCheck": [
+        {
+            "sku": "C05000",
+            "value": 8,
+            "verification": "precise",
+            "calculationType": "cpu-hours",
+            "thresholds": {
+                "warning": 0.99,
+                "error": 0.975
+            }
+        },
+        {
+            "sku": "MKS1000",
+            "verification": "existence-only"
+        }
+    ]
+}
+\end{lstlisting}
+ 
+Esta estructura permite definir de forma declarativa qué verificación aplicar a cada SKU, facilitando la adición de nuevos recursos sin modificar el código.
+
+\subsubsection{Endpoint de verificación de cantidades diarias}
+Se ha creado un nuevo endpoint específico para la verificación de cantidades diarias:
+
+\begin{verbatim}
+GET /data/v1/utilization/check-daily-quantity/:contractId
+\end{verbatim}
+
+Este endpoint realiza el siguiente proceso interno:
+\begin{enumerate}
+    \item Calcula los días transcurridos en el período de facturación actual.
+    \item Obtiene los datos de uso desde la billing-api mediante \texttt{/\{contractId\}/usage}.
+    \item Agrega el consumo por SKU utilizando la función \texttt{aggregateUsageData()}.
+    \item Compara los valores actuales contra los esperados para cada SKU configurado.
+\end{enumerate}
+
+\subsubsection{Cálculo del valor esperado}
+Para los SKUs con verificación \texttt{precise}, el valor esperado se calcula mediante la fórmula:
+
+\begin{equation}
+\texttt{expected} = \texttt{value} \times 24 \text{ horas} \times \texttt{días\_transcurridos}
+\end{equation}
+
+Donde \texttt{value} es el valor base configurado (por ejemplo, 8 cores) y \texttt{días\_transcurridos} son los días desde el inicio del período de facturación hasta ayer.
+
+\subsubsection{Agregación de datos de uso}
+La función \texttt{aggregateUsageData()} procesa la respuesta de la billing-api y agrupa el consumo por SKU:
+
+\begin{lstlisting}[caption=Función de agregación de datos de uso, label=lst:aggregate-usage]
+function aggregateUsageData(usageData) {
+    const aggregated = {};
+    usageData.datacenters.forEach(dc => {
+        dc.meters.forEach(meter => {
+            const sku = meter.meterId;
+            if (!aggregated[sku]) {
+                aggregated[sku] = 0;
+            }
+            aggregated[sku] += parseFloat(meter.quantity.quantity);
+        });
+    });
+    return aggregated;
+}
+\end{lstlisting}
+
+\subsubsection{Verificación y comparación}
+La función \texttt{processItemVerification()} determina el tipo de verificación a aplicar:
+
+\begin{lstlisting}[caption=Lógica de verificación por tipo, label=lst:process-verification]
+if (itemConfig.verification === 'existence-only') {
+    return this.generateExistenceVerification(sku, actualValue);
+}
+// Para verificacion precise:
+const expected = itemConfig.value * 24 * daysElapsed;
+const ratio = (actualValue / expected) * 100;
+return this.evaluateWithThresholds(sku, actualValue, expected, ratio);
+\end{lstlisting}
+
+\subsubsection{Respuesta del endpoint}
+El endpoint devuelve una respuesta estructurada con el resultado de cada verificación:
+
+\begin{lstlisting}[caption=Ejemplo de respuesta del endpoint de cantidades diarias, label=lst:response-daily]
+{
+  "ok": true,
+  "message": "daily-quantities check completed",
+  "contractId": "36348704",
+  "period": "this month until yesterday (3 days)",
+  "daysCalculated": 3,
+  "results": [
+    {
+      "sku": "C05000",
+      "status": "ok",
+      "actual": 1920.00,
+      "expected": 1920.00,
+      "ratio": 100,
+      "calculationMethod": "precise"
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "ok": 8,
+    "warnings": 1,
+    "errors": 1
+  }
+}
+\end{lstlisting}
+
+El campo \texttt{ratio} se expresa como porcentaje, donde 100 indica coincidencia perfecta entre el valor actual y el esperado.
+
+\subsubsection{Configuración de PostMan con Bearer Token estándar}
+Se ha actualizado la colección de PostMan para utilizar la pestaña \textit{Authorization} con tipo \texttt{Bearer Token} en lugar de una variable personalizada en los headers. Este cambio:
+
+\begin{itemize}
+    \item Aprovecha la interfaz nativa de PostMan para gestión de tokens.
+    \item Permite heredar la autenticación a nivel de colección, evitando configurarla en cada petición.
+    \item Facilita el uso por parte de otros miembros del equipo que estén familiarizados con PostMan.
+\end{itemize}
+
+\subsubsection{Scheduler para verificación de cantidades diarias}
+Se ha configurado un nuevo thread en el scheduler de CouchDB específico para la verificación de cantidades:
+
+\begin{lstlisting}[caption=Configuración del scheduler para cantidades diarias, label=lst:scheduler-quantities]
+{
+    "thread": "utilization-verifier:daily-quantities",
+    "enabled": true,
+    "mutex": true,
+    "timeout": 3600000,
+    "action": "utilization-verifier:daily-quantities:request",
+    "endAction": "utilization-verifier:daily-quantities:complete"
+}
+\end{lstlisting}
+
+Este scheduler puede programarse con expresiones cron independientes del verificador de existencia, permitiendo ejecutar las verificaciones de cantidades con una frecuencia diferente si fuera necesario.
+
+
+    
+    \subsection{Evaluación y reunión con el cliente} Los cambios solicitados
+    por el cliente se han implementado correctamente, simplificando el uso de la
+    API y mejorando la configuración de PostMan. Además al volver a reunirme con
+    el cliente dio el visto bueno a la iteración y hablamos sobre un posible
+    cambio en el futuro de seprarar las credenciales de las configuraciones en
+    dos documentos/formatos distintos, siendo este comentario más orientado a el
+    grupo de trabajo entero que a mi trabajo, ya que esta decisión es propia del
+    equipo de trabajo.
+    
+    Referido a los tiempos, ocurre algo similar a la iteración anterior, se han
+    finalizado antes de lo previsto, pero las horas totales dedicadas se han
+    aproximado bastante a la estimación inicial. La desviación en la tarea de
+    implementación de la verificación de cantidades se debe principalmente a la
+    complejidad añadida por el sistema de thresholds y la necesidad de realizar
+    pruebas adicionales para validar los diferentes escenarios (valores dentro
+    del umbral de warning, valores que superan el umbral de error, etc.).
+    
+    En resumen, la variación en los tiempos de esta iteración se debe a que fue
+    necesario emplear tiempo adicional para implementar las mejoras solicitadas
+    por el cliente, como el sistema de thresholds, la estandarización del
+    contrato, el uso de Bearer Token en PostMan y la mejora del sistema de
+    alertas. Esta complejidad añadida implicó realizar pruebas adicionales para
+    validar diferentes escenarios (valores dentro del umbral de warning, valores
+    que superan el umbral de error, etc.). Sin embargo, gracias a que las
+    pruebas y la validación se simplificaron por estas mismas mejoras, el tiempo
+    total invertido no se vio muy afectado, manteniéndose próximo a la
+    estimación inicial y finalizándose antes de lo previsto. Además de que se
+    decidio desglosar y plasmar también el tiempo de reunión con el cliente, ya
+    que aunque es una tarea que no aporta valor directo al desarrollo, es
+    necesaria para la correcta evolución del proyecto y para garantizar que se
+    cumplen las expectativas del cliente, por lo que se considera relevante
+    incluirla en la comparativa de horas.
+    
+    \begin{table}[H] \centering \begin{tabular}{|l|c|c|c|} \hline
+    \textbf{Tarea} & \textbf{Estimadas (h)} & \textbf{Reales (h)} &
+    \textbf{Desviación}\\ \hline Verificación cantidades & 16h & 18h & +12.5\%
+    \\ Comprobación contrato completo & 1h & 10' & -83.3\% \\ Configuraciones &
+    2h & 6h 10min & +205\% \\ Pruebas y validación & 4h & 1h & -75\% \\ Reunión
+    con el clinte & 0h & 1h & \% \\ \hline \textbf{Total} & \textbf{24h} &
+    \textbf{26h} & \textbf{+8.3\%} \\ \hline \end{tabular} \caption{Comparativa
+    de horas estimadas vs reales en la Iteración 2} \label{tab:horas-iteracion2}
+    \end{table}
     \begin{tabular}{|l|c|c|c|}
         \hline
         \textbf{Tarea} & \textbf{Estimadas (h)} & \textbf{Reales (h)} & \textbf{Desviación}\\ 
@@ -863,11 +1126,213 @@ Además de que se decidio desglosar y plasmar también el tiempo de reunión con
         Configuraciones & 2h & 6h 10min & +205\% \\
     
         Pruebas y validación & 4h & 1h & -75\% \\
-        Reunión con el clinte & 0h & 1h & \% \\
+        Reunión con el cliente & 0h & 1h & 100\% \\
         \hline
         \textbf{Total} & \textbf{24h} & \textbf{26h} & \textbf{+8.3\%} \\
         \hline
     \end{tabular}
     \caption{Comparativa de horas estimadas vs reales en la Iteración 2}
     \label{tab:horas-iteracion2}
+\end{table}
+
+% ============================================
+% ===== TERCERA ITERACIÓN =====
+% ============================================
+\newpage
+\section{Iteración 3}
+
+\subsection{Planificación}
+
+En esta iteración se cierra el ciclo de verificación de los \textit{items} continuables iniciado en las iteraciones anteriores: conocida la existencia de los SKUs (\textbf{TFG 3.1.1}) y verificadas sus cantidades de uso (\textbf{TFG 3.2.1}), el siguiente paso natural es contrastar el coste económico teórico con el importe real reflejado en la factura de IONOS Cloud (\textbf{TFG 3.3.1}).
+
+\textbf{Comprobación del gasto de ítems continuables:} A partir de las cantidades de uso obtenidas de la \textit{billing-api} y de las tarifas unitarias configuradas en CouchDB, se calcula el importe esperado para cada SKU y se contrasta con el valor real de la factura. Este proceso resulta fundamental para satisfacer los requisitos RF03.01, RF03.02 y RF03.04, cuya ejecución está también vinculada al requisito RF04.02.
+
+\textbf{Obtención y validación de la factura:} Se consume el endpoint de facturas de la API de IONOS Cloud y se valida la respuesta mediante el esquema Joi definido en iteraciones anteriores, asegurando que únicamente se procesan facturas cerradas y definitivas (\texttt{finallyPosted === true}).
+
+\textbf{Sistema de tolerancias:} Se reutiliza y extiende el sistema de umbrales configurables implementado en la iteración anterior, añadiendo parámetros específicos para la validación de importes monetarios y \textit{rebates}.
+
+Como en las iteraciones precedentes, se repiten las tareas transversales: verificación de completitud del contrato (\textbf{TFG 3.3.2}), actualización de credenciales y configuración en CouchDB (\textbf{TFG 3.3.3}), pruebas de funcionamiento (\textbf{TFG 3.3.4}) y configuración de alertas y rutinas (\textbf{TFG 3.3.5}).
+
+\subsection{Análisis}
+
+\subsubsection{Obtención de la factura real}
+
+La \textit{billing-api} expone dos endpoints para el acceso a los datos de facturación:
+
+\begin{enumerate}
+    \item \textbf{Listado de facturas:} \texttt{GET /\{contractId\}/invoices} --- Devuelve la lista básica de facturas disponibles con su identificador y período de facturación.
+    \item \textbf{Detalle de factura:} \texttt{GET /\{contractId\}/invoices/\{invoiceId\}} --- Devuelve la factura completa con el desglose por \textit{datacenter} y SKU.
+\end{enumerate}
+
+Los campos más relevantes de la respuesta son:
+
+\begin{itemize}
+    \item \textbf{\texttt{metadata.postingPeriod}:} Período de facturación en formato \texttt{YYYY-MM}.
+    \item \textbf{\texttt{metadata.finallyPosted}:} Booleano que indica si la factura está cerrada y definitiva.
+    \item \textbf{\texttt{total.quantity} / \texttt{total.unit}:} Importe total de la factura.
+    \item \textbf{\texttt{datacenters[].meters[]}:} Desglose por SKU, con los campos \texttt{meterId}, \texttt{quantity}, \texttt{rate} y \texttt{amount}.
+    \item \textbf{\texttt{datacenters[].rebate.amount.quantity}:} Descuento aplicado por \textit{datacenter}.
+\end{itemize}
+
+El verificador trabaja siempre sobre el \textbf{mes anterior cerrado}: se calcula el período del mes anterior y se busca en el listado la factura cuyo campo \texttt{date} coincida. El campo \texttt{finallyPosted} no está disponible en el endpoint de listado, por lo que se comprueba tras obtener el detalle completo de la factura mediante una llamada separada a \texttt{getInvoiceById()}. Si la factura aún no está disponible o \texttt{finallyPosted} es \texttt{false}, el proceso finaliza sin generar alertas, ya que podría seguir modificándose durante los primeros días del mes.
+
+\subsubsection{Cálculo del coste teórico}
+
+La fórmula de cálculo es directa. Para cada SKU se multiplica la cantidad de uso reportada por la tarifa unitaria almacenada en CouchDB bajo la clave \texttt{skuPrices}:
+
+\begin{equation}
+    \texttt{expectedAmount} = \texttt{expectedQuantity} \times \texttt{expectedRate}
+\end{equation}
+
+La tarifa \texttt{expectedRate} es independiente de la que figura en la factura. Esto es una decisión de diseño deliberada: si los precios de la factura contuviesen algún error, usar esa misma fuente para calcular el valor de referencia invalidaría cualquier detección de anomalía. Al mantenerla separada en CouchDB, el sistema conserva una fuente de verdad propia.
+
+Las unidades se utilizan tal cual, sin conversiones adicionales: si la tarifa está expresada en EUR/30Days, la cantidad de uso vendrá igualmente en esas unidades.
+
+\subsubsection{Sistema de tolerancias y estados}
+
+Se extiende el sistema de umbrales de la iteración anterior con parámetros específicos para la validación de cantidades e importes. Los valores por defecto, configurables por SKU en CouchDB bajo \texttt{config.invoiceValidation.validationTolerances}, son los siguientes:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{0.40\textwidth}|p{0.18\textwidth}|p{0.35\textwidth}|}
+        \hline
+        \textbf{Parámetro} & \textbf{Valor por defecto} & \textbf{Descripción} \\
+        \hline
+        \hline
+        \texttt{DEFAULT\_QUANTITY\_TOLERANCE} & 1\% (0,01) & Tolerancia general de cantidad \\
+        \hline
+        \texttt{DEFAULT\_ERROR\_THRESHOLD} & 95\% (0,95) & Ratio mínimo para no generar error en cantidades \\
+        \hline
+    \end{tabular}
+    \caption{Parámetros de tolerancia para validación de facturas}
+    \label{tab:tolerancias-factura}
+\end{table}
+
+La lógica de estados difiere según el tipo de comparación:
+
+\begin{itemize}
+    \item \textbf{Validación de cantidades} (\texttt{calculateQuantityComparison}): tres estados posibles según el ratio respecto al valor esperado.
+    \begin{itemize}
+        \item \textbf{\texttt{ok}:} ratio $\geq$ 0,99 --- coincidencia prácticamente perfecta.
+        \item \textbf{\texttt{warning}:} 0,95 $\leq$ ratio $<$ 0,99 --- desviación menor, requiere atención.
+        \item \textbf{\texttt{error}:} ratio $<$ 0,95 --- discrepancia crítica, requiere acción inmediata.
+    \end{itemize}
+    \item \textbf{Validación de importes monetarios} (\texttt{validateAmounts}): únicamente dos estados: \textbf{\texttt{ok}} si el importe está dentro del umbral configurado, \textbf{\texttt{error}} en caso contrario. No existe estado intermedio \texttt{warning} para importes.
+\end{itemize}
+
+\subsection{Desarrollo y pruebas}
+
+\subsubsection{Obtención y validación de la factura}
+
+El primer paso del proceso es localizar la factura correspondiente al mes anterior cerrado. Para ello se utiliza el helper \texttt{InvoiceHelper}, que encapsula las llamadas a la \textit{billing-api}. El endpoint de listado devuelve únicamente metadatos básicos — entre ellos el campo \texttt{date} con el período — pero \textbf{no incluye \texttt{finallyPosted}}. Por ello, la búsqueda inicial filtra solo por \texttt{date}; la comprobación de \texttt{finallyPosted} se realiza tras obtener el detalle completo con \texttt{getInvoiceById()}:
+
+\begin{lstlisting}[caption=Obtención de la factura del mes anterior cerrado, label=lst:get-invoice]
+const targetPeriod = now.clone().subtract(1, 'month')
+                                .startOf('month')
+                                .format('YYYY-MM');
+
+// NOTE: The list endpoint does NOT include finallyPosted,
+// so we must fetch details to check it.
+const invoices       = await invoiceHelper.listInvoices(contractId, token);
+const matchingInvoice = invoices.find((inv) => inv.date === targetPeriod);
+\end{lstlisting}
+
+Si no se localiza ninguna factura para ese período, o si tras obtener el detalle \texttt{finallyPosted} es \texttt{false}, el verificador termina sin generar alertas. A continuación se valida la respuesta mediante \texttt{invoiceSchema} antes de continuar con el procesamiento. De este modo se garantiza que los campos esperados están presentes y con el formato correcto, evitando errores de acceso en etapas posteriores.
+
+\subsubsection{Cálculo del coste teórico por SKU}
+
+Con la factura validada se recorre el array de \textit{datacenters} y sus \textit{meters}. Para cada SKU se calcula el importe esperado y se determina si la diferencia absoluta respecto al importe real queda dentro de la tolerancia configurada:
+
+\begin{lstlisting}[caption=Cálculo del importe esperado y validación de la desviación, label=lst:expected-amount]
+const expectedRate    = skuPrices[meter.meterId];
+const expectedAmount  = expectedQuantity * expectedRate;
+const invoiceAmount   = parseFloat(meter.amount.quantity);
+
+const difference      = invoiceAmount - expectedAmount;
+const toleranceAmount = Math.abs(expectedAmount) * DEFAULT_QUANTITY_TOLERANCE;
+const isValid         = Math.abs(difference) <= Math.max(toleranceAmount, REBATE_TOLERANCE);
+\end{lstlisting}
+
+
+\subsubsection{Validación de \textit{rebates}}
+
+Los descuentos por \textit{datacenter} se validan de forma independiente al resto de la jerarquía, usando una tolerancia absoluta de 0,01. Esta tolerancia es más estricta en términos absolutos que la tolerancia porcentual de los SKUs, dado que los \textit{rebates} son importes fijos y pequeñas diferencias de redondeo son esperables en su cálculo:
+
+\begin{lstlisting}[caption=Validación del rebate por datacenter, label=lst:rebate]
+const rebateDiff   = Math.abs(actualRebate - expectedRebate);
+const rebateStatus = rebateDiff < REBATE_TOLERANCE
+    ? 'ok'
+    : 'error';
+\end{lstlisting}
+
+\subsubsection{Endpoint de validación y ejecución programada}
+
+Se ha añadido un endpoint de prueba manual que permite lanzar la validación sobre un contrato concreto sin esperar a la ejecución programada:
+
+\begin{verbatim}
+POST /data/v1/invoice/manual-test/:contractId
+\end{verbatim}
+
+Este endpoint devuelve una respuesta estructurada con el resultado por SKU, por grupo de producto y el estado global del contrato, lo que facilita la depuración y la revisión puntual de facturas.
+
+Para la ejecución automática se ha añadido un nuevo \textit{thread} al \textit{scheduler} de CouchDB. El verificador corre los días 3, 4 y 5 de cada mes a las 14:00 (Europe/Berlin), dando margen para que la factura del mes anterior esté cerrada y disponible. La opción \texttt{mutex: true} garantiza que no se ejecutan dos instancias en paralelo si una tarda más de lo esperado:
+
+\begin{lstlisting}[caption=Configuración del scheduler para validación de facturas, label=lst:scheduler-invoice]
+{
+    "thread":    "invoice-verifier:monthly",
+    "enabled":   true,
+    "mutex":     true,
+    "timeout":   3600000,
+    "action":    "invoice-verifier:monthly:request",
+    "endAction": "invoice-verifier:monthly:complete"
+}
+\end{lstlisting}
+
+Esta configuración satisface los requisitos RF04.01 (ejecución programada del sistema de validación) y RF03.04 (programación de \textit{jobs} cron), ya que el ciclo mensual encaja con la periodicidad de las facturas de IONOS Cloud.
+
+\subsubsection{Comprobación de completitud del contrato (TFG 3.3.2)}
+
+Como en las iteraciones anteriores, antes de comenzar con el desarrollo de la funcionalidad principal se verifica que el contrato de pruebas sigue conteniendo todos los SKUs necesarios (\textbf{TFG 3.3.2}). En este caso no fue necesario añadir ningún elemento nuevo, ya que los SKUs monitorizados no habían variado respecto a la iteración anterior.
+
+\subsubsection{Actualización de credenciales y configuración (TFG 3.3.3)}
+
+Se actualizó el documento de configuración de CouchDB para incluir los nuevos parámetros de tolerancia de facturación (\textbf{TFG 3.3.3}): \texttt{validationTolerances}, \texttt{skuPrices} y la configuración del nuevo \textit{thread} del \textit{scheduler}. La estructura de credenciales no requirió cambios adicionales, ya que el helper \texttt{InvoiceHelper} reutiliza los mismos tokens de acceso definidos en iteraciones previas.
+
+\subsubsection{Pruebas manuales con PostMan (TFG 3.3.4)}
+
+Se añadieron nuevas colecciones en PostMan para la validación de facturas (\textbf{TFG 3.3.4}), verificando los siguientes escenarios:
+
+\begin{itemize}
+    \item Respuesta 200 cuando la factura del mes anterior está disponible y finalizada.
+    \item Estado global \texttt{ok} cuando todos los importes coinciden dentro del umbral configurado.
+    \item Paso a \texttt{error} de un SKU concreto al introducir una tarifa incorrecta en \texttt{skuPrices} de CouchDB que supera la tolerancia configurada (la validación de importes solo produce \texttt{ok} o \texttt{error}, sin estado intermedio).
+    \item Finalización sin alertas cuando \texttt{finallyPosted === false}, comprobando que el sistema espera a que la factura esté cerrada.
+\end{itemize}
+
+\subsubsection{Configuración de alertas (TFG 3.3.5)}
+
+Se adaptó el sistema de alertas para incluir el nuevo verificador de facturas (\textbf{TFG 3.3.5}). Las alertas generadas siguen la misma estructura que las de iteraciones anteriores: se notifica el estado global del contrato y, en caso de \texttt{warning} o \texttt{error}, se detallan los SKUs y \textit{datacenters} afectados junto con el ratio calculado. Esto permite al equipo de operaciones identificar rápidamente si la discrepancia corresponde a un SKU concreto, a un grupo de producto o a un \textit{rebate} incorrecto.
+
+\subsection{Evaluación}
+
+En esta iteración se ha implementado la validación económica completa de los \textit{items} continuables, cerrando el ciclo de verificación que comenzó en la iteración 1 (detección de existencia de SKUs) y se amplió en la iteración 2 (verificación de cantidades de uso). El sistema puede ahora comparar el gasto teórico calculado con el importe real facturado, desglosándolo de forma jerárquica por SKU, grupo de producto y \textit{datacenter}, y generando alertas diferenciadas por nivel de criticidad.
+
+Con esta iteración quedan satisfechos los requisitos \textbf{RF03.01} (cálculo del coste esperado por SKU), \textbf{RF03.02} (comparación con el importe real de la factura), \textbf{RF03.04} (programación de la ejecución mediante cron) y \textbf{RF04.02} (contraste entre el cálculo teórico y los datos reales de la API).
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Tarea} & \textbf{Estimadas (h)} & \textbf{Reales (h)} & \textbf{Desviación} \\
+        \hline
+        Comprobación gasto \textit{items} continuables & 16h & -- & -- \\
+        Comprobación contrato completo & 1h & -- & -- \\
+        Configuración de credenciales, alertas y rutinas & 2h & -- & -- \\
+        Testeo de funcionamiento & 4h & -- & -- \\
+        \hline
+        \textbf{Total} & \textbf{23h} & \textbf{--} & \textbf{--} \\
+        \hline
+    \end{tabular}
+    \caption{Comparativa de horas estimadas vs reales en la Iteración 3}
+    \label{tab:horas-iteracion3}
 \end{table}
