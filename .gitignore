@@ -1,0 +1,69 @@
+# ============================================
+# Archivos de compilación LaTeX
+# ============================================
+
+# Auxiliares generados por pdflatex / lualatex / xelatex
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.nav
+*.snm
+*.vrb
+*.idx
+*.ilg
+*.ind
+*.glo
+*.gls
+*.glg
+*.acn
+*.acr
+*.alg
+*.ist
+*.xdy
+*.ptc
+*.maf
+*.mtc
+*.mtc0
+*.mlf
+*.mlt
+*.nlf
+*.nlt
+
+# Archivos de latexmk
+*.fdb_latexmk
+*.fls
+
+# Archivos de BibTeX / Biber
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+
+# Carpeta de auxiliares propia del proyecto
+auxiliares/
+
+# Carpeta de salida de compilación (TeXstudio / latexmk)
+%OUTDIR%/
+out/
+output/
+build/
+
+# PDF generado (comentar si se quiere versionar el PDF)
+# main.pdf
+
+# Archivo de indentación
+indent.log
+
+# Carpeta de copia espejo
+pablogalileavalverde-TFG/
