@@ -168,10 +168,10 @@ su escalabilidad, simplicidad y naturaleza sin estado (cada petición es indepen
 
 \subsection{Concepto y Origen de API Canary}
 
-La empresa ha solicitado específicamente que el sistema de validación se implemente como una API Canary. El término \textbf{``Canary''} proviene de la práctica minera de usar canarios para detectar gases peligrosos: del mismo modo que estos animales alertaban a los mineros ante condiciones peligrosas, una API Canary actúa como sistema de alerta temprana en el software. En desarrollo de software, una \textbf{API Canary} se define como:
+La empresa ha solicitado que el sistema de validación se implemente como una API Canary. El término \textbf{``Canary''} proviene de la práctica minera de usar canarios para detectar gases peligrosos: del mismo modo que estos alertaban a los mineros ante condiciones peligrosas, una API Canary actúa como sistema de alerta temprana en el software. Una \textbf{API Canary} se define como:
 
 \begin{quote}
-    Una implementación de API que se despliega gradualmente a un subconjunto de usuarios o sistemas para detectar posibles problemas antes de que el usuario final lo detecte. El método de funcionamiento es una ejecución periódica con una alarma si falla, la frecuencia de dicha ejecución será dependiente de lo crítico que sea el módulo que controla.
+    Una implementación de API que se despliega gradualmente a un subconjunto de usuarios o sistemas para detectar posibles problemas antes de que el usuario final lo detecte. El método de funcionamiento es una ejecución periódica con una alarma si falla.
 \end{quote}
 
 \subsection{Características Principales}
