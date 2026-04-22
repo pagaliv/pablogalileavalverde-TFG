@@ -59,7 +59,7 @@ out/
 output/
 build/
 
-# PDF generado (comentar si se quiere versionar el PDF)
+# PDF generado 
 # main.pdf
 
 # Archivo de indentación
