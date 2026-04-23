@@ -58,6 +58,7 @@ auxiliares/
 out/
 output/
 build/
+.claude/
 
 # PDF generado 
 # main.pdf

@@ -1054,20 +1054,174 @@ En esta iteración se ha implementado la validación económica completa de los 
 
 Con esta iteración quedan satisfechos los requisitos \textbf{RF03.01} (cálculo del coste esperado por SKU), \textbf{RF03.02} (comparación con el importe real de la factura), \textbf{RF03.04} (programación de la ejecución mediante cron) y \textbf{RF04.02} (contraste entre el cálculo teórico y los datos reales de la API).
 
+En esta reunión no fue necesaria la reunión con el cliente, ya que los cambios introducidos en esta iteración fueron pequeños y con la comunicación de los cambios y el modo en los que se hicieros via mensaje fue suficiente y no se requirió reunión. 
+
+Referido a tiempos, se realizo según lo previsto aproximadamente, invirtiendo las horas necesarias, necesitanto menos tiempo para comprobar que el contrato estaba compledo debido a que no se introdujeron ningún cambio.
+
 \begin{table}[H]
     \centering
     \begin{tabular}{|l|c|c|c|}
         \hline
         \textbf{Tarea} & \textbf{Estimadas (h)} & \textbf{Reales (h)} & \textbf{Desviación} \\
         \hline
-        Comprobación gasto \textit{items} continuables & 16h & -- & -- \\
-        Comprobación contrato completo & 1h & -- & -- \\
-        Configuración de credenciales, alertas y rutinas & 2h & -- & -- \\
-        Testeo de funcionamiento & 4h & -- & -- \\
+        Comprobación gasto \textit{items} continuables & 16h & 16h & 0\% \\
+        Comprobación contrato completo & 1h & 10' & -83\% \\
+        Configuración de credenciales, alertas y rutinas & 2h & 2h y 30' & +25\% \\
+        Testeo de funcionamiento & 4h & 4h & 0\% \\
         \hline
-        \textbf{Total} & \textbf{23h} & \textbf{--} & \textbf{--} \\
+        \textbf{Total} & \textbf{23h} & \textbf{22h y 40'} & \textbf{3\%} \\
         \hline
     \end{tabular}
     \caption{Comparativa de horas estimadas vs reales en la Iteración 3}
     \label{tab:horas-iteracion3}
+\end{table}
+
+% ============================================
+% ===== TERCERA ITERACIÓN =====
+% ============================================
+\newpage
+\section{Iteración 4}
+
+\subsection{Planificación}
+
+Las tres iteraciones anteriores han completado el ciclo de verificación de los \textit{items} continuables: se detecta su presencia en el contrato, se contrasta su consumo diario y se valida su coste en la factura mensual. En esta cuarta iteración el foco cambia: se abordan por primera vez los \textit{items} no continuables, representados por los tokens de IA de IONOS Cloud (\textbf{TFG 3.4.1}).
+
+A diferencia de los recursos de infraestructura (cores de CPU, RAM o almacenamiento), el consumo de tokens de IA solo existe si el sistema realiza llamadas activas al endpoint de inferencia. Sin generación controlada, la API de facturación simplemente no reflejaría consumo para los SKUs \texttt{AIL370I1100} (tokens de entrada) y \texttt{AIL370O1100} (tokens de salida), haciendo imposible cualquier verificación.
+
+\textbf{Módulo generador de tokens:} Se implementará un módulo \texttt{generator} que, activado diariamente por el \textit{scheduler}, realice llamadas repetidas al endpoint de IA de IONOS Cloud hasta acumular un número mínimo de tokens configurable (\texttt{targetTokens}). El diseño sigue el mismo patrón basado en eventos ya utilizado en módulos anteriores.
+
+\textbf{Control mediante configuración:} Todos los parámetros relevantes (modelo, \texttt{targetTokens}, \textit{prompt} y URL del endpoint) se centralizan en CouchDB, de modo que pueden ajustarse sin modificar el código.
+
+\subsection{Análisis}
+
+\subsubsection{El problema de los \textit{items} no continuables}
+
+Los \textit{items} continuables ---como los cores de CPU o los GB de RAM--- generan consumo de forma automática mientras los recursos están activos. Los tokens de IA, en cambio, solo aparecen en la factura si se realizan llamadas explícitas al modelo. Esto plantea un problema de verificabilidad: sin consumo no hay datos que verificar, y sin generación controlada no es posible predecir cuántos tokens deberían aparecer.
+
+La solución adoptada es crear un generador que se ejecute a hora fija cada día y produzca un volumen de tokens conocido de antemano. Una vez que el consumo es predecible, el módulo de verificación de utilización puede comprobar los SKUs de IA con verificación \texttt{existence-only}: basta con confirmar que hay consumo mayor que cero en el período.
+
+\subsubsection{Separación de tokens de entrada y salida}
+
+La API de IONOS Cloud distingue dos SKUs para el consumo de IA:
+
+\begin{itemize}
+    \item \textbf{\texttt{AIL370I1100}} (tokens de entrada / \textit{input}): corresponde a los tokens del \textit{prompt} enviado al modelo en cada llamada.
+    \item \textbf{\texttt{AIL370O1100}} (tokens de salida / \textit{output}): corresponde a los tokens generados por el modelo en la respuesta.
+\end{itemize}
+
+Con un \texttt{targetTokens} de 100.000, la distribución habitual es aproximadamente 10.000 de entrada y 90.000 de salida, es decir, 0,01M y 0,09M respectivamente en las unidades de facturación. El \textit{prompt} largo es intencionado: cuanto más extenso sea, más tokens de salida genera el modelo por llamada, reduciendo el número de iteraciones necesarias para alcanzar el objetivo.
+
+\subsubsection{Compatibilidad con el SDK de OpenAI}
+
+El endpoint de inferencia de IONOS Cloud implementa la misma interfaz que la API de OpenAI, lo que permite utilizar el SDK oficial de Node.js (\texttt{openai}) apuntando a la URL del servicio de IONOS. La única diferencia respecto a un uso convencional del SDK es que \texttt{baseURL} apunta al endpoint de IONOS en lugar del de OpenAI, por lo que no fue necesario aprender ni integrar ningún cliente adicional.
+
+El uso de \texttt{temperature: 0} garantiza respuestas deterministas: con el mismo \textit{prompt} y el mismo modelo, el número de tokens generados es reproducible entre ejecuciones, lo que facilita la predicción del consumo mensual acumulado.
+
+\subsection{Desarrollo y pruebas}
+
+\subsubsection{Configuración del \textit{scheduler} en CouchDB}
+
+El generador se activa cada día a las 08:00 mediante un nuevo \textit{thread} en el \textit{scheduler}. La opción \texttt{mutex: true} impide que dos ejecuciones se solapen si la generación tarda más de lo habitual:
+
+\begin{lstlisting}[caption=Configuración del scheduler para el generador de tokens, label=lst:scheduler-generator]
+{
+    "thread":    "generator",
+    "enabled":   true,
+    "mutex":     true,
+    "timeout":   3600000,
+    "action":    "generator:request",
+    "endAction": "generator:complete",
+    "schedule":  [["0 8 * * *", {}]]
+}
+\end{lstlisting}
+
+El campo \texttt{action} debe coincidir exactamente con el nombre del evento registrado en el módulo, ya que es la cadena que el \textit{mediator} usa para enrutar el disparo.
+
+\subsubsection{Módulo Generator: registro del evento}
+
+El módulo \texttt{generator} sigue el mismo patrón que los módulos anteriores: en su método \texttt{init()} registra un \textit{listener} sobre el evento correspondiente y delega toda la lógica en el \textit{helper} especializado:
+
+\begin{lstlisting}[caption=Registro del evento en el módulo Generator, label=lst:generator-event]
+// src/modules/generator/index.js:22
+this.mediator.on(Actions.GENERATOR_REQUEST, async () => {
+    const result = await this.inferenceHelper.generateTokens();
+    this.mediator.emit(Actions.GENERATOR_COMPLETE); // libera el mutex
+});
+\end{lstlisting}
+
+La constante \texttt{Actions.GENERATOR\_REQUEST} vale \texttt{'generator:request'}, que coincide exactamente con el \texttt{action} configurado en el \textit{scheduler}. La emisión de \texttt{GENERATOR\_COMPLETE} al finalizar, independientemente del resultado, es lo que libera el \textit{mutex} y permite que la siguiente ejecución programada pueda arrancar.
+
+\subsubsection{InferenceHelper: carga de configuración}
+
+Antes de iniciar la generación, \texttt{InferenceHelper} lee sus parámetros desde CouchDB. Si alguno no está definido, aplica un valor por defecto:
+
+\begin{lstlisting}[caption=Carga de parámetros de configuración en InferenceHelper, label=lst:inference-config]
+// src/helpers/inference.js:35-39
+const { baseUrl, apiKey, model, targetTokens, prompt }
+    = this.getConfig().config || {};
+
+this.targetTokens = targetTokens || 100000;
+this.prompt       = prompt       || DEFAULT_PROMPT;
+\end{lstlisting}
+
+El \texttt{DEFAULT\_PROMPT} es un texto extenso sobre computación en la nube que actúa como \textit{fallback}. Su longitud es deliberada: un \textit{prompt} largo produce más tokens de salida por llamada, reduciendo el número de iteraciones necesarias para alcanzar \texttt{targetTokens}.
+
+\subsubsection{InferenceHelper: bucle de generación}
+
+El núcleo del módulo es un bucle que acumula tokens hasta superar el umbral configurado. En cada iteración se realiza una única llamada al modelo y se suman los tokens consumidos, separando los de entrada de los de salida:
+
+\begin{lstlisting}[caption=Bucle de generación de tokens hasta alcanzar el objetivo, label=lst:inference-loop]
+// src/helpers/inference.js:59
+while (inputTokens + outputTokens < this.targetTokens) {
+    const response = await this.client.chat.completions.create({
+        model:       this.model,
+        temperature: 0,
+        messages:    [{ role: 'user', content: prompt }]
+    });
+    inputTokens  += response.usage.prompt_tokens     || 0;
+    outputTokens += response.usage.completion_tokens || 0;
+    calls++;
+}
+return { inputTokens, outputTokens,
+         totalTokens: inputTokens + outputTokens, calls };
+\end{lstlisting}
+
+Con \texttt{targetTokens = 100.000} y un \textit{prompt} suficientemente largo, en la práctica suelen necesitarse una o dos llamadas para alcanzar el objetivo. Un resultado típico sería \texttt{\{inputTokens: 10000, outputTokens: 90000, totalTokens: 100000, calls: 1\}}.
+
+\subsubsection{Actualización del contrato y configuración de verificación}
+
+Los SKUs \texttt{AIL370I1100} y \texttt{AIL370O1100} son nuevos en el contrato, por lo que fue necesario añadirlos. A diferencia de los SKUs continuables, se configuran con verificación \texttt{existence-only}: no se compara contra un valor esperado fijo, sino que basta con confirmar que hay consumo mayor que cero, ya que la cantidad exacta puede variar ligeramente según el número de días transcurridos en el período:
+
+\begin{lstlisting}[caption=Configuración de los SKUs de IA en itemsToCheck, label=lst:ai-sku-config]
+{ "sku": "AIL370I1100", "verification": "existence-only" },
+{ "sku": "AIL370O1100", "verification": "existence-only" }
+\end{lstlisting}
+
+\subsection{Evaluación}
+
+Con esta iteración el sistema es capaz de generar consumo de IA de forma autónoma y verificar que dicho consumo aparece en la API de facturación. El módulo generador cierra el ciclo para los \textit{items} no continuables: primero produce el consumo y, en la verificación diaria de cantidades implementada en la iteración 2, se comprueba que los SKUs de IA están presentes.
+
+No se incluyó una subsección de pruebas con PostMan independiente porque el módulo generador no expone un endpoint REST propio: su ejecución está diseñada para ser disparada exclusivamente por el \textit{scheduler}. Para la validación manual se empleó directamente el endpoint de IA de IONOS, comprobando que las llamadas devolvían el campo \texttt{usage} con los contadores esperados antes de integrar la lógica en el bucle.
+
+Del mismo modo,aunque no fue necesaria una reunión con el cliente, porque los cambios se comunicaron de forma asíncrona y no requirieron validación, se hizo una reunión de seguimiento para tratar los posibles porblemas y decisiones que no se habian especificado, el cliente comunico el problema de usar un gasto de tockes lo suficientemente grande para que se plasmará en la factura pero no un tamaño que fuese demasiado grande, por lo que se llego a la conclusión de usar 100.000 tockens.
+
+La implementación del \textit{helper} resultó más directa de lo previsto gracias a la compatibilidad del SDK de OpenAI con el endpoint de IONOS. La mayor inversión de tiempo se concentró en las pruebas de integración, ya que el consumo real de tokens tarda unas horas en reflejarse en la API de facturación y para verificar que funcionaba correctamente fue necesario esperar a que el consumo generado por el módulo se viera reflejado en la API de facturación, lo que alargó el proceso de validación. Sin embargo, una vez superada esta fase, la integración con el sistema de verificación existente fue fluida, ya que los SKUs de IA se configuraron con verificación \texttt{existence-only}, lo que simplificó la lógica de validación. Además los tiempos muertos de espera se usararon para redactar.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Tarea} & \textbf{Estimadas (h)} & \textbf{Reales (h)} & \textbf{Desviación} \\
+        \hline
+        Implementación módulo generador     & 24h & 20h  & -16.7\% \\
+        Comprobación contrato completo      & 1h  & 30'  & -50\%   \\
+        Configuración de credenciales y rutinas & 4h & 5h & +25\%  \\
+        Testeo de funcionamiento            & 8h  & 11h y 30' & +45\%   \\
+        Reunión con el cliente                   & 0h  & 30'   & $\infty$ \%   \\
+        \hline
+        \textbf{Total} & \textbf{37h} & \textbf{37h 30'} & \textbf{+1.3\%} \\
+        \hline
+    \end{tabular}
+    \caption{Comparativa de horas estimadas vs reales en la Iteración 4}
+    \label{tab:horas-iteracion4}
 \end{table}
