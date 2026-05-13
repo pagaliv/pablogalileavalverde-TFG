@@ -182,7 +182,7 @@ Los tokens de autenticación en IONOS Cloud presentan las siguientes caracterís
 
 \subsubsection{Uso del Token}
 
-Una vez definida la gestión de los tokens, estos se pueden utilizar para realizar llamadas a la API de facturación. En concreto, se emplea el endpoint \textit{"https://api.ionos.com/billing/\{contract\}/products"}~\cite{billing-IONOSCloud}, que devuelve la información de los productos asociados al contrato. De este modo es posible verificar la presencia de cada recurso deseado.
+Una vez definida la gestión de los tokens, estos se pueden utilizar para realizar llamadas a la API de facturación. En concreto, se emplea el endpoint \url{https://api.ionos.com/billing/{contract}/products}~\cite{billing-IONOSCloud}, que devuelve la información de los productos asociados al contrato. De este modo es posible verificar la presencia de cada recurso deseado.
 
 Para ejecutar estas llamadas se utiliza PostMan.
 Como primer SKU a detectar se opta por A01000 (IP estática). Para ello se añade una IP estática de forma manual en el DCD y, tras pasar el periodo que tarda en actualizarse
