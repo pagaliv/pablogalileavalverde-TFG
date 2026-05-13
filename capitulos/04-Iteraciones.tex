@@ -1348,7 +1348,7 @@ Tres detalles merecen comentario:
 
 El módulo \texttt{invoice-validation} extrae los \textit{meters} de IA de la respuesta de la \textit{billing-api} y, a través del \textit{dispatcher} comentado en el análisis, los enruta a \texttt{generateNonConsumableVerification()}. El resto del flujo es compartido con la iteración 3: se valida la factura con \texttt{invoiceSchema}, se aplica la tolerancia configurada y se acumulan los resultados en la respuesta jerárquica. Los SKUs que no estén declarados en \texttt{itemsToCheck} pero sí aparezcan en la factura se agregan en una lista \texttt{unmappedSkus}, lo que evita que un SKU nuevo pase desapercibido.
 
-\subsubsection{Comprobación del contrato y configuración (TFG 3.5.2 y 3.5.3)}
+\subsubsection{Comprobación del contrato y configuración}
 
 Los SKUs \texttt{AIL370I1100} y \texttt{AIL370O1100} ya estaban incluidos en el contrato desde la iteración 4, por lo que no fue necesario añadirlos (\textbf{TFG 3.5.2}). La actualización de configuración en CouchDB se limitó a las nuevas entradas en \texttt{itemsToCheck} y a los precios en \texttt{skuPrices} (\textbf{TFG 3.5.3}). El \textit{thread} \texttt{invoice-verifier:monthly} del \textit{scheduler} se reutiliza tal cual, sin modificaciones, ya que la periodicidad mensual sigue siendo la adecuada.
 
