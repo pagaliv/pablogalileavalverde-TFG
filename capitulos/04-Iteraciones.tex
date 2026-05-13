@@ -1185,7 +1185,7 @@ Con \texttt{targetTokens = 100.000} y un \textit{prompt} suficientemente largo, 
 
 \subsubsection{Actualización del contrato y configuración de verificación}
 
-Los SKUs \texttt{AIL370I1100} y \texttt{AIL370O1100} son nuevos en el contrato, por lo que fue necesario añadirlos. A diferencia de los SKUs continuables, se configuran con verificación \texttt{existence-only}: no se compara contra un valor esperado fijo, sino que basta con confirmar que hay consumo mayor que cero, ya que la cantidad exacta puede variar ligeramente según el número de días transcurridos en el período:
+Los SKUs \texttt{AIL370I1100} y \texttt{AIL370O1100} son nuevos en el contrato, por lo que fue necesario añadirlos el 16 de abril. A diferencia de los SKUs continuables, se configuran con verificación \texttt{existence-only}: no se compara contra un valor esperado fijo, sino que basta con confirmar que hay consumo mayor que cero, ya que la cantidad exacta puede variar ligeramente según el número de días transcurridos en el período:
 
 \begin{lstlisting}[caption=Configuración de los SKUs de IA en itemsToCheck, label=lst:ai-sku-config]
 { "sku": "AIL370I1100", "verification": "existence-only" },
@@ -1194,11 +1194,11 @@ Los SKUs \texttt{AIL370I1100} y \texttt{AIL370O1100} son nuevos en el contrato, 
 
 \subsection{Evaluación}
 
-Con esta iteración el sistema es capaz de generar consumo de IA de forma autónoma y verificar que dicho consumo aparece en la API de facturación. El módulo generador cierra el ciclo para los \textit{items} no continuables: primero produce el consumo y, en la verificación diaria de cantidades implementada en la iteración 2, se comprueba que los SKUs de IA están presentes.
+Tras completar la iteración el 25 de abril, el sistema es capaz de generar consumo de IA de forma autónoma y verificar que dicho consumo aparece en la API de facturación. El módulo generador cierra el ciclo para los \textit{items} no continuables: primero produce el consumo y, en la verificación diaria de cantidades implementada en la iteración 2, se comprueba que los SKUs de IA están presentes.
 
 No se incluyó una subsección de pruebas con PostMan independiente porque el módulo generador no expone un endpoint REST propio: su ejecución está diseñada para ser disparada exclusivamente por el \textit{scheduler}. Para la validación manual se empleó directamente el endpoint de IA de IONOS, comprobando que las llamadas devolvían el campo \texttt{usage} con los contadores esperados antes de integrar la lógica en el bucle.
 
-Del mismo modo,aunque no fue necesaria una reunión con el cliente, porque los cambios se comunicaron de forma asíncrona y no requirieron validación, se hizo una reunión de seguimiento para tratar los posibles porblemas y decisiones que no se habian especificado, el cliente comunico el problema de usar un gasto de tockes lo suficientemente grande para que se plasmará en la factura pero no un tamaño que fuese demasiado grande, por lo que se llego a la conclusión de usar 100.000 tockens.
+Del mismo modo, aunque no fue necesaria una reunión formal con el cliente, porque los cambios se comunicaron de forma asíncrona y no requirieron validación, se hizo una reunión de seguimiento el 21 de abril para tratar los posibles problemas y decisiones que no se habían especificado; el cliente comunicó el problema de usar un gasto de tokens lo suficientemente grande para que se plasmara en la factura pero no un tamaño que fuese demasiado grande, por lo que se llegó a la conclusión de usar 100.000 tokens.
 
 La implementación del \textit{helper} resultó más directa de lo previsto gracias a la compatibilidad del SDK de OpenAI con el endpoint de IONOS. La mayor inversión de tiempo se concentró en las pruebas de integración, ya que el consumo real de tokens tarda unas horas en reflejarse en la API de facturación y para verificar que funcionaba correctamente fue necesario esperar a que el consumo generado por el módulo se viera reflejado en la API de facturación, lo que alargó el proceso de validación. Sin embargo, una vez superada esta fase, la integración con el sistema de verificación existente fue fluida, ya que los SKUs de IA se configuraron con verificación \texttt{existence-only}, lo que simplificó la lógica de validación. Además los tiempos muertos de espera se usararon para redactar.
 
@@ -1348,7 +1348,7 @@ El módulo \texttt{invoice-validation} extrae los \textit{meters} de IA de la re
 
 \subsubsection{Comprobación del contrato y configuración}
 
-Los SKUs \texttt{AIL370I1100} y \texttt{AIL370O1100} ya estaban incluidos en el contrato desde la iteración 4, por lo que no fue necesario añadirlos (\textbf{TFG 3.5.2}). La actualización de configuración en CouchDB se limitó a las nuevas entradas en \texttt{itemsToCheck} y a los precios en \texttt{skuPrices} (\textbf{TFG 3.5.3}). El \textit{thread} \texttt{invoice-verifier:monthly} del \textit{scheduler} se reutiliza tal cual, sin modificaciones, ya que la periodicidad mensual sigue siendo la adecuada.
+Los SKUs \texttt{AIL370I1100} y \texttt{AIL370O1100} ya estaban incluidos en el contrato desde la iteración 4, por lo que no fue necesario añadirlos (\textbf{TFG 3.5.2}). La actualización de configuración en CouchDB, realizada el 24 de abril, se limitó a las nuevas entradas en \texttt{itemsToCheck} y a los precios en \texttt{skuPrices} (\textbf{TFG 3.5.3}). El \textit{thread} \texttt{invoice-verifier:monthly} del \textit{scheduler} se reutiliza tal cual, sin modificaciones, ya que la periodicidad mensual sigue siendo la adecuada.
 
 \subsubsection{Pruebas manuales con PostMan}
 
@@ -1392,9 +1392,9 @@ El sistema de alertas se adapta para incorporar los SKUs de IA dentro del mismo 
 
 Con esta iteración el sistema queda completo: valida tanto los \textit{items} continuables como los no continuables, en el doble plano del uso diario (módulo \texttt{utilization}) y de la facturación mensual (módulo \texttt{invoice-validation}). Quedan así cubiertos los requisitos \textbf{RF03.01} (cálculo del coste esperado), \textbf{RF03.02} (comparación con el importe real), \textbf{RF03.03} (tolerancia configurable, especialmente relevante en esta iteración por la naturaleza de los tokens), \textbf{RF03.04} (programación mediante cron), \textbf{RF04.02} (contraste teórico vs. real) y \textbf{RF04.03} (verificación de \textit{items} no continuables).
 
-La iteración resultó más ligera de lo previsto en términos de desarrollo, ya que la mayor parte del esfuerzo se concentró en analizar las tarifas reales de IONOS Cloud y en justificar la elección de tolerancias diferenciadas para \textit{input} y \textit{output}. Una vez tomada esa decisión, la integración fue prácticamente inmediata: la rama \texttt{non-consumable} del \textit{dispatcher} ya estaba disponible y solo fue necesario configurar los SKUs en CouchDB. El testeo, en cambio, se vio condicionado por el calendario mensual de las facturas, pues hubo que esperar al cierre del período para poder ejecutar los escenarios completos sobre datos reales.
+La iteración resultó más ligera de lo previsto en términos de desarrollo, ya que la mayor parte del esfuerzo se concentró en analizar las tarifas reales de IONOS Cloud y en justificar la elección de tolerancias diferenciadas para \textit{input} y \textit{output}. Una vez tomada esa decisión, la integración fue prácticamente inmediata: la rama \texttt{non-consumable} del \textit{dispatcher} ya estaba disponible y solo fue necesario configurar los SKUs en CouchDB. El testeo, en cambio, se vio condicionado por el calendario mensual de las facturas, pues hubo que esperar al cierre del período de abril para poder ejecutar los escenarios completos sobre datos reales, lo que situó las pruebas definitivas en torno al 9 de mayo.
 
-No se requirió reunión con el cliente: los cambios se comunicaron de forma asíncrona y la única decisión relevante --- los valores concretos de tolerancia --- se cerró por mensaje, basándose en los datos observados durante la iteración 4.
+No se requirió reunión con el cliente: los cambios se comunicaron de forma asíncrona y la única decisión relevante --- los valores concretos de tolerancia --- se cerró por mensaje a principios de mayo, basándose en los datos observados durante la iteración 4. La iteración quedó completamente cerrada el 11 de mayo.
 
 
 \begin{table}[H]
