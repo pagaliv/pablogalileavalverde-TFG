@@ -1394,7 +1394,7 @@ Con esta iteración el sistema queda completo: valida tanto los \textit{items} c
 
 La iteración resultó más ligera de lo previsto en términos de desarrollo, ya que la mayor parte del esfuerzo se concentró en analizar las tarifas reales de IONOS Cloud y en justificar la elección de tolerancias diferenciadas para \textit{input} y \textit{output}. Una vez tomada esa decisión, la integración fue prácticamente inmediata: la rama \texttt{non-consumable} del \textit{dispatcher} ya estaba disponible y solo fue necesario configurar los SKUs en CouchDB. El testeo, en cambio, se vio condicionado por el calendario mensual de las facturas, pues hubo que esperar al cierre del período de abril para poder ejecutar los escenarios completos sobre datos reales, lo que situó las pruebas definitivas en torno al 9 de mayo.
 
-No se requirió reunión con el cliente: los cambios se comunicaron de forma asíncrona y la única decisión relevante --- los valores concretos de tolerancia --- se cerró por mensaje a principios de mayo, basándose en los datos observados durante la iteración 4. La iteración quedó completamente cerrada el 11 de mayo.
+No se requirió reunión con el cliente: los cambios se comunicaron de forma asíncrona y la única decisión relevante --- los valores concretos de tolerancia --- se cerró por mensaje a principios de mayo, basándose en los datos observados durante la iteración 4. La iteración quedó completamente cerrada el 11 de mayo. En la tabla se ha desglosado \textit{Comprobación de gasto de item no continuables} en tres tareas por mayor claridad. 
 
 
 \begin{table}[H]
@@ -1404,13 +1404,13 @@ No se requirió reunión con el cliente: los cambios se comunicaron de forma as�
         \textbf{Tarea} & \textbf{Estimadas (h)} & \textbf{Reales (h)} & \textbf{Desviación} \\
         \hline
         Análisis de tarifas y tolerancias       & 4h  & 4h y 30' & +12.5\% \\
-        Configuración en CouchDB                & 1h  & 30'      & -50\%   \\
-        Integración del tipo \texttt{non-consumable} & 6h  & 4h       & -33.3\% \\
+        Configuración en CouchDB                & 2h  & 1h y 30'  & -25\%   \\
+        Integración del tipo \texttt{non-consumable} & 6h  & 7 h       & +14,3\% \\
         Comprobación contrato completo          & 1h  & 10'      & -83\%   \\
         Configuración de alertas y rutinas      & 2h  & 2h       & 0\%     \\
         Testeo de funcionamiento                & 6h  & 7h       & +16.7\% \\
         \hline
-        \textbf{Total} & \textbf{20h} & \textbf{18h y 10'} & \textbf{-9.2\%} \\
+        \textbf{Total} & \textbf{21h} & \textbf{22h y 10'} & \textbf{-9\%} \\
         \hline
     \end{tabular}
     \caption{Comparativa de horas estimadas vs reales en la Iteración 5}
