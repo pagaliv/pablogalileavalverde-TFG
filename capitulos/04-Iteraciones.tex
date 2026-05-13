@@ -1352,9 +1352,9 @@ El módulo \texttt{invoice-validation} extrae los \textit{meters} de IA de la re
 
 Los SKUs \texttt{AIL370I1100} y \texttt{AIL370O1100} ya estaban incluidos en el contrato desde la iteración 4, por lo que no fue necesario añadirlos (\textbf{TFG 3.5.2}). La actualización de configuración en CouchDB se limitó a las nuevas entradas en \texttt{itemsToCheck} y a los precios en \texttt{skuPrices} (\textbf{TFG 3.5.3}). El \textit{thread} \texttt{invoice-verifier:monthly} del \textit{scheduler} se reutiliza tal cual, sin modificaciones, ya que la periodicidad mensual sigue siendo la adecuada.
 
-\subsubsection{Pruebas manuales con PostMan (TFG 3.5.4)}
+\subsubsection{Pruebas manuales con PostMan}
 
-Las pruebas se ejecutaron una vez cerrado el período mensual, lanzando la validación a través del endpoint manual ya disponible:
+Las pruebas se ejecutaron una vez cerrado el período mensual (\textbf{TFG 4.5.4}), lanzando la validación a través del endpoint manual ya disponible:
 
 \begin{verbatim}
 POST /data/v1/invoice/manual-test/:contractId
