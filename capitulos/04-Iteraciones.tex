@@ -217,7 +217,7 @@ Se creó un script en JavaScript para PostMan que verifica los SKUs disponibles.
 \begin{enumerate}
     \item Define un objeto \texttt{requiredResources} con 14 categorías de SKUs (IPs estáticas, VMs, almacenamiento, bases de datos, etc.).
     \item La función \texttt{checkResources()} compara cada SKU requerido con los devueltos por la API.
-          \begin{lstlisting}[label=lst:verificacion-categorias]
+          \begin{lstlisting}[caption=Verificación de categorías, label=lst:verificacion-categorias]
 Object.keys(requiredResources).forEach(category => {
     const resources = requiredResources[category];
     results.available[category] = [];
@@ -229,7 +229,7 @@ Object.keys(requiredResources).forEach(category => {
         } else { results.missing[category].push(resource); } }); });
 
 \end{lstlisting}
-    \item Clasifica los resultados en \texttt{available} (encontrados) y \texttt{missing} (no encontrados).
+    \item Clasifica los resultados en \texttt{available} (encontrados) y \texttt{missing} (no encontrados) y después los muestra graficamente con \textit{checks} y \textit{crosses} como se ve en la figura 4.1.
           \begin{figure}[h!]
               \centering
               \includegraphics[width=1\textwidth]{PostMan-Test.png}
