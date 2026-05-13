@@ -1386,7 +1386,7 @@ A modo de ejemplo, la respuesta del endpoint para un caso \texttt{warning} en \t
 
 El campo \texttt{calculationMethod} se incluye en la respuesta precisamente para que el equipo de operaciones pueda distinguir, de un vistazo, qué tipo de verificación ha generado cada resultado.
 
-\subsubsection{Configuración de alertas (TFG 3.5.5)}
+\subsubsection{Configuración de alertas}
 
 El sistema de alertas se adapta para incorporar los SKUs de IA dentro del mismo \textit{payload} de Google Chat ya empleado en iteraciones anteriores (\textbf{TFG 3.5.5}). La diferencia principal es que, junto al \texttt{status} y al SKU, se muestra explícitamente el campo \texttt{ratio} (en porcentaje) y la \texttt{tolerance} aplicada. Esta información permite al equipo distinguir rápidamente si una alerta corresponde a una desviación marginal de \texttt{output} o a un problema más serio, como una tarifa mal configurada.
 
