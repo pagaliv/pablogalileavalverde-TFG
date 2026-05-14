@@ -229,12 +229,13 @@
 \thispagestyle{empty}  % Sin número en primera página del resumen
 \addcontentsline{toc}{chapter}{Resumen}  % Añadir al índice
 
-\textbf{Palabras clave:} automatización, testing, facturación, hosting, validación.
+\textbf{Palabras clave:} automatización, testing, facturación, nube, validación, Node.js, CouchDB.
 
 \vspace{0.5cm}
 
-En este proyecto implementaremos una solución para validar la corrección de un sistema de facturación de servicios en la nube, que funcione de manera automatizada. Se desarrollará una API REST en Node.js que valide de manera cruzada los cargos que se hacen a través de APIs internas de la empresa, que garantice una facturación estable, fiable y basada estrictamente en el consumo de los clientes. El proyecto debe ser capaz de usar flujos de trabajo y servicios en la nube, y abordar temas
-como la implementación, operación y monitoreo de aplicaciones REST de back-end.
+Este proyecto desarrolla un sistema automatizado de validación de la facturación del DCD (\textit{Data Center Designer}) de IONOS Cloud. El problema de partida es que, con decenas de SKUs facturables y múltiples tipos de recursos, verificar manualmente la corrección de los cargos resulta inviable a escala. La solución consiste en un servicio construido en Node.js que orquesta dos tipos de comprobación: por un lado, verifica que los recursos de consumo constante —máquinas virtuales, almacenamiento y discos— figuran correctamente en la factura mensual; por otro, genera y valida consumo variable artificial —llamadas DNS, tokens de inteligencia artificial— asegurando que las cantidades facturadas coinciden con las esperadas dentro de márgenes configurables por SKU.
+
+El sistema se apoya en CouchDB para almacenar la configuración y el histórico de verificaciones, y emplea jobs cron para programar las comprobaciones periódicas. Ante cualquier desviación significativa, lanza notificaciones automáticas al equipo. El desarrollo se llevó a cabo en cinco iteraciones siguiendo una metodología ágil, logrando cubrir la totalidad de los requisitos funcionales y no funcionales con una desviación respecto a la planificación inferior al 3\%.
 
 \vspace{2cm}
 
@@ -243,11 +244,13 @@ como la implementación, operación y monitoreo de aplicaciones REST de back-end
 \thispagestyle{empty}
 \addcontentsline{toc}{chapter}{Abstract}
 
-\textbf{Keywords:} automation, testing, billing, hosting, validation.
+\textbf{Keywords:} automation, testing, billing, cloud, validation, Node.js, CouchDB.
 
 \vspace{0.5cm}
 
-This project implements an automated quality assurance solution to validate Cloud billing accuracy. A Node.js REST API application regularly cross-checks product charges via internal APIs, ensuring stable and reliable consumption-based invoicing. The project provided hands-on experience in QA workflows and Cloud Services, as well as in the topic of implementing, operating and monitoring the back-end REST applications.
+This project develops an automated billing validation system for the IONOS Cloud DCD (\textit{Data Center Designer}). Given the scale of the platform — with dozens of billable SKUs and multiple resource types — manual verification of billing accuracy is not feasible. The solution is a Node.js service that orchestrates two complementary validation flows: first, it checks that continuously consumed resources — virtual machines, object storage, and block disks — are correctly reflected in the monthly invoice; second, it generates and validates artificial variable consumption — DNS queries, AI token usage — verifying that the billed amounts match the expected values within per-SKU configurable tolerance margins.
+
+CouchDB is used to store configuration and the historical log of verifications, while cron jobs drive the periodic execution schedule. Any significant deviation triggers automatic notifications to the team. The system was built across five agile iterations, achieving full coverage of all functional and non-functional requirements with a total schedule deviation of under 3\%.
 
 \vspace{2cm}
 
@@ -324,13 +327,21 @@ Por último, y más importante, quiero darle las gracias a Cristina. Una gran pa
 
 % ===== ANEXOS =====
 \appendix
-\renewcommand{\appendixname}{Anexo}         % Cambia "Apéndice" por "Anexo" en el índice
-\renewcommand{\chaptername}{Anexo}          % Cambia "Capítulo" por "Anexo"
+\renewcommand{\appendixname}{Anexo}
+\renewcommand{\chaptername}{Anexo}
 \renewcommand{\thechapter}{\arabic{chapter}}
+
 \newpage
+\addcontentsline{toc}{chapter}{Anexo~1\quad{}Lista de SKUs}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
 \input{anexos/A1-Anexo-ListaItems}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
+
 \newpage
+\addcontentsline{toc}{chapter}{Anexo~2\quad{}Crear cuenta y obtener token}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
 \input{anexos/A2-Anexo-ObtenerTockenDCD.tex}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
 
 % ===== BIBLIOGRAFÍA =====
 \newpage

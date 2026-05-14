@@ -4,7 +4,7 @@
 
 \chapter{Revisión y Conclusiones}\label{chap:revision-conclusiones}
 \section{Revisión de planificación}
-En esta sección se revisa la planificación inicial del proyecto, comparando las tareas previstas con las realmente realizadas, y se analizan las desviaciones y su impacto en el desarrollo del TFG. Como se ha hecho un analisis en cada iteración se le dara un enfoque más global.
+En esta sección se revisa la planificación inicial del proyecto, comparando las tareas previstas con las realmente realizadas, y se analizan las desviaciones y su impacto en el desarrollo del TFG. Como se ha hecho un análisis en cada iteración, se le dará un enfoque más global.
 Primero se muestra una tabla de las horas estimadas con las usadas finalmente.
 
 \begin{table}[H]
@@ -13,9 +13,9 @@ Primero se muestra una tabla de las horas estimadas con las usadas finalmente.
         \hline
         \textbf{Tarea} & \textbf{Estimadas (h)} & \textbf{Reales (h)} & \textbf{Desviación} \\
         \hline
-        Lista requistios funcionales & 6h & 5h       & -16.7\%     \\
-        Análisis requistios no funcionales & 6h & 6h       & 0\%     \\
-        Análisis requistios funcionales & 6h & 5h       & -16.7\%     \\
+        Lista requisitos funcionales & 6h & 5h       & -16.7\%     \\
+        Análisis requisitos no funcionales & 6h & 6h       & 0\%     \\
+        Análisis requisitos funcionales & 6h & 5h       & -16.7\%     \\
         \hline 
         \textbf{Total Análisis} & \textbf{18h} & \textbf{16h} & \textbf{-11.1\%} \\
         \hline
@@ -44,21 +44,39 @@ Primero se muestra una tabla de las horas estimadas con las usadas finalmente.
 \end{table}
 
 Como se puede observar en la tabla \ref{tab:horas-iteracion5}, el proyecto ha tenido una desviación total del 2\% respecto a
- las horas estimadas inicialmente, lo que indica una planificación bastante precisa, esto se logro gracias a usar como base 
- las estimaciones y tiempo usado que se anotarón en la asignatura de Taller Transversal I,
+ las horas estimadas inicialmente, lo que indica una planificación bastante precisa, esto se logró gracias a usar como base
+ las estimaciones y tiempo usado que se anotaron en la asignatura de Taller Transversal I,
   en la que ya se recogio tiempos y usando esto como base se logró este resultado tan positivo. 
   Sin embargo, es importante destacar que algunas tareas específicas, como la redacción de la memoria,
    han requerido un 19\% más de tiempo del previsto, esto se debe a un factor principal,
     el uso de LaTeX, este se uso por querer presentar un trabajo de calidad, pero al ser
      la primera vez que se usaba se tuvo que invertir tiempo en aprender a usarlo. Otro módulo digno 
-     a mencionar es el apartado de Tecnologias y herramientas, que se invirtio menos tiempo del
-      previsto, esto se debio a que gracias a la experiencia adquirida en las practicas se puedo 
+     a mencionar es el apartado de Tecnologías y herramientas, en el que se invirtió menos tiempo del
+      previsto; esto se debió a que gracias a la experiencia adquirida en las prácticas se pudo
       hacer de forma más ligera de lo previsto. En general, la planificación ha sido bastante acertada,
        aunque siempre hay margen de mejora en la estimación de tiempos para tareas específicas. 
        En futuras planificaciones, se podría considerar incluir un margen adicional para tareas 
        que impliquen el aprendizaje de nuevas herramientas o tecnologías, como fue el caso de LaTeX
-        en este proyecto. Además en enfutras estimaciones se deberá reservar también tiempo para reunirse con 
+        en este proyecto. Además, en futuras estimaciones se deberá reservar también tiempo para reunirse con 
         el cliente a lo largo del proyecto, ya que ha sido algo que se ha debido hacer a lo largo de todo el 
         proyecto y no se había previsto inicialmente.
 
+        \subsection{Revisión de objetivos}
+        En esta sección se revisan los objetivos planteados al inicio del proyecto, evaluando si se han cumplido y en qué medida, y se analizan las razones detrás de cualquier desviación. Los objetivos planteados al inicio del proyecto fueron logrados todos, creando un sistema funcional de automatización de tests para la validación de la facturación del DCD de IONOS Cloud. El objetivo general, consistente en comprobar de forma automática el correcto funcionamiento de la facturación, se cumplió íntegramente mediante la implementación de una API REST que orquesta los tests y valida los resultados frente a los valores esperados.
+
+        En cuanto a los objetivos específicos, todos fueron alcanzados. Se analizó el estado de los sistemas de facturación de IONOS Cloud, lo que permitió identificar los puntos de validación necesarios. Se diseñó e implementó una arquitectura de automatización de tests con validación cruzada entre sistemas, materializada en las distintas iteraciones del proyecto. Se desarrolló un mecanismo de detección temprana de inconsistencias mediante comprobaciones periódicas automatizadas. La efectividad del sistema fue evaluada a lo largo de las iteraciones, verificando su precisión y rendimiento. Finalmente, el proceso de desarrollo y los resultados obtenidos han sido documentados en esta memoria, cumpliendo el último objetivo específico planteado.
+
+       A lo largo de la memoria se ha especificado en qué partes del proceso se cumplía cada requisito, tanto funcional como no funcional, logrando así comprobar que todos han sido satisfechos. Puede considerarse, por tanto, un éxito el cumplimiento de los objetivos planteados al inicio del proyecto.
+
+       \subsection{Conclusiones}
+         El proyecto ha sido exitoso en la implementación de un sistema de automatización para la validación de la facturación del DCD de IONOS Cloud. Todos los objetivos planteados al inicio han sido alcanzados, y todos los requisitos, tanto funcionales como no funcionales, han quedado satisfechos a lo largo de las iteraciones. El sistema resultante es capaz de detectar de forma automática y periódica inconsistencias en la facturación, notificar al equipo ante desviaciones significativas y mantener un histórico de verificaciones, cubriendo así el ciclo completo de validación previsto. En general, puede considerarse un proyecto completado con éxito, con una desviación total respecto a la planificación inicial inferior al 3\%.
+
+       \subsection{Valoración personal}
+         A nivel personal, el proyecto ha resultado muy enriquecedor en varios sentidos. Para empezar, pude aplicar herramientas aprendidas de manera teórica durante la carrera, como la planificación de proyectos o la estimación de tiempos. Por otro lado, aprendí a usar nuevas tecnologías que no se habían empleado en la carrera, como documentar en \textbf{LaTeX}, lo que me ha permitido presentar un trabajo de calidad. Además, el proyecto me ha permitido aplicar mis conocimientos en un entorno real, enfrentándome a desafíos y problemas que no se presentan en un entorno académico. Cabe destacar también el uso de herramientas de trabajo colaborativo como \textbf{Jira} y \textbf{Git} en un contexto profesional, lo que me ha permitido consolidar hábitos de desarrollo que hasta ahora solo había practicado de forma teórica o en proyectos académicos de menor escala. Sin embargo, también he identificado áreas de mejora, como la necesidad de reservar tiempo para reuniones con el cliente, tal como se mencionó anteriormente. En resumen, me ha gustado desarrollar un proyecto de esta envergadura, ver cómo se va materializando a lo largo del tiempo y aprender a gestionarlo en su conjunto, algo que me será muy útil en el futuro, sin perder de vista que aún tengo amplio margen de mejora.
+
+        \subsection{Trabajo futuro}
+
         
+        Debido a que el proyecto se ha desarrollado correctamente y finalizado con margen, el cliente solicitó al finalizar otras implementaciones que no se recogen en la memoria por varias razones: la primera es que no se plantearon en la planificación inicial, y la segunda, y más importante, es la extensión máxima de la memoria; siendo ya una memoria larga, era inviable añadir más iteraciones, por lo que aquí planteo dichas mejoras que he implementado a petición del cliente. Originalmente los únicos ítems no continuables que se iban a implementar eran los tokens de gasto de \textit{IA}, pero tras finalizar el proyecto se planteó implementar también la generación de tráfico de red entre máquinas virtuales y almacenamiento S3.
+
+La idea consiste en ejecutar periódicamente un script que transfiera un volumen significativo de datos desde una máquina virtual hacia un bucket S3 situado en una región diferente, de forma que el tráfico saliente de la VM sea facturable. Para que el tráfico sea cobrable, la VM y el bucket deben estar en regiones distintas, ya que el tráfico saliente entre regiones genera los ítems \textit{TO1000} y \textit{CTO}, mientras que la entrada al bucket S3 corresponde a ítems gratuitos (\textit{S3TI2100}, \textit{CTI1000}). El script, implementado en \textbf{Python} con \textbf{boto3} o en \textbf{Node.js} con \textbf{aws-sdk}, subiría al menos 10~GB de datos al bucket y posteriormente eliminaría su contenido, garantizando así un gasto diario constante y predecible. Dicho script residiría en el repositorio \textbf{billing-reference-verifier} y su ejecución quedaría integrada como un módulo programado en el servicio \textbf{canary}, ya sea mediante un \textit{job} cron en la propia VM o a través del planificador existente. 

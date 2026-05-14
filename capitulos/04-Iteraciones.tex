@@ -446,13 +446,13 @@ transmite a la \texttt{billing-api} de IONOS para autenticar las operaciones y s
 \hyperref[iteraciones:gestion-tokens]{el plan de gestión de tokens de autenticación} y garantizar el cumplimiento del requisito RNF03.
 
 \subsection{Implementación de función de Detección de items continuables}
-Una vez definida la estructura del proyecto, el 21 de febrero se inicia la implementación de la función de detección de ítems continuables en el módulo \texttt{utilization}. Esta función realiza llamadas a la API de facturación para obtener los datos de utilización y compararlos con la lista de SKUs monitorizados en CouchDB, logrando así la primera parte del requisito RNF04.02.
+Una vez definida la estructura del proyecto, el 21 de febrero se inicia la implementación de la función de detección de ítems continuables en el módulo \texttt{utilization}. Esta función realiza llamadas a la API de facturación para obtener los datos de utilización y compararlos con la lista de SKUs monitorizados en CouchDB, logrando así la primera parte del requisito RF04.02.
 
 Para ello se implementa la función \texttt{checkUtilization()}, basada en el script que se creó para PostMan ---explicado en la sección \hyperref[iteraciones:script-verificacion-postman]{Creación del script de verificación}---. Al igual que en PostMan, el desarrollo se realiza en dos fases: primero se detecta un SKU concreto y, una vez verificado su correcto funcionamiento, se extiende al resto de SKUs.
 
 \paragraph{Validación de respuestas con Joi}
 
-Para garantizar la integridad de los datos recibidos de la API de facturación, se ha implementado la validación de las respuestas mediante esquemas \texttt{Joi}, definidos en el helper \texttt{schema.js}. Esto permite detectar de forma temprana respuestas inesperadas o malformadas de la API, devolviendo un error controlado en lugar de propagar datos incorrectos al resultado de la verificación. Además se ha creado la verificación de todos los futuros datos necesarios, es decir, ahora solo se necesitan los datos de utilización, pero se ha creado la validación de las facturas y del uso para futuras iteraciones, lo que cumple el requisito RNF06.
+Para garantizar la integridad de los datos recibidos de la API de facturación, se ha implementado la validación de las respuestas mediante esquemas \texttt{Joi}, definidos en el helper \texttt{schema.js}. Esto permite detectar de forma temprana respuestas inesperadas o malformadas de la API, devolviendo un error controlado en lugar de propagar datos incorrectos al resultado de la verificación. Además se ha creado la verificación de todos los futuros datos necesarios, es decir, ahora solo se necesitan los datos de utilización, pero se ha creado la validación de las facturas y del uso para futuras iteraciones, lo que cumple el requisito RNF01.
 
 El archivo \texttt{schema.js} define tres esquemas de validación, cada uno adaptado a un endpoint distinto de la API de facturación:
 
