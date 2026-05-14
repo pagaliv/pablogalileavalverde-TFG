@@ -234,7 +234,7 @@ Object.keys(requiredResources).forEach(category => {
               \centering
               \includegraphics[width=1\textwidth]{PostMan-Test.png}
               \caption{Prueba Test}
-              \label{fig:edt}
+              \label{fig:postman-test}
           \end{figure}
     \item Detecta patrones especiales: a diferencia del resto de SKUs, que se comparan por coincidencia exacta con el \texttt{meterId} devuelto por la API, ciertos recursos siguen convenciones de nomenclatura distintas. Las VMs CUBE se identifican porque su \texttt{meterId} contiene la subcadena \texttt{CUBES}, mientras que las licencias Windows se reconocen porque su \texttt{meterId} comienza por \texttt{WL}. Para estos casos, el script aplica búsqueda por subcadena y por prefijo respectivamente, en lugar de igualdad exacta y si se detectan aunque no se muestre en la figura 4.1.
     \item Almacena los resultados en variables de entorno de PostMan.
@@ -244,14 +244,14 @@ Object.keys(requiredResources).forEach(category => {
               \centering
               \includegraphics[width=0.25\textwidth]{PostMan-Resumen.png}
               \caption{Prueba Resumen Test}
-              \label{fig:edt}
+              \label{fig:postman-resumen}
           \end{figure}
     \item Ejecuta tests automáticos (código 200, productos no vacíos)( Ver figura 4.3).
           \begin{figure}[h!]
               \centering
               \includegraphics[width=0.7\textwidth]{PostMan-CodsOK.png}
               \caption{Prueba Cods. Test}
-              \label{fig:edt}
+              \label{fig:postman-codsok}
           \end{figure}
 \end{enumerate}
 
