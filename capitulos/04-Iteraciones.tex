@@ -510,7 +510,7 @@ quantity: joi.object({
 
 Esta flexibilidad es necesaria porque la API de facturación devuelve en ocasiones valores numéricos como cadenas de texto (por ejemplo, \texttt{"4.5"} en lugar de \texttt{4.5}), comportamiento que puede variar entre versiones o entre distintos tipos de recursos.
 
-Los tres esquemas comparten un conjunto de validadores comunes de Joi: \texttt{required()} para campos obligatorios, \texttt{optional()} para opcionales, \texttt{pattern()} para expresiones regulares, \texttt{valid()} para valores permitidos (como \texttt{'EU'} y \texttt{'US'} en la ubicación de los datacenters), \texttt{uuid()} para identificadores universales y \texttt{array().items()} para validar arrays de objetos con estructura definida.
+Los tres esquemas comparten un conjunto de validadores comunes de Joi: \texttt{required()} para campos obligatorios, \texttt{optional()} para opcionales, \texttt{pattern()} para expresiones regulares, \texttt{valid()} para valores permitidos (como \texttt{`EU'} y \texttt{`US'} en la ubicación de los datacenters), \texttt{uuid()} para identificadores universales y \texttt{array().items()} para validar arrays de objetos con estructura definida.
 
 \subsubsection{Creación de endpoint y decisión de formato de URL}
 Debido a que no hay ningún requisito que especifique el formato de la URL, se opta por un formato RESTful que refleje claramente la acción realizada. Se decide utilizar el endpoint \texttt{GET /data/v1/utilization/check/:contractId}, donde \texttt{contractId} es un parámetro dinámico que permite especificar el contrato para el cual se desea realizar la verificación de utilización. Este formato es intuitivo y sigue las convenciones REST, facilitando su comprensión y uso por parte de otros desarrolladores o sistemas que puedan integrarse con esta API en el futuro.
@@ -532,7 +532,7 @@ Se han configurado los siguientes elementos:
 
 Es importante configurar correctamente los encabezados, el cuerpo de las peticiones según lo requiera cada endpoint de la API de facturación, ya que una configuración incorrecta puede provocar errores difíciles de diagnosticar.
 
-Tras reunirse con el cliente, se sugerieron por su parte dos cambios, la primera el estandarizar el contrato y eliminarlo de la URL de la petición, denido a que siempre se usará el mismo contrato y en el caso de querer usar otro en el futuro se puede modificar en la configuración. La segunda fue usar desde PostMan \texttt{Authorization: Bearer <token>} en lugar de una variable personalizada, para que sea más fácil de usar y entender. Ambos cambios se implementarán en la proxima iteración.
+Tras reunirse con el cliente el 20 de febrero, se sugerieron por su parte dos cambios, la primera el estandarizar el contrato y eliminarlo de la URL de la petición, debido a que siempre se usará el mismo contrato y en el caso de querer usar otro en el futuro se puede modificar en la configuración. La segunda fue usar desde PostMan \texttt{Authorization: Bearer <token>} en lugar de una variable personalizada, para que sea más fácil de usar y entender. Ambos cambios se implementarán en la proxima iteración.
 
 %% TODO: Si quieres incluir el esquema Joi utilizado (utilizationSchema, usageSchema, etc.), añádelo aquí.
 
