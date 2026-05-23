@@ -618,7 +618,7 @@ Para cumplir los requisitos RF05.01 y RF05.02, se ha implementado un sistema de 
 
 La configuración de alertas definitiva se realizará utilizando la infraestructura propia del equipo de Billing y ERP. Sin embargo, al tratarse de una primera iteración, se ha optado por una solución provisional más sencilla: el envío de notificaciones mediante \textit{webhooks} de Google Chat. Este mecanismo permite enviar mensajes a un espacio de Google Chat mediante una simple petición HTTP POST a una URL generada por la propia plataforma, sin necesidad de configurar servicios intermedios ni gestionar autenticación adicional.
 
-El contenido de la alerta incluye:
+El contenido de la alerta incluye lo que se puede ver en la figura 4.4.
 
 
 Esta solución es suficiente para las primeras fases del proyecto, ya que permite al equipo recibir notificaciones en tiempo real sin un coste de implementación elevado. En la Figura~\ref{fig:alerta-iteracion1} se muestra un ejemplo de alerta recibida en Google Chat durante esta iteración.
