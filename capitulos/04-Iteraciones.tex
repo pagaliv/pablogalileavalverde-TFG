@@ -443,7 +443,7 @@ configuración definida en \texttt{package.json} e inicializa el servidor y los 
 \paragraph{Autenticación }
 Todas las peticiones requieren el header \texttt{Authorization: Bearer <token>}. Este token se
 transmite a la \texttt{billing-api} de IONOS para autenticar las operaciones y se gestiona como ya se explicó en
-\hyperref[iteraciones:gestion-tokens]{el plan de gestión de tokens de autenticación} y garantizar el cumplimiento del requisito RNF03.
+\hyperref[iteraciones:gestion-tokens]{el plan de gestión de tokens de autenticación} y garantiza el cumplimiento del requisito RNF03.
 
 \subsection{Implementación de función de Detección de items continuables}
 Una vez definida la estructura del proyecto, el 21 de febrero se inicia la implementación de la función de detección de ítems continuables en el módulo \texttt{utilization}. Esta función realiza llamadas a la API de facturación para obtener los datos de utilización y compararlos con la lista de SKUs monitorizados en CouchDB, logrando así la primera parte del requisito RF04.02.
