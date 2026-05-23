@@ -675,7 +675,7 @@ En esta iteración se trabajará principalmente en ampliar las funcionalidades d
 Tras analizar los diferentes SKUs monitorizados, se identifican dos categorías de verificación necesarias:
 
 \begin{itemize}
-    \item \textbf{existence-only:} Para recursos cuyo consumo puede variar legítimamente (IPs estaticas, Bases de datos). En estos casos, basta con verificar que existe consumo mayor que cero, sin comparar contra un valor esperado concreto.
+    \item \textbf{existence-only:} Para recursos cuyo consumo puede variar legítimamente (IPs estáticas, Bases de datos). En estos casos, basta con verificar que existe consumo mayor que cero, sin comparar contra un valor esperado concreto.
     
     \item \textbf{precise:} Para recursos con cantidades fijas y predecibles (cores de CPU, GB de RAM). Estos requieren calcular el valor esperado y compararlo con el reportado por la API, aplicando umbrales de tolerancia para detectar discrepancias.
 \end{itemize}
@@ -691,7 +691,7 @@ Para los SKUs con verificación \texttt{precise}, se definen dos niveles de aler
     \item \textbf{Error:} Se activa cuando el ratio cae por debajo del umbral de error (típicamente 0.975). Indica una discrepancia significativa que requiere acción inmediata.
 \end{itemize}
 
-Estos umbrales son configurables por SKU en CouchDB, permitiendo ajustar la sensibilidad según las características de cada recurso. Ya que hay recursos como los cores de CPU donde una desviación del 1\% puede ser relevante, mientras que en otros como el almacenamiento en Kubernetes, la mera ausencia de consumo es suficiente para generar una alerta.
+Estos umbrales son configurables por SKU en CouchDB, permitiendo ajustar la sensibilidad según las características de cada recurso, ya que hay recursos como los cores de CPU donde una desviación del 1\% puede ser relevante, mientras que en otros como el almacenamiento en Kubernetes, la mera ausencia de consumo es suficiente para generar una alerta.
 
 \subsubsection{Estandarización del contrato en la configuración}
 Actualmente, el \texttt{contractId} se pasa como parámetro en la URL del endpoint (\texttt{/check/:contractId}). Tras analizar los casos de uso previstos, se concluye que el sistema operará siempre sobre un único contrato de referencia, por lo que tiene sentido centralizar este valor en la configuración del scheduler de CouchDB.
