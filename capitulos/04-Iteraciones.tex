@@ -236,7 +236,7 @@ Object.keys(requiredResources).forEach(category => {
               \caption{Prueba Test}
               \label{fig:postman-test}
           \end{figure}
-    \item Detecta patrones especiales: a diferencia del resto de SKUs, que se comparan por coincidencia exacta con el \texttt{meterId} devuelto por la API, ciertos recursos siguen convenciones de nomenclatura distintas. Las VMs CUBE se identifican porque su \texttt{meterId} contiene la subcadena \texttt{CUBES}, mientras que las licencias Windows se reconocen porque su \texttt{meterId} comienza por \texttt{WL}. Para estos casos, el script aplica búsqueda por subcadena y por prefijo respectivamente, en lugar de igualdad exacta y si se detectan aunque no se muestre en la figura 4.1.
+    \item Detecta patrones especiales: a diferencia del resto de SKUs, que se comparan por coincidencia exacta con el \texttt{meterId} devuelto por la API, ciertos recursos siguen convenciones de nomenclatura distintas. Las VMs CUBE se identifican porque su \texttt{meterId} contiene la subcadena \texttt{CUBES}, mientras que las licencias Windows se reconocen porque su \texttt{meterId} comienza por \texttt{WL}. Para estos casos, el script aplica búsqueda por subcadena y por prefijo respectivamente, en lugar de igualdad exacta y sí se detectan, aunque no se muestre en la figura 4.1.
     \item Almacena los resultados en variables de entorno de PostMan.
     \item Genera un reporte en consola con el estado de cada categoría.
     \item Calcula estadísticas globales: total disponibles vs total requeridos.
