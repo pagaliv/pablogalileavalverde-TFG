@@ -37,15 +37,15 @@ Se consideró necesario desarrollar e implementar un sistema de gestión de auto
 \begin{enumerate}
     \item \textbf{Analizar} el estado actual de los sistemas de facturación y validación en IONOS Cloud.
 
-    \item \textbf{Diseñar} una arquitectura de automatización de tests que permita la validación cruzada entre sistemas.
+    \item \textbf{Diseñar} una arquitectura de automatización de tests que permita la validación entre sistemas.
 
     \item \textbf{Implementar} una API REST para la ejecución y gestión de tests automatizados.
 
     \item \textbf{Desarrollar} un sistema de detección temprana de inconsistencias mediante técnicas de validación periódica, esto es, comprobaciones automatizadas ejecutadas en intervalos regulares (diarias, semanales o mensuales) para contrastar los cargos facturados con el consumo real.
 
-    \item \textbf{Evaluar} la efectividad del sistema propuesto en términos de precisión, rendimiento y reducción de errores.
+    \item \textbf{Evaluar} la efectividad del sistema propuesto en términos de rendimiento y reducción de errores.
 
-    \item \textbf{Documentar} el proceso de desarrollo y los resultados obtenidos para su posible replicación o mejora.
+    \item \textbf{Documentar} el desarrollo y los resultados obtenidos para su replicación o mejora.
 \end{enumerate}
 % ===== SECCIÓN 1.3: Metodología del Proyecto =====
 \section{Metodología del Proyecto}
@@ -68,7 +68,7 @@ La metodología adoptada ofrece flexibilidad para adaptarse a cambios en los req
 
 
 % ===== SECCIÓN 1.3: ¿QUÉ ES EL DCD DE IONOS CLOUD? =====
-\section{¿Qué es el Diseñador de Centros de Datos (DCD) ?}\label{sec:dcd-ionos}
+\section{¿Qué es el Diseñador de Centros de Datos (DCD)?}\label{sec:dcd-ionos}
 
 \subsection{Definición y Propósito}
 
@@ -81,7 +81,7 @@ El \textbf{Data Center Designer (DCD)} de IONOS Cloud es una plataforma gráfica
     \item \textbf{Facturación}: Cálculo y generación de cargos basados en consumo.
 \end{itemize}
 
-Es muy intuitivo y tiene una interfaz bien desarrollada como se puede observar en la imagen.
+Es muy intuitivo y tiene una interfaz bien desarrollada como se puede observar en la imagen. (Ver Figrua 1.1)
 
 \begin{figure}[htb]
     \begin{center}
@@ -91,7 +91,6 @@ Es muy intuitivo y tiene una interfaz bien desarrollada como se puede observar e
     \end{center}
 \end{figure}
 
-\newpage
 
 
 \subsection{Funciones y Herramientas del DCD}
@@ -124,7 +123,7 @@ El DCD tiene muchas herramientas y es importante conocerlas para este proyecto, 
 
     \item \textbf{Bases de datos: } Conjunto de datos organizado de tal modo que permita obtener con rapidez diversos tipos de información. Existen tanto relacionales como no relacionales; para más información, consultar el \hyperref[anexo:Lista-de-SKUs]{Anexo 1}..
 
-    \item \textbf{ Almacenamiento y Copias de Seguridad:} En el \textit{DCD}, Storage y Backup son pilares complementarios de la estrategia de datos, siendo el Almacenamiento donde ``viven'' los datos actualmente y las copias de seguridad la manera de recuperar dicha información. Ofrece cinco servicios:
+    \item \textbf{ Almacenamiento y Copias de Seguridad:} Son pilares complementarios de la estrategia de datos, siendo el Almacenamiento donde ``viven'' los datos actualmente y las copias de seguridad la manera de recuperar dicha información. Ofrece cinco servicios:
           \begin{itemize}
               \item \textbf{ IONOS Object Storage: } Almacén masivo para archivos y objetos.
               \item \textbf{ Network File Storage: } Sistema de archivos compartido en red.
@@ -135,8 +134,8 @@ El DCD tiene muchas herramientas y es importante conocerlas para este proyecto, 
     \item \textbf{Servicios de red: } Define cómo se conectan y comunican todos los recursos, es una de las partes más importantes, desglosándose en varias partes:
           \begin{itemize}
               \item \textbf{Administración de direcciones IP: } gestión centralizada de direcciones IP.
-              \item \textbf{Puerta de Enlace VPN: }  Servicio que crea un túnel cifrado y seguro entre tu infraestructura en IONOS Cloud y otro sitio.
-              \item \textbf{Red de Distribución de Contenidos: } Una red global de servidores que almacenan en caché copias del contenido estático (imágenes, CSS, JS, vídeos) cerca de los usuarios finales.
+              \item \textbf{Puerta de Enlace VPN: }  Servicio que crea un túnel cifrado y seguro.
+              \item \textbf{Red de Distribución de Contenidos: } Una red global de servidores que almacenan en caché copias del contenido estático (CSS, JS, vídeos) cerca de los usuarios finales.
               \item \textbf{Cloud DNS: } El servicio de resolución de nombres de dominio gestionado por IONOS. Traduce nombres de dominio (www.tuempresa.com) a direcciones IP (185.100.100.10).
           \end{itemize}
     \item \textbf{Seguridad: } Marco de trabajo integrado que aplica múltiples capas de protección:
@@ -159,7 +158,7 @@ Como antecedente de una explicación más detallada posteriormente, es improtant
 
 \subsection{¿Qué es una API REST?}
 Una API REST es un intermediario estandarizado que permite que diferentes aplicaciones se comuniquen entre sí mediante el protocolo HTTP.
-En el contexto de este proyecto, la API REST desarrollada permite ejecutar y gestionar los tests de validación de facturación, comunicándose
+En el contexto de este proyecto, la API REST permite ejecutar y gestionar los tests de validación de facturación, comunicándose
 con los servicios de IONOS Cloud para obtener datos de consumo y compararlos con los cargos facturados. Este formato fue requerido por la empresa debido a
 su escalabilidad, simplicidad y naturaleza sin estado (cada petición es independiente y autocontenida).
 \subsection{Principios REST}

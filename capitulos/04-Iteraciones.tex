@@ -5,7 +5,7 @@
 \chapter{Iteraciones}\label{chap:iteraciones}
 \section{Primera Iteración}
 \subsection{Planificación y Análisis}
-Siendo esta la primera iteración, es en la que más se desarrolla para que en las siguientes iteraciones todo resulte más sencillo, como ya se había planeado adjudicandole más horas que al resto de iteraciones.
+Siendo esta la primera iteración, es en la que más se desarrolla para que en las siguientes iteraciones todo resulte más sencillo, como ya se había planeado adjudicándole más horas que al resto de iteraciones.
 Esta iteración se basa en 4 puntos: la creación de la función para detectar los \textit{items} continuables;
 las configuraciones iniciales en CouchDB; la creación de las primeras alarmas --- después de crearlas, solo habrá que modificar su contenido
 en el resto de iteraciones --- y la creación del contrato.
@@ -28,7 +28,7 @@ Tanto la configuración inicial de CouchDB, como la creación de las alarmas y l
 
 \subsubsection{Verificación de SKUs con PostMan}
 Para la verificación de los SKUs disponibles en la API de IONOS Cloud, hemos optado por utilizar
-\textbf{PostMan}\Cite{PostMan-Learning} como herramienta de prueba y automatización. Antes de comenzar a utilizarlo, es
+\textbf{PostMan}~\Cite{PostMan-Learning} como herramienta de prueba y automatización. Antes de comenzar a utilizarlo, es
 importante comprender su funcionamiento y las capacidades que ofrece para este proyecto.
 
 PostMan es una plataforma de colaboración para el desarrollo de APIs que permite diseñar, probar,
@@ -70,8 +70,8 @@ clave de PostMan:
 \end{itemize}
 
 \subsubsection{Base de datos con CouchDB}
-Para las configuraciones, exceptuando los tokens y las claves, se ha optado por utilizar \textbf{CouchDB}\Cite{CouchDB-Info}, para cumplir el requisito RNF10, una base de datos NoSQL
-orientada a documentos que destaca por su facilidad de integración con aplicaciones web. Realizando esta tarea el 20 de febrero de 2026.
+Para las configuraciones, exceptuando los tokens y las claves, se ha optado por utilizar \textbf{CouchDB}~\Cite{CouchDB-Info}, para cumplir el requisito RNF10, una base de datos NoSQL
+orientada a documentos que destaca por su facilidad de integración con aplicaciones web. Esta tarea se ha realizado el 20 de febrero de 2026.
 
 \paragraph{Características principales de CouchDB para el proyecto}
 
@@ -236,7 +236,7 @@ Object.keys(requiredResources).forEach(category => {
               \caption{Prueba Test}
               \label{fig:postman-test}
           \end{figure}
-    \item Detecta patrones especiales: a diferencia del resto de SKUs, que se comparan por coincidencia exacta con el \texttt{meterId} devuelto por la API, ciertos recursos siguen convenciones de nomenclatura distintas. Las VMs CUBE se identifican porque su \texttt{meterId} contiene la subcadena \texttt{CUBES}, mientras que las licencias Windows se reconocen porque su \texttt{meterId} comienza por \texttt{WL}. Para estos casos, el script aplica búsqueda por subcadena y por prefijo respectivamente, en lugar de igualdad exacta y si se detectan aunque no se muestre en la figura 4.1.
+    \item Detecta patrones especiales: a diferencia del resto de SKUs, que se comparan por coincidencia exacta con el \texttt{meterId} devuelto por la API, ciertos recursos siguen convenciones de nomenclatura distintas. Las VMs CUBE se identifican porque su \texttt{meterId} contiene la subcadena \texttt{CUBES}, mientras que las licencias Windows se reconocen porque su \texttt{meterId} comienza por \texttt{WL}. Para estos casos, el script aplica búsqueda por subcadena y por prefijo respectivamente, en lugar de igualdad exacta y sí se detectan, aunque no se muestre en la figura 4.1.
     \item Almacena los resultados en variables de entorno de PostMan.
     \item Genera un reporte en consola con el estado de cada categoría.
     \item Calcula estadísticas globales: total disponibles vs total requeridos.
@@ -246,7 +246,7 @@ Object.keys(requiredResources).forEach(category => {
               \caption{Prueba Resumen Test}
               \label{fig:postman-resumen}
           \end{figure}
-    \item Ejecuta tests automáticos (código 200, productos no vacíos)( Ver figura 4.3).
+    \item Ejecuta tests automáticos (código 200, productos no vacíos)(Ver figura 4.3).
           \begin{figure}[h!]
               \centering
               \includegraphics[width=0.7\textwidth]{PostMan-CodsOK.png}
@@ -443,7 +443,7 @@ configuración definida en \texttt{package.json} e inicializa el servidor y los 
 \paragraph{Autenticación }
 Todas las peticiones requieren el header \texttt{Authorization: Bearer <token>}. Este token se
 transmite a la \texttt{billing-api} de IONOS para autenticar las operaciones y se gestiona como ya se explicó en
-\hyperref[iteraciones:gestion-tokens]{el plan de gestión de tokens de autenticación} y garantizar el cumplimiento del requisito RNF03.
+\hyperref[iteraciones:gestion-tokens]{el plan de gestión de tokens de autenticación} y garantiza el cumplimiento del requisito RNF03.
 
 \subsection{Implementación de función de Detección de items continuables}
 Una vez definida la estructura del proyecto, el 21 de febrero se inicia la implementación de la función de detección de ítems continuables en el módulo \texttt{utilization}. Esta función realiza llamadas a la API de facturación para obtener los datos de utilización y compararlos con la lista de SKUs monitorizados en CouchDB, logrando así la primera parte del requisito RF04.02.
@@ -510,7 +510,7 @@ quantity: joi.object({
 
 Esta flexibilidad es necesaria porque la API de facturación devuelve en ocasiones valores numéricos como cadenas de texto (por ejemplo, \texttt{"4.5"} en lugar de \texttt{4.5}), comportamiento que puede variar entre versiones o entre distintos tipos de recursos.
 
-Los tres esquemas comparten un conjunto de validadores comunes de Joi: \texttt{required()} para campos obligatorios, \texttt{optional()} para opcionales, \texttt{pattern()} para expresiones regulares, \texttt{valid()} para valores permitidos (como \texttt{'EU'} y \texttt{'US'} en la ubicación de los datacenters), \texttt{uuid()} para identificadores universales y \texttt{array().items()} para validar arrays de objetos con estructura definida.
+Los tres esquemas comparten un conjunto de validadores comunes de Joi: \texttt{required()} para campos obligatorios, \texttt{optional()} para opcionales, \texttt{pattern()} para expresiones regulares, \texttt{valid()} para valores permitidos (como \texttt{`EU'} y \texttt{`US'} en la ubicación de los datacenters), \texttt{uuid()} para identificadores universales y \texttt{array().items()} para validar arrays de objetos con estructura definida.
 
 \subsubsection{Creación de endpoint y decisión de formato de URL}
 Debido a que no hay ningún requisito que especifique el formato de la URL, se opta por un formato RESTful que refleje claramente la acción realizada. Se decide utilizar el endpoint \texttt{GET /data/v1/utilization/check/:contractId}, donde \texttt{contractId} es un parámetro dinámico que permite especificar el contrato para el cual se desea realizar la verificación de utilización. Este formato es intuitivo y sigue las convenciones REST, facilitando su comprensión y uso por parte de otros desarrolladores o sistemas que puedan integrarse con esta API en el futuro.
@@ -532,7 +532,7 @@ Se han configurado los siguientes elementos:
 
 Es importante configurar correctamente los encabezados, el cuerpo de las peticiones según lo requiera cada endpoint de la API de facturación, ya que una configuración incorrecta puede provocar errores difíciles de diagnosticar.
 
-Tras reunirse con el cliente, se sugerieron por su parte dos cambios, la primera el estandarizar el contrato y eliminarlo de la URL de la petición, denido a que siempre se usará el mismo contrato y en el caso de querer usar otro en el futuro se puede modificar en la configuración. La segunda fue usar desde PostMan \texttt{Authorization: Bearer <token>} en lugar de una variable personalizada, para que sea más fácil de usar y entender. Ambos cambios se implementarán en la proxima iteración.
+Tras reunirse con el cliente el 20 de febrero, se sugerieron por su parte dos cambios, la primera el estandarizar el contrato y eliminarlo de la URL de la petición, debido a que siempre se usará el mismo contrato y en el caso de querer usar otro en el futuro se puede modificar en la configuración. La segunda fue usar desde PostMan \texttt{Authorization: Bearer <token>} en lugar de una variable personalizada, para que sea más fácil de usar y entender. Ambos cambios se implementarán en la proxima iteración.
 
 %% TODO: Si quieres incluir el esquema Joi utilizado (utilizationSchema, usageSchema, etc.), añádelo aquí.
 
@@ -618,7 +618,7 @@ Para cumplir los requisitos RF05.01 y RF05.02, se ha implementado un sistema de 
 
 La configuración de alertas definitiva se realizará utilizando la infraestructura propia del equipo de Billing y ERP. Sin embargo, al tratarse de una primera iteración, se ha optado por una solución provisional más sencilla: el envío de notificaciones mediante \textit{webhooks} de Google Chat. Este mecanismo permite enviar mensajes a un espacio de Google Chat mediante una simple petición HTTP POST a una URL generada por la propia plataforma, sin necesidad de configurar servicios intermedios ni gestionar autenticación adicional.
 
-El contenido de la alerta incluye:
+El contenido de la alerta incluye lo que se puede ver en la figura 4.4.
 
 
 Esta solución es suficiente para las primeras fases del proyecto, ya que permite al equipo recibir notificaciones en tiempo real sin un coste de implementación elevado. En la Figura~\ref{fig:alerta-iteracion1} se muestra un ejemplo de alerta recibida en Google Chat durante esta iteración.
@@ -662,7 +662,7 @@ En cuanto a la planificación temporal, aunque la iteración se ha finalizado an
 \subsection{Planificación}
 En esta iteración se trabajará principalmente en ampliar las funcionalidades del sistema de verificación, evolucionando desde la simple detección de existencia de SKUs hacia la verificación de cantidades de uso. Además, se implementarán las mejoras solicitadas por el cliente durante la revisión de la primera iteración.
 
-\textbf{Verificación de cantidades de uso:} En la iteración anterior se implementó la detección de existencia de SKUs (\texttt{existence-only}). Ahora se ampliará esta funcionalidad para verificar que las cantidades de uso reportadas por la API coincidan con los valores esperados. Esto permitirá detectar anomalías como recursos que reportan menos cores, RAM o almacenamiento del esperado. Además de ser el preambulo final para lograr el requisito RF04.02. 
+\textbf{Verificación de cantidades de uso:} En la iteración anterior se implementó la detección de existencia de SKUs (\texttt{existence-only}). Ahora se ampliará esta funcionalidad para verificar que las cantidades de uso reportadas por la API coincidan con los valores esperados. Esto permitirá detectar anomalías como recursos que reportan menos cores, RAM o almacenamiento del esperado. Además de ser el preámbulo final para lograr el requisito RF04.02. 
 
 \textbf{Sistema de thresholds:} Se implementará un sistema de umbrales configurable que permita distinguir entre situaciones de \textit{warning} (desviación menor) y \textit{error} (desviación crítica), adaptándose a las diferentes tolerancias según el tipo de recurso.
 
@@ -675,7 +675,7 @@ En esta iteración se trabajará principalmente en ampliar las funcionalidades d
 Tras analizar los diferentes SKUs monitorizados, se identifican dos categorías de verificación necesarias:
 
 \begin{itemize}
-    \item \textbf{existence-only:} Para recursos cuyo consumo puede variar legítimamente (IPs estaticas, Bases de datos). En estos casos, basta con verificar que existe consumo mayor que cero, sin comparar contra un valor esperado concreto.
+    \item \textbf{existence-only:} Para recursos cuyo consumo puede variar legítimamente (IPs estáticas, Bases de datos). En estos casos, basta con verificar que existe consumo mayor que cero, sin comparar contra un valor esperado concreto.
     
     \item \textbf{precise:} Para recursos con cantidades fijas y predecibles (cores de CPU, GB de RAM). Estos requieren calcular el valor esperado y compararlo con el reportado por la API, aplicando umbrales de tolerancia para detectar discrepancias.
 \end{itemize}
@@ -691,7 +691,7 @@ Para los SKUs con verificación \texttt{precise}, se definen dos niveles de aler
     \item \textbf{Error:} Se activa cuando el ratio cae por debajo del umbral de error (típicamente 0.975). Indica una discrepancia significativa que requiere acción inmediata.
 \end{itemize}
 
-Estos umbrales son configurables por SKU en CouchDB, permitiendo ajustar la sensibilidad según las características de cada recurso. Ya que hay recursos como los cores de CPU donde una desviación del 1\% puede ser relevante, mientras que en otros como el almacenamiento en Kubernetes, la mera ausencia de consumo es suficiente para generar una alerta.
+Estos umbrales son configurables por SKU en CouchDB, permitiendo ajustar la sensibilidad según las características de cada recurso, ya que hay recursos como los cores de CPU donde una desviación del 1\% puede ser relevante, mientras que en otros como el almacenamiento en Kubernetes, la mera ausencia de consumo es suficiente para generar una alerta.
 
 \subsubsection{Estandarización del contrato en la configuración}
 Actualmente, el \texttt{contractId} se pasa como parámetro en la URL del endpoint (\texttt{/check/:contractId}). Tras analizar los casos de uso previstos, se concluye que el sistema operará siempre sobre un único contrato de referencia, por lo que tiene sentido centralizar este valor en la configuración del scheduler de CouchDB.
@@ -836,12 +836,12 @@ Se ha configurado un nuevo thread en el scheduler de CouchDB específico para la
 }
 \end{lstlisting}
 
-Este scheduler puede programarse con expresiones cron independientes del verificador de existencia, permitiendo ejecutar las verificaciones de cantidades con una frecuencia diferente si fuera necesario.
+Este scheduler puede programarse con expresiones cron independientes del verificador de existencia, permitiendo ejecutar las verificaciones de cantidades con una frecuencia diferente si fuera necesario. El \textit{timeout} puede parecer excesivo, pero este se mide en milisegundos, siendo un total de tiempo de espera de 1 hora. Al ser una ejecucuón díaria, el tiempo de espera aunque es grande no es excesivo.
 
 
 
 \subsection{Evaluación y reunión con el cliente}
-Los cambios solicitados por el cliente se han implementado correctamente, simplificando el uso de la API y mejorando la configuración de PostMan. Además al volver a reunirme con el cliente dio el visto bueno a la iteración y hablamos sobre un posible cambio en el futuro de seprarar las credenciales de las configuraciones en dos documentos/formatos distintos, siendo este comentario más orientado a el grupo de trabajo entero que a mi trabajo, ya que esta decisión es propia del equipo de trabajo.
+Los cambios solicitados por el cliente se han implementado correctamente, simplificando el uso de la API y mejorando la configuración de PostMan. Además al volver a reunirme con el cliente el 15 de marzo, dio el visto bueno a la iteración y hablamos sobre un posible cambio en el futuro de separar las credenciales de las configuraciones en dos documentos/formatos distintos, siendo este comentario más orientado al grupo de trabajo entero que a mi trabajo, ya que esta decisión es propia del equipo de trabajo.
 
 Referido a los tiempos, ocurre algo similar a la iteración anterior, se han finalizado antes de lo previsto, pero las horas totales dedicadas se han aproximado bastante a la estimación inicial. La desviación en la tarea de implementación de la verificación de cantidades se debe principalmente a la complejidad añadida por el sistema de thresholds y la necesidad de realizar pruebas adicionales para validar los diferentes escenarios (valores dentro del umbral de warning, valores que superan el umbral de error, etc.).
 

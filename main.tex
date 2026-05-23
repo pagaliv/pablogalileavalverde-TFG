@@ -18,6 +18,7 @@
 \usepackage{verbatim}             % Texto verbatim
 
 
+
 % 3. CONFIGURACIÓN DE PÁGINA (GEOMETRÍA)
 % ¡SOLO UNA configuración de geometry! Elijo la segunda que tenías
 \usepackage[top=3cm,bottom=4cm,left=2cm,right=2.5cm,twoside]{geometry}
@@ -37,6 +38,7 @@
 \usepackage{multirow}             % Multiples filas en tablas
 \usepackage{caption}              % Personalización de leyendas
 \captionsetup[table]{name=Tabla}  % Cambiar "Table" por "Tabla"
+\usepackage{longtable}
 
 % 6. MATEMÁTICAS
 \usepackage{amsmath}              % Símbolos y entornos matemáticos
@@ -235,7 +237,7 @@
 
 Este proyecto desarrolla un sistema automatizado de validación de la facturación del DCD (\textit{Data Center Designer}) de IONOS Cloud. El problema de partida es que, con decenas de SKUs facturables y múltiples tipos de recursos, verificar manualmente la corrección de los cargos resulta inviable a escala. La solución consiste en un servicio construido en Node.js que orquesta dos tipos de comprobación: por un lado, verifica que los recursos de consumo constante —máquinas virtuales, almacenamiento y discos— figuran correctamente en la factura mensual; por otro, genera y valida consumo variable artificial —llamadas DNS, tokens de inteligencia artificial— asegurando que las cantidades facturadas coinciden con las esperadas dentro de márgenes configurables por SKU.
 
-El sistema se apoya en CouchDB para almacenar la configuración y el histórico de verificaciones, y emplea jobs cron para programar las comprobaciones periódicas. Ante cualquier desviación significativa, lanza notificaciones automáticas al equipo. El desarrollo se llevó a cabo en cinco iteraciones siguiendo una metodología ágil, logrando cubrir la totalidad de los requisitos funcionales y no funcionales con una desviación respecto a la planificación inferior al 3\%.
+El sistema se apoya en CouchDB para almacenar la configuración y el histórico de verificaciones, y emplea trabajos cron para programar las comprobaciones periódicas. Ante cualquier desviación significativa, lanza notificaciones automáticas al equipo. El desarrollo se llevó a cabo en cinco iteraciones siguiendo una metodología ágil, logrando cubrir la totalidad de los requisitos funcionales y no funcionales con una desviación respecto a la planificación inferior al 3\%.
 
 \vspace{2cm}
 
