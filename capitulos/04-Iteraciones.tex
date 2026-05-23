@@ -836,12 +836,12 @@ Se ha configurado un nuevo thread en el scheduler de CouchDB específico para la
 }
 \end{lstlisting}
 
-Este scheduler puede programarse con expresiones cron independientes del verificador de existencia, permitiendo ejecutar las verificaciones de cantidades con una frecuencia diferente si fuera necesario.
+Este scheduler puede programarse con expresiones cron independientes del verificador de existencia, permitiendo ejecutar las verificaciones de cantidades con una frecuencia diferente si fuera necesario. El \textit{timeout} puede parecer excesivo, pero este se mide en milisegundos, siendo un total de tiempo de espera de 1 hora. Al ser una ejecucuón díaria, el tiempo de espera aunque es grande no es excesivo.
 
 
 
 \subsection{Evaluación y reunión con el cliente}
-Los cambios solicitados por el cliente se han implementado correctamente, simplificando el uso de la API y mejorando la configuración de PostMan. Además al volver a reunirme con el cliente dio el visto bueno a la iteración y hablamos sobre un posible cambio en el futuro de seprarar las credenciales de las configuraciones en dos documentos/formatos distintos, siendo este comentario más orientado a el grupo de trabajo entero que a mi trabajo, ya que esta decisión es propia del equipo de trabajo.
+Los cambios solicitados por el cliente se han implementado correctamente, simplificando el uso de la API y mejorando la configuración de PostMan. Además al volver a reunirme con el cliente el 15 de marzo, dio el visto bueno a la iteración y hablamos sobre un posible cambio en el futuro de separar las credenciales de las configuraciones en dos documentos/formatos distintos, siendo este comentario más orientado al grupo de trabajo entero que a mi trabajo, ya que esta decisión es propia del equipo de trabajo.
 
 Referido a los tiempos, ocurre algo similar a la iteración anterior, se han finalizado antes de lo previsto, pero las horas totales dedicadas se han aproximado bastante a la estimación inicial. La desviación en la tarea de implementación de la verificación de cantidades se debe principalmente a la complejidad añadida por el sistema de thresholds y la necesidad de realizar pruebas adicionales para validar los diferentes escenarios (valores dentro del umbral de warning, valores que superan el umbral de error, etc.).
 
