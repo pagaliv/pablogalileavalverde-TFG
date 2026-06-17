@@ -1,0 +1,129 @@
+% ============================================
+% ===== ANEXO 4: Tablas de Comprobación de cumplimento de objetivos =====
+% ============================================
+
+\chapter{Tablas de comprobación de objetivos}
+\label{anexo:tabla-objetivos}
+
+\section{Cumplimiento de hitos}
+\begin{table}[h!]
+	\centering
+	\small
+	\begin{tabular}{|l|p{5cm}|p{3.3cm}|p{5cm}|}
+		\hline
+		\textbf{Hito} & \textbf{Descripción} & \textbf{Fecha finalización} & \textbf{Evidencia (sección)} \\
+		\hline
+		TFG 1.1.1 & Análisis de requisitos no funcionales & 12 de febrero de 2026 & \hyperref[tab:requisitos-no-funcionales]{Cap. 2, tabla RNF} \\
+		\hline
+		TFG 1.1.2 & Análisis de requisitos funcionales & 13 de febrero de 2026 & \hyperref[tab:requisitos-funcionales]{Cap. 2, tabla RF} \\
+		\hline
+		TFG 1.2   & Lista Items continuables & 14 de febrero de 2026 & \hyperref[anexo:Lista-de-SKUs]{Anexo 1} y \hyperref[chap:iteraciones]{Cap. 4 (Iteraciones)} \\
+		\hline
+		TFG 2.1   & Planificación & 5 de marzo de 2026 & \hyperref[chap:planificacion]{Cap. 3 (Planificación)} \\
+		\hline
+		TFG 2.2   & Seguimiento y control & 15 de junio de 2026 & \hyperref[chap:iteraciones]{Cap. 4 (Iteraciones)} \\
+		\hline
+		TFG 2.3   & Tecnologías y herramientas & 7 de marzo de 2026 & \hyperref[tab:stack-tecnologico]{Cap. 3, tabla Stack tecnológico} \\
+		\hline
+		TFG 2.4   & Memoria & 17 de junio de 2026 & \hyperref[chap:planificacion]{Cap. 3} y el propio documento \\
+		\hline
+		TFG 3.1   & Iteración 1 & 11 de marzo de 2026 & \hyperref[tab:horas-iteracion1]{Cap. 4, tabla horas iteración 1} \\
+		\hline
+		TFG 3.2   & Iteración 2 & 27 de marzo de 2026 & \hyperref[tab:horas-iteracion2]{Cap. 4, tabla horas iteración 2} \\
+		\hline
+		TFG 3.3   & Iteración 3 & 6 de abril de 2026 & \hyperref[tab:horas-iteracion3]{Cap. 4, tabla horas iteración 3} \\
+		\hline
+		TFG 3.4   & Iteración 4 & 25 de abril de 2026 & \hyperref[tab:horas-iteracion4]{Cap. 4, tabla horas iteración 4} \\
+		\hline
+		TFG 3.5   & Iteración 5 & 11 de mayo de 2026 & \hyperref[tab:horas-iteracion5]{Cap. 4, tabla horas iteración 5} \\
+		\hline
+	\end{tabular}
+	\caption{Resumen de cumplimiento de hitos y referencia a la evidencia en el documento}
+\end{table}
+
+\section{Cumplimiento de requisitos funcionales y no funcionales}
+% Tabla de requisitos funcionales
+\begin{table}[h!]
+	\centering
+	\small
+	\setlength{\tabcolsep}{6pt}
+	\begin{tabular}{|p{2.2cm}|p{14cm}|}
+		\hline
+			\textbf{Requisito} & \textbf{Evidencia (sección)} \\
+		\hline
+		RF01.01 & Usuario exclusivo para pruebas y contrato dedicado: \hyperref[chap:iteraciones]{Cap. 4 (Iteraciones)} \\
+		\hline
+		RF01.02 & Contrato con todos los recursos facturables: \hyperref[anexo:Lista-de-SKUs]{Anexo 1}; ver \textit{Creación del contrato} (sección "Desarrollo y despliegue", Cap. 4) y \hyperref[iteraciones:script-verificacion-postman]{Creación del script de verificación} \\
+		\hline
+		RF01.03 & Exclusión manual de productos costosos: \hyperref[anexo:Lista-de-SKUs]{Anexo 1}; ver apartado "Verificación de SKUs con PostMan" y la subsección \hyperref[iteraciones:script-verificacion-postman]{Creación del script de verificación} (Cap. 4) \\
+		\hline
+		RF02.01 & Provisión de recursos de consumo constante: ver "Creación del contrato" y "Implementación de función de Detección de items continuables" (Cap. 4, sección \nameref{chap:iteraciones}) \\
+		\hline
+		RF02.01.01 & Provisión de Máquinas Virtuales (VMs): \hyperref[anexo:Lista-de-SKUs]{Anexo 1}; implementado en "Implementación de función de Detección de items continuables" (Cap. 4) \\
+		\hline
+		RF02.01.02 & Provisión de Almacenamiento (buckets/discos): \hyperref[anexo:Lista-de-SKUs]{Anexo 1} \\
+		\hline
+		RF02.02 & Configuración única sin modificaciones posteriores (CouchDB): ver subsección "Base de datos con CouchDB" y "Configuración en CouchDB" (Cap. 4) \\
+		\hline
+		RF02.03 & Consumo mensual predecible y estable: \hyperref[chap:iteraciones]{Cap. 4} \\
+		\hline
+		RF03.01 & Servicio para generar consumo automatizado (iteraciones 3–5): ver secciones de Iteración 3–5 (Cap. 4), en concreto "Comprobación gasto items continuables" y "Creación de gasto de tokens automático" \\
+		\hline
+		RF03.02 & Generación de cantidades similares mensualmente: ver descripciones en Iteración 3–5 (Cap. 4), apartado de generación de consumo y validación de facturas \\
+		\hline
+		RF03.03 & Tolerancia configurable para variaciones: \hyperref[tab:tolerancias-factura]{Cap. 4, tabla de tolerancias} (sección sobre tolerancias y comparación de facturas) \\
+		\hline
+		RF03.04 & Programación de jobs cron para generación periódica: ver "Programación de tareas (scheduler)" en la configuración de CouchDB y la nota sobre cron en Cap. 4 (sección Integración / Configuración) \\
+		\hline
+		RF04.01 & Recolección diaria de datos de consumo: ver párrafo sobre configuración de scheduler y automatización de verificaciones (Cap. 4, cerca de la sección "Configuración en CouchDB") \\
+		\hline
+		RF04.02 & Comparación automática entre cálculos teóricos y registrados: implementado en \texttt{utilization} y explicado en "Implementación de función de Detección de items continuables" y secciones de validación de facturas (Cap. 4, ver funciones \texttt{checkUtilization()} y los esquemas Joi) \\
+		\hline
+		RF04.03 & Márgenes de tolerancia configurables por SKU: \hyperref[tab:tolerancias-factura]{Cap. 4, tabla de tolerancias} \\
+		\hline
+		RF05.01 & Notificaciones automáticas ante desviaciones: \hyperref[chap:iteraciones]{Cap. 4}, \hyperref[fig:alerta-iteracion1]{figura de alerta} \\
+		\hline
+		RF05.02 & Histórico de verificaciones y desviaciones: \hyperref[chap:iteraciones]{Cap. 4} (reportes e historial) \\
+		\hline
+	\end{tabular}
+	\caption{Requisitos funcionales y su evidencia}
+\end{table}
+
+% Tabla de requisitos no funcionales
+\begin{table}[h!]
+	\centering
+	\small
+	\setlength{\tabcolsep}{6pt}
+	\begin{tabular}{|p{2.2cm}|p{14cm}|}
+		\hline
+			\textbf{Requisito} & \textbf{Evidencia (sección)} \\
+		\hline
+		RNF01 & Fiabilidad: márgenes y pruebas de validación documentadas en \hyperref[chap:iteraciones]{Cap. 4} \\
+		\hline
+		RNF02 & Mantenibilidad: diseño modular y aislamiento de estrategias (ver "Patrones de diseño" y "Módulos desacoplados", Cap. 4) \\
+		\hline
+		RNF03 & Seguridad: gestión de tokens/credenciales y accesos restringidos: \hyperref[iteraciones:gestion-tokens]{Plan de gestión de tokens, Cap. 4} y \hyperref[anexo:Obtener-Tocken-DCD]{Anexo 2} \\
+		\hline
+		RNF04 & Costos: criterios de selección de SKUs y minimización de costes: \hyperref[anexo:Lista-de-SKUs]{Anexo 1}; ver "Creación del contrato" y el proceso de verificación en PostMan (Cap. 4, subsección \hyperref[iteraciones:script-verificacion-postman]{Creación del script de verificación}) \\
+		\hline
+		RNF05 & Lenguaje: uso de JavaScript ES6+ — mencionado en la primera iteración ("Planificación y Análisis", Cap. 4) y en la descripción de la arquitectura del proyecto \hyperref[chap:iteraciones]{Cap. 4} \\
+		\hline
+		RNF06 & Runtime: Node.js 18+ — indicado en la sección "Información general / Tecnología" y en la arquitectura del proyecto (Cap. 4) \\
+		\hline
+		RNF07 & Gestión de paquetes: Yarn 3+ — reflejado en la sección de Stack y dependencias del proyecto (Cap. 4, y Cap. 3 para el detalle) \\
+		\hline
+		RNF08 & Versionado: uso de GitLab — ver "Despliegue del proyecto y vinculación a GitLab" (Cap. 4, subsección correspondiente) \\
+		\hline
+		RNF09 & Estructura del proyecto: estandarización y nombres (ver "Estructura del documento de configuración" y la sección sobre arquitectura del proyecto, Cap. 4) \\
+		\hline
+		RNF10 & Configuración centralizada en CouchDB: \hyperref[tab:stack-tecnologico]{Cap. 3} y secciones "Base de datos con CouchDB" y "Configuración en CouchDB" (Cap. 4) \\
+		\hline
+	\end{tabular}
+	\caption{Requisitos no funcionales y su evidencia}
+\end{table}
+
+\vspace{6pt}
+\noindent Nota: Las referencias indicadas apuntan a las secciones, tablas y anexos donde se describe la implementación o evidencia del cumplimiento; para más detalle consulte las secciones enlazadas.
+
+\vspace{6pt}
+\noindent Nota: Las referencias indicadas apuntan a las secciones, tablas y anexos donde se describe la implementación o evidencia del cumplimiento; para más detalle consulte las secciones enlazadas.
