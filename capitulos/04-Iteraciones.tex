@@ -1185,7 +1185,7 @@ Con \texttt{targetTokens = 100.000} y un \textit{prompt} suficientemente largo, 
 
 \subsubsection{Actualización del contrato y configuración de verificación}
 
-Los SKUs \texttt{AIL370I1100} y \texttt{AIL370O1100} son nuevos en el contrato, por lo que fue necesario añadirlos el 16 de abril. A diferencia de los SKUs continuables, se configuran con verificación \texttt{existence-only}: no se compara contra un valor esperado fijo, sino que basta con confirmar que hay consumo mayor que cero, ya que la cantidad exacta puede variar ligeramente según el número de días transcurridos en el período:
+Los SKUs \texttt{AIL370I1100} y \texttt{AIL370O1100} son nuevos en el contrato, por lo que fue necesario añadirlos. A diferencia de los SKUs continuables, se configuran con verificación \texttt{existence-only}: no se compara contra un valor esperado fijo, sino que basta con confirmar que hay consumo mayor que cero, ya que la cantidad exacta puede variar ligeramente según el número de días transcurridos en el período:
 
 \begin{lstlisting}[caption=Configuración de los SKUs de IA en itemsToCheck, label=lst:ai-sku-config]
 { "sku": "AIL370I1100", "verification": "existence-only" },
