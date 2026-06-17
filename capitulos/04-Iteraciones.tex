@@ -1104,7 +1104,7 @@ La API de IONOS Cloud distingue dos SKUs para el consumo de IA:
     \item \textbf{\texttt{AIL370O1100}} (tokens de salida / \textit{output}): corresponde a los tokens generados por el modelo en la respuesta.
 \end{itemize}
 
-Con un \texttt{targetTokens} de 100.000, la distribución habitual es aproximadamente 10.000 de entrada y 90.000 de salida, es decir, 0,01M y 0,09M respectivamente en las unidades de facturación. El \textit{prompt} largo es intencionado: cuanto más extenso sea, más tokens de salida genera el modelo por llamada, reduciendo el número de iteraciones necesarias para alcanzar el objetivo.
+Con un \texttt{targetTokens} de 100.000, la distribución habitual es aproximadamente 10.000 de entrada y 90.000 de salida, es decir, 0,01M y 0,09M respectivamente en las unidades de facturación. El \textit{prompt} largo es intencionado: cuanto más extenso sea, más tokens de salida genera el modelo por llamada, reduciendo el número de iteraciones necesarias para alcanzar el objetivo, como se explica más adelante.
 
 \subsubsection{Compatibilidad con el SDK de OpenAI}
 
