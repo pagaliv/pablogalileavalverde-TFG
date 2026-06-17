@@ -1144,7 +1144,7 @@ this.mediator.on(Actions.GENERATOR_REQUEST, async () => {
 });
 \end{lstlisting}
 
-La constante \texttt{Actions.GENERATOR\_REQUEST} vale \texttt{'generator:request'}, que coincide exactamente con el \texttt{action} configurado en el \textit{scheduler}. La emisión de \texttt{GENERATOR\_COMPLETE} al finalizar, independientemente del resultado, es lo que libera el \textit{mutex} y permite que la siguiente ejecución programada pueda arrancar.
+La constante \texttt{Actions.GENERATOR\_REQUEST} vale \texttt{`generator:request'}, que coincide exactamente con el \texttt{action} configurado en el \textit{scheduler}. La emisión de \texttt{GENERATOR\_COMPLETE} al finalizar, independientemente del resultado, es lo que libera el \textit{mutex} y permite que la siguiente ejecución programada pueda arrancar.
 
 \subsubsection{InferenceHelper: carga de configuración}
 
