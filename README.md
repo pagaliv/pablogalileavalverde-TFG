@@ -4,7 +4,9 @@ Trabajo Fin de Grado — Grado en Ingeniería Informática
 Universidad de La Rioja, Facultad de Ciencia y Tecnología
 
 **Autor:** Pablo Galilea Valverde
+
 **Tutor:** Jesús María Aransay Azofra
+
 **Curso:** 2025-2026
 
 ![Póster del TFG](imagenes/poster.png)
